@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { Terminal, Check } from 'lucide-react';
-import { toolsData } from './data/toolsData';
-import Sidebar from './components/Sidebar';
-import DashboardHome from './components/DashboardHome';
-import ToolDetail from './components/ToolDetail';
-import Quiz from './components/Quiz';
-import { GithubIcon } from './components/icons';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { Terminal, Check } from "lucide-react";
+import { toolsData } from "./data/toolsData";
+import Sidebar from "./components/Sidebar";
+import DashboardHome from "./components/DashboardHome";
+import ToolDetail from "./components/ToolDetail";
+import Quiz from "./components/Quiz";
+import { GithubIcon } from "./components/icons";
+import "./App.css";
 
 export default function App() {
   const [activeToolId, setActiveToolId] = useState(null); // null = Home Dashboard
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState('All');
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+
   // Interactive options state
   const [builderOpts, setBuilderOpts] = useState({});
-  const [generatedCmd, setGeneratedCmd] = useState('');
+  const [generatedCmd, setGeneratedCmd] = useState("");
   const [cmdExplanation, setCmdExplanation] = useState([]);
-  const [simulatedOutput, setSimulatedOutput] = useState('');
-  
+  const [simulatedOutput, setSimulatedOutput] = useState("");
+
   // Execution state for terminal
-  const [runCmdSignal, setRunCmdSignal] = useState('');
-  const [runCmdOutput, setRunCmdOutput] = useState('');
+  const [runCmdSignal, setRunCmdSignal] = useState("");
+  const [runCmdOutput, setRunCmdOutput] = useState("");
 
   // Favorites state
   const [favorites, setFavorites] = useState(() => {
-    const saved = localStorage.getItem('toolscli_favorites');
+    const saved = localStorage.getItem("toolscli_favorites");
     return saved ? JSON.parse(saved) : [];
   });
 
   // Installation OS Tabs
-  const [activeOsTab, setActiveOsTab] = useState('windows');
+  const [activeOsTab, setActiveOsTab] = useState("windows");
 
   // Quiz Overlay Toggle
   const [showQuiz, setShowQuiz] = useState(false);
@@ -39,10 +39,10 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#/quiz' || hash === '#quiz') {
+      if (hash === "#/quiz" || hash === "#quiz") {
         setShowQuiz(true);
         setActiveToolId(null);
-      } else if (hash.startsWith('#/')) {
+      } else if (hash.startsWith("#/")) {
         const toolId = hash.substring(2);
         const exists = toolsData.some((t) => t.id === toolId);
         if (exists) {
@@ -51,9 +51,9 @@ export default function App() {
         } else {
           setActiveToolId(null);
           setShowQuiz(false);
-          window.location.hash = '';
+          window.location.hash = "";
         }
-      } else if (hash.startsWith('#')) {
+      } else if (hash.startsWith("#")) {
         const toolId = hash.substring(1);
         const exists = toolsData.some((t) => t.id === toolId);
         if (exists) {
@@ -63,7 +63,7 @@ export default function App() {
         } else {
           setActiveToolId(null);
           setShowQuiz(false);
-          window.location.hash = '';
+          window.location.hash = "";
         }
       } else {
         setActiveToolId(null);
@@ -73,14 +73,14 @@ export default function App() {
 
     handleHashChange();
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
   // Toast Notifications
   const [toasts, setToasts] = useState([]);
 
-  const showToast = (message, type = 'success') => {
+  const showToast = (message, type = "success") => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
@@ -105,10 +105,13 @@ export default function App() {
   // Recalculate generated command when builder options change
   useEffect(() => {
     if (activeTool && activeTool.interactiveBuilder) {
-      const { command, explanation } = activeTool.interactiveBuilder.generator(builderOpts);
+      const { command, explanation } =
+        activeTool.interactiveBuilder.generator(builderOpts);
       setGeneratedCmd(command);
       setCmdExplanation(explanation);
-      setSimulatedOutput(activeTool.interactiveBuilder.simulatedOutput(builderOpts));
+      setSimulatedOutput(
+        activeTool.interactiveBuilder.simulatedOutput(builderOpts),
+      );
     }
   }, [builderOpts, activeToolId]);
 
@@ -116,27 +119,30 @@ export default function App() {
   const handleOptChange = (id, value) => {
     setBuilderOpts((prev) => ({
       ...prev,
-      [id]: value
+      [id]: value,
     }));
   };
 
   // Filter tools for Sidebar
   const filteredTools = toolsData.filter((tool) => {
-    const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          tool.tagline.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = activeCategory === 'All' || tool.category === activeCategory;
+    const matchesSearch =
+      tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tool.tagline.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory =
+      activeCategory === "All" || tool.category === activeCategory;
     return matchesSearch && matchesCategory;
   });
 
   // Copy code to clipboard (supports fallback for insecure contexts like HTTP IP addresses)
-  const handleCopyToClipboard = (text, type = 'Command') => {
+  const handleCopyToClipboard = (text, type = "Command") => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text)
+      navigator.clipboard
+        .writeText(text)
         .then(() => {
           showToast(`${type} copied to clipboard!`);
         })
         .catch((err) => {
-          console.warn('Clipboard API failed, trying fallback:', err);
+          console.warn("Clipboard API failed, trying fallback:", err);
           fallbackCopyToClipboard(text, type);
         });
     } else {
@@ -146,29 +152,29 @@ export default function App() {
 
   const fallbackCopyToClipboard = (text, type) => {
     try {
-      const textArea = document.createElement('textarea');
+      const textArea = document.createElement("textarea");
       textArea.value = text;
       // Prevent page scrolling and make it completely invisible
-      textArea.style.position = 'fixed';
-      textArea.style.top = '0';
-      textArea.style.left = '0';
-      textArea.style.opacity = '0';
-      textArea.style.pointerEvents = 'none';
-      
+      textArea.style.position = "fixed";
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.opacity = "0";
+      textArea.style.pointerEvents = "none";
+
       document.body.appendChild(textArea);
       textArea.focus();
       textArea.select();
-      
-      const successful = document.execCommand('copy');
+
+      const successful = document.execCommand("copy");
       document.body.removeChild(textArea);
-      
+
       if (successful) {
         showToast(`${type} copied to clipboard!`);
       } else {
         showToast(`Failed to copy ${type}.`);
       }
     } catch (err) {
-      console.error('Fallback copy failed: ', err);
+      console.error("Fallback copy failed: ", err);
       showToast(`Failed to copy ${type}.`);
     }
   };
@@ -177,15 +183,17 @@ export default function App() {
   const handleRunCommand = (cmd, output) => {
     setRunCmdSignal(cmd);
     setRunCmdOutput(output);
-    showToast('Executing command in terminal simulator...');
+    showToast("Executing command in terminal simulator...");
   };
 
   // Save/Bookmark command
   const handleSaveCommand = () => {
     if (!generatedCmd) return;
-    const isAlreadySaved = favorites.some((fav) => fav.command === generatedCmd);
+    const isAlreadySaved = favorites.some(
+      (fav) => fav.command === generatedCmd,
+    );
     if (isAlreadySaved) {
-      showToast('Command is already in your favorites!', 'info');
+      showToast("Command is already in your favorites!", "info");
       return;
     }
 
@@ -194,26 +202,27 @@ export default function App() {
       toolId: activeTool.id,
       toolName: activeTool.name,
       command: generatedCmd,
-      simulatedOutput: simulatedOutput
+      simulatedOutput: simulatedOutput,
     };
 
     const updated = [...favorites, newFav];
     setFavorites(updated);
-    localStorage.setItem('toolscli_favorites', JSON.stringify(updated));
-    showToast('Command bookmarked to favorites!');
+    localStorage.setItem("toolscli_favorites", JSON.stringify(updated));
+    showToast("Command bookmarked to favorites!");
   };
 
   // Delete saved command
   const handleDeleteFavorite = (id) => {
     const updated = favorites.filter((fav) => fav.id !== id);
     setFavorites(updated);
-    localStorage.setItem('toolscli_favorites', JSON.stringify(updated));
-    showToast('Removed from favorites.');
+    localStorage.setItem("toolscli_favorites", JSON.stringify(updated));
+    showToast("Removed from favorites.");
   };
 
   return (
-    <div className={`app-container ${activeTool ? activeTool.accentClass : 'ollama-accent'}`}>
-      
+    <div
+      className={`app-container ${activeTool ? activeTool.accentClass : "ollama-accent"}`}
+    >
       {/* Sidebar Navigation */}
       <Sidebar
         filteredTools={filteredTools}
@@ -226,32 +235,56 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0 }}>
-        
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+          minWidth: 0,
+        }}
+      >
         {/* Header */}
         <header className="app-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Workspace /</span>
-            <span style={{ fontSize: '0.85rem', color: '#fff', fontWeight: 600 }}>
-              {showQuiz ? 'CLI Quiz' : activeTool ? activeTool.name : 'Dashboard Overview'}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              Workspace /
+            </span>
+            <span
+              style={{ fontSize: "0.85rem", color: "#fff", fontWeight: 600 }}
+            >
+              {showQuiz
+                ? "CLI Quiz"
+                : activeTool
+                  ? activeTool.name
+                  : "Dashboard Overview"}
             </span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Local Host: 127.0.0.1</span>
-            <span style={{
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--ffmpeg-color)',
-              boxShadow: '0 0 8px var(--ffmpeg-color)'
-            }} />
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <span
+              style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}
+            >
+              Local Host: 127.0.0.1
+            </span>
+            <span
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                backgroundColor: "var(--ffmpeg-color)",
+                boxShadow: "0 0 8px var(--ffmpeg-color)",
+              }}
+            />
           </div>
         </header>
 
         {/* Content Body */}
         <main className="main-content">
           {showQuiz ? (
-            <Quiz onClose={() => { window.location.hash = ''; }} />
+            <Quiz
+              onClose={() => {
+                window.location.hash = "";
+              }}
+            />
           ) : activeTool ? (
             <ToolDetail
               activeTool={activeTool}
@@ -282,39 +315,68 @@ export default function App() {
         </main>
 
         {/* Footer */}
-        <footer style={{
-          marginTop: 'auto',
-          borderTop: '1px solid var(--border-color)',
-          background: 'var(--bg-secondary)',
-          padding: '2rem 1.5rem',
-          textAlign: 'center',
-          boxSizing: 'border-box'
-        }}>
-          <div style={{
-            maxWidth: '1200px',
-            margin: '0 auto',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '1rem'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Terminal size={18} style={{ color: 'var(--accent-color)' }} />
-              <span style={{ fontWeight: 700, fontSize: '0.9rem', color: '#fff', letterSpacing: '-0.5px' }}>TOOLS CLI</span>
-              <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>v1.0.0</span>
+        <footer
+          style={{
+            marginTop: "auto",
+            borderTop: "1px solid var(--border-color)",
+            background: "var(--bg-secondary)",
+            padding: "2rem 1.5rem",
+            textAlign: "center",
+            boxSizing: "border-box",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: "1200px",
+              margin: "0 auto",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "1rem",
+            }}
+          >
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+            >
+              <Terminal size={18} style={{ color: "var(--accent-color)" }} />
+              <span
+                style={{
+                  fontWeight: 700,
+                  fontSize: "0.9rem",
+                  color: "#fff",
+                  letterSpacing: "-0.5px",
+                }}
+              >
+                TOOLS CLI
+              </span>
+              <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>
+                v1.0.0
+              </span>
             </div>
-            
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0 }}>
-              &copy; {new Date().getFullYear()} Tools CLI. Built with React & Vite. Released under the MIT License.
+
+            <p
+              style={{
+                fontSize: "0.8rem",
+                color: "var(--text-secondary)",
+                margin: 0,
+              }}
+            >
+              &copy; {new Date().getFullYear()} Tools CLI. Built with React &
+              Vite. Released under the MIT License.
             </p>
 
-            <div style={{ display: 'flex', gap: '1.25rem' }}>
-              <a 
-                href="https://github.com/your-username/tools-cli" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)', display: 'inline-flex', alignItems: 'center' }}
+            <div style={{ display: "flex", gap: "1.25rem" }}>
+              <a
+                href="https://github.com/karan-k-code/tools-cli"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "var(--text-secondary)",
+                  transition: "color var(--transition-fast)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                }}
                 title="GitHub"
               >
                 <GithubIcon size={18} />
@@ -328,12 +390,11 @@ export default function App() {
       <div className="toast-container">
         {toasts.map((toast) => (
           <div key={toast.id} className="toast">
-            <Check size={16} style={{ color: 'var(--ffmpeg-color)' }} />
+            <Check size={16} style={{ color: "var(--ffmpeg-color)" }} />
             <span>{toast.message}</span>
           </div>
         ))}
       </div>
-
     </div>
   );
 }

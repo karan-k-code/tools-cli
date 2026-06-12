@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
 
 :root {
   /* Color Palette - High Tech Dark Theme */
@@ -7,15 +7,15 @@
   --bg-tertiary: #191c2e;
   --bg-card: rgba(22, 25, 41, 0.7);
   --bg-active: #20243d;
-  
+
   --border-color: rgba(255, 255, 255, 0.08);
   --border-focus: rgba(255, 255, 255, 0.2);
   --border-glow: rgba(168, 85, 247, 0.4);
-  
+
   --text-primary: #f3f4f6;
   --text-secondary: #9ca3af;
   --text-muted: #6b7280;
-  
+
   /* Brand/Tool Accents */
   --git-color: #f05032;
   --ollama-color: #a855f7;
@@ -24,21 +24,22 @@
   --python-color: #06b6d4;
   --utils-color: #eab308;
   --node-color: #339933;
-  
+  --vercel-color: #ffffff;
+
   --accent-color: var(--ollama-color); /* default fallback */
   --accent-glow: rgba(168, 85, 247, 0.25);
-  
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  
+
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.8);
   --shadow-glow: 0 0 20px var(--accent-glow);
-  
+
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   font-family: var(--font-sans);
   color: var(--text-primary);
   background-color: var(--bg-primary);
@@ -50,7 +51,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   background-color: var(--bg-primary);
-  background-image: 
+  background-image:
     radial-gradient(at 0% 0%, rgba(168, 85, 247, 0.1) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.08) 0px, transparent 50%);
   background-attachment: fixed;
@@ -81,18 +82,34 @@ body {
 
 /* Utility Animations */
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.15); }
-  50% { box-shadow: 0 0 25px rgba(168, 85, 247, 0.35); }
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.35);
+  }
 }
 
 @keyframes slide-in {
-  from { transform: translateY(10px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Tool specific accent mappings */
@@ -123,6 +140,10 @@ body {
 .node-accent {
   --accent-color: var(--node-color);
   --accent-glow: rgba(51, 153, 51, 0.25);
+}
+.vercel-accent {
+  --accent-color: var(--vercel-color);
+  --accent-glow: rgba(255, 255, 255, 0.2);
 }
 
 /* Layout Elements */
@@ -170,7 +191,7 @@ body {
   font-weight: 800;
   letter-spacing: -0.5px;
   background: linear-gradient(to right, #ffffff, var(--accent-color));
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -306,7 +327,11 @@ body {
   gap: 0.5rem;
   width: 100%;
   padding: 0.75rem;
-  background: linear-gradient(135deg, var(--bg-tertiary), rgba(168, 85, 247, 0.15));
+  background: linear-gradient(
+    135deg,
+    var(--bg-tertiary),
+    rgba(168, 85, 247, 0.15)
+  );
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-weight: 600;
@@ -503,7 +528,7 @@ body {
 }
 
 .flowchart-node::after {
-  content: '→';
+  content: "→";
   position: absolute;
   right: -1rem;
   top: 50%;
@@ -519,7 +544,7 @@ body {
 
 @media (max-width: 768px) {
   .flowchart-node::after {
-    content: '↓';
+    content: "↓";
     right: auto;
     bottom: -1rem;
     left: 50%;
@@ -529,7 +554,9 @@ body {
 
 .flowchart-node:hover {
   border-color: var(--accent-color);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), var(--shadow-glow);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    var(--shadow-glow);
   transform: translateY(-2px);
 }
 
@@ -790,9 +817,15 @@ body {
   border-radius: 999px;
 }
 
-.terminal-dot.red { background-color: #ef4444; }
-.terminal-dot.yellow { background-color: #f59e0b; }
-.terminal-dot.green { background-color: #10b981; }
+.terminal-dot.red {
+  background-color: #ef4444;
+}
+.terminal-dot.yellow {
+  background-color: #f59e0b;
+}
+.terminal-dot.green {
+  background-color: #10b981;
+}
 
 .terminal-title {
   font-family: var(--font-mono);
@@ -1015,7 +1048,11 @@ body {
 
 .quiz-progress-bar-fill {
   height: 100%;
-  background: linear-gradient(to right, var(--ollama-color), var(--python-color));
+  background: linear-gradient(
+    to right,
+    var(--ollama-color),
+    var(--python-color)
+  );
   transition: width var(--transition-normal);
 }
 
@@ -1243,7 +1280,7 @@ body {
 }
 
 .landing-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;

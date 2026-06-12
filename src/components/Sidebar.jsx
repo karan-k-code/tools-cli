@@ -8,7 +8,8 @@ import {
   Cpu, 
   Video, 
   Download, 
-  Code
+  Code,
+  Triangle
 } from 'lucide-react';
 
 const getToolIcon = (id, size = 20) => {
@@ -27,6 +28,8 @@ const getToolIcon = (id, size = 20) => {
       return <Layers size={size} />;
     case 'node-npm':
       return <Code size={size} />;
+    case 'vercel':
+      return <Triangle size={size} fill="currentColor" />;
     default:
       return <Terminal size={size} />;
   }

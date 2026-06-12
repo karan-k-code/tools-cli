@@ -10,7 +10,8 @@ import {
   Video, 
   Download, 
   Terminal, 
-  Layers
+  Layers,
+  Triangle
 } from 'lucide-react';
 import Console from './Console';
 
@@ -30,6 +31,8 @@ const getToolIcon = (id, size = 20) => {
       return <Layers size={size} />;
     case 'node-npm':
       return <Code size={size} />;
+    case 'vercel':
+      return <Triangle size={size} fill="currentColor" />;
     default:
       return <Terminal size={size} />;
   }
