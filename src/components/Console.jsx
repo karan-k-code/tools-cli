@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Terminal, Trash2, HelpCircle, RefreshCw } from 'lucide-react';
+import './Console.css';
 
 export default function Console({ activeCommand, simulatedOutput, onCommandRunComplete }) {
   const [history, setHistory] = useState([

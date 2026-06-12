@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { quizQuestions } from '../data/toolsData';
 import { Award, CheckCircle, AlertCircle, RefreshCw, X } from 'lucide-react';
+import './Quiz.css';
 
 export default function Quiz({ onClose }) {
   const [currentIdx, setCurrentIdx] = useState(0);

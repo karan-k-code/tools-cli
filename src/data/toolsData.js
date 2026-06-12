@@ -571,7 +571,7 @@ export const toolsData = [
           id: 'url',
           label: 'Video/Playlist URL',
           type: 'text',
-          defaultValue: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+          defaultValue: 'https://www.youtube.com/watch?v=HcjW2k1IrTM'
         },
         {
           id: 'audioQuality',
@@ -628,7 +628,7 @@ export const toolsData = [
         }
       ],
       generator: (opts) => {
-        const url = opts.url || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        const url = opts.url || 'https://www.youtube.com/watch?v=HcjW2k1IrTM';
         switch (opts.action) {
           case 'best-quality':
             return {
@@ -695,15 +695,15 @@ export const toolsData = [
       },
       simulatedOutput: (opts) => {
         if (opts.action === 'list-formats') {
-          return `[youtube] Extracting URL: ${opts.url || '...'}\n[youtube] dQw4w9WgXcQ: Downloading webpage\n[info] Available formats for dQw4w9WgXcQ:\nID  EXT   RESOLUTION FPS CH │   FILESIZE   TBR PROTO │ VCODEC           ACODEC\n137 mp4   1920x1080   30    │   45.21MiB  2154k https │ avc1.640028      none\n140 m4a   audio only   2    │    3.15MiB   129k https │ none             mp4a.40.2`;
+          return `[youtube] Extracting URL: ${opts.url || '...'}\n[youtube] HcjW2k1IrTM: Downloading webpage\n[info] Available formats for HcjW2k1IrTM:\nID  EXT   RESOLUTION FPS CH │   FILESIZE   TBR PROTO │ VCODEC           ACODEC\n137 mp4   1920x1080   30    │   45.21MiB  2154k https │ avc1.640028      none\n140 m4a   audio only   2    │    3.15MiB   129k https │ none             mp4a.40.2`;
         }
         if (opts.action === 'download-section') {
-          return `[youtube] Extracting URL: ${opts.url || '...'}\n[info] dQw4w9WgXcQ: Downloading section *${opts.sectionStart || '00:01:00'}-${opts.sectionEnd || '00:02:30'}\n[download] Destination: Rick Astley - Never Gonna Give You Up.mp4\n[download] 100% of 3.12MiB in 00:01\n\x1b[32m[Finished downloading trimmed segment successfully]\x1b[0m`;
+          return `[youtube] Extracting URL: ${opts.url || '...'}\n[info] HcjW2k1IrTM: Downloading section *${opts.sectionStart || '00:01:00'}-${opts.sectionEnd || '00:02:30'}\n[download] Destination: Google Keynote IO 2024.mp4\n[download] 100% of 3.12MiB in 00:01\n\x1b[32m[Finished downloading trimmed segment successfully]\x1b[0m`;
         }
         if (opts.action === 'embed-subs') {
-          return `[youtube] Extracting URL: ${opts.url || '...'}\n[info] Writing subtitles to: Rick Astley - Never Gonna Give You Up.${opts.subLang || 'en'}.vtt\n[download] Destination: Rick Astley - Never Gonna Give You Up.mp4\n[download] 100% of 15.40MiB in 00:03\n[Subtitles] Embedding subtitles in "Rick Astley - Never Gonna Give You Up.mp4"\n\x1b[32m[Finished downloading video and embedding subtitles]\x1b[0m`;
+          return `[youtube] Extracting URL: ${opts.url || '...'}\n[info] Writing subtitles to: Google Keynote IO 2024.${opts.subLang || 'en'}.vtt\n[download] Destination: Google Keynote IO 2024.mp4\n[download] 100% of 15.40MiB in 00:03\n[Subtitles] Embedding subtitles in "Google Keynote IO 2024.mp4"\n\x1b[32m[Finished downloading video and embedding subtitles]\x1b[0m`;
         }
-        return `[youtube] Extracting URL: ${opts.url || '...'}\n[youtube] dQw4w9WgXcQ: Downloading webpage\n[info] dQw4w9WgXcQ: Downloading 1 format(s)\n[download] Destination: Rick Astley - Never Gonna Give You Up.mp4\n\x1b[36m[download]  45.0% of   15.40MiB at   5.20MiB/s ETA 00:01\x1b[0m\n[download] 100% of 15.40MiB in 00:03 at 4.80MiB/s\n[Merger] Merging formats into "Rick Astley - Never Gonna Give You Up.mp4"\n\x1b[32m[Finished Downloading]\x1b[0m`;
+        return `[youtube] Extracting URL: ${opts.url || '...'}\n[youtube] HcjW2k1IrTM: Downloading webpage\n[info] HcjW2k1IrTM: Downloading 1 format(s)\n[download] Destination: Google Keynote IO 2024.mp4\n\x1b[36m[download]  45.0% of   15.40MiB at   5.20MiB/s ETA 00:01\x1b[0m\n[download] 100% of 15.40MiB in 00:03 at 4.80MiB/s\n[Merger] Merging formats into "Google Keynote IO 2024.mp4"\n\x1b[32m[Finished Downloading]\x1b[0m`;
       }
     },
     cheatsheets: [

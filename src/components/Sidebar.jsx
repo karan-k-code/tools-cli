@@ -11,6 +11,7 @@ import {
   Code,
   Triangle
 } from 'lucide-react';
+import './Sidebar.css';
 
 const getToolIcon = (id, size = 20) => {
   switch (id) {

@@ -17,6 +17,7 @@ import {
   Triangle
 } from "lucide-react";
 import { GithubIcon } from "./icons";
+import './DashboardHome.css';
 
 const getToolIcon = (id, size = 20) => {
   switch (id) {

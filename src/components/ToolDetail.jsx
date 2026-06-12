@@ -14,6 +14,7 @@ import {
   Triangle
 } from 'lucide-react';
 import Console from './Console';
+import './ToolDetail.css';
 
 const getToolIcon = (id, size = 20) => {
   switch (id) {
