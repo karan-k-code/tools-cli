@@ -11,9 +11,11 @@ import {
   Download, 
   Terminal, 
   Layers,
-  Triangle
+  Triangle,
+  ExternalLink
 } from 'lucide-react';
 import Console from './Console';
+import { GithubIcon } from './icons';
 import './ToolDetail.css';
 
 const getToolIcon = (id, size = 20) => {
@@ -102,6 +104,42 @@ export default function ToolDetail({
         <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginTop: '1rem', maxWidth: '800px' }}>
           {activeTool.description}
         </p>
+        {activeTool.github && (
+          <div style={{ marginTop: '1.25rem' }}>
+            <a 
+              href={activeTool.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                fontSize: '0.85rem',
+                color: 'var(--text-secondary)',
+                textDecoration: 'none',
+                background: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid var(--border-color)',
+                padding: '0.5rem 0.85rem',
+                borderRadius: '6px',
+                transition: 'all var(--transition-fast)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#fff';
+                e.currentTarget.style.borderColor = 'var(--accent-color)';
+                e.currentTarget.style.background = 'var(--accent-glow)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--text-secondary)';
+                e.currentTarget.style.borderColor = 'var(--border-color)';
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+              }}
+            >
+              <GithubIcon size={14} />
+              <span>Official GitHub Repository</span>
+              <ExternalLink size={11} style={{ opacity: 0.7 }} />
+            </a>
+          </div>
+        )}
       </section>
 
       {/* Visual concept diagram / Flowchart */}

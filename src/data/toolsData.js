@@ -5,6 +5,7 @@ export const toolsData = [
     category: 'VCS',
     color: '#F05032',
     accentClass: 'git-accent',
+    github: 'https://github.com/git/git',
     tagline: 'Distributed version control system to track changes in source code.',
     description: 'Git is the industry standard for version control. It tracks changes to files, lets you revert to previous states, and makes collaboration seamless via branching and merging.',
     install: {
@@ -214,6 +215,7 @@ export const toolsData = [
     category: 'AI',
     color: '#a855f7',
     accentClass: 'ollama-accent',
+    github: 'https://github.com/ollama/ollama',
     tagline: 'Run large language models locally on your system.',
     description: 'Ollama is a lightweight, extensible framework for building and running large language models (LLMs) locally. It packages model weights, configuration, and dependencies into a single Modelfile.',
     install: {
@@ -348,6 +350,7 @@ export const toolsData = [
     category: 'Media',
     color: '#00cc66',
     accentClass: 'ffmpeg-accent',
+    github: 'https://github.com/FFmpeg/FFmpeg',
     tagline: 'Swiss Army knife for multimedia transcoding and processing.',
     description: 'FFmpeg is a leading multimedia framework capable of decoding, encoding, transcoding, muxing, demuxing, streaming, filtering and playing almost anything humans and machines have created.',
     install: {
@@ -532,6 +535,7 @@ export const toolsData = [
     category: 'Media',
     color: '#FF0000',
     accentClass: 'ytdlp-accent',
+    github: 'https://github.com/yt-dlp/yt-dlp',
     tagline: 'High-speed media and audio downloader for the web.',
     description: 'yt-dlp is a command-line YouTube downloader fork of youtube-dl, adding active feature development, speed improvements, and rich customization features for downloading streams from thousands of websites.',
     install: {
@@ -738,6 +742,7 @@ export const toolsData = [
     category: 'AI',
     color: '#306998',
     accentClass: 'python-accent',
+    github: 'https://github.com/pypa/pip',
     tagline: 'Write advanced applications and manage packages with pip.',
     description: 'Python is a high-level, general-purpose coding language. Pip is Python\'s package installer, enabling developers to query, install, resolve dependencies, and manage packages from the PyPI index.',
     install: {
@@ -1065,6 +1070,7 @@ export const toolsData = [
     category: 'Utilities',
     color: '#339933',
     accentClass: 'node-accent',
+    github: 'https://github.com/npm/cli',
     tagline: 'JavaScript runtime & package manager engine.',
     description: 'Node.js is an open-source cross-platform JavaScript runtime environment. npm is the default package manager for Node.js, and npx is its package execution helper.',
     install: {
@@ -1216,6 +1222,7 @@ export const toolsData = [
     category: 'Utilities',
     color: '#ffffff',
     accentClass: 'vercel-accent',
+    github: 'https://github.com/vercel/vercel',
     tagline: 'Instant cloud deployments and serverless management from your shell.',
     description: 'Vercel CLI provides a command line interface to deploy projects, configure DNS, configure serverless functions, and manage environment variables directly on Vercel\'s edge network.',
     install: {
