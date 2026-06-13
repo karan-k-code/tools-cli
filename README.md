@@ -32,6 +32,7 @@ The companion currently includes deep configurations, lifecycles, and interactiv
 4. **Knowledge Quiz**: Challenge your terminal syntax knowledge with a 5-question mock certification test interface.
 5. **Favorites / Bookmark Drawer**: Locally save frequently used config commands into a persistent localStorage favorites list.
 6. **Insecure Context Copy Fallback**: Uses a fallback textarea copy utility supporting local area network IP addresses (e.g. `http://10.23.126.23:3000/`) where standard `navigator.clipboard` is blocked by browsers.
+7. **GitHub Repository Integration**: Instant redirection links to official tool GitHub repositories built right into the hero layouts.
 
 ---
 
@@ -121,6 +122,7 @@ To extend the companion dashboard with a new command engine:
      category: 'Utilities',
      color: '#accent-hex-color',
      accentClass: 'my-cli-accent',
+     github: 'https://github.com/username/project',
      tagline: 'Short description of what it does.',
      description: 'Detailed description of utility goals.',
      install: {
