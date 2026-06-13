@@ -902,7 +902,7 @@ export const toolsData = [
     tagline: 'Standard commands that every CLI power user should master.',
     description: 'A curated collection of essential command line tools for text manipulation, networking, containers, and server multiplexing.',
     install: {
-      windows: 'secureshell/install: winget install -e --id Docker.DockerDesktop / winget install Chocolatey',
+      windows: 'winget install jqlang.jq BurntSushi.ripgrep Docker.DockerDesktop',
       mac: 'brew install jq ripgrep tmux',
       linux: 'sudo apt install jq ripgrep tmux curl'
     },
