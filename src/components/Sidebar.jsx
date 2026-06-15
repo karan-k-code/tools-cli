@@ -1,4 +1,3 @@
-import React from 'react';
 import { 
   Terminal, 
   Search, 
@@ -9,7 +8,8 @@ import {
   Video, 
   Download, 
   Code,
-  Triangle
+  Triangle,
+  Sparkles
 } from 'lucide-react';
 import './Sidebar.css';
 
@@ -31,6 +31,8 @@ const getToolIcon = (id, size = 20) => {
       return <Code size={size} />;
     case 'vercel':
       return <Triangle size={size} fill="currentColor" />;
+    case 'gemini':
+      return <Sparkles size={size} />;
     default:
       return <Terminal size={size} />;
   }

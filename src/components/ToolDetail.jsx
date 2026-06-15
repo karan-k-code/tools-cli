@@ -1,4 +1,3 @@
-import React from 'react';
 import { 
   BookOpen, 
   Code, 
@@ -101,7 +100,7 @@ export default function ToolDetail({
             </div>
           </div>
         </div>
-        <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginTop: '1rem', maxWidth: '800px' }}>
+        <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginTop: '1rem', maxWidth: '800px', whiteSpace: 'pre-wrap' }}>
           {activeTool.description}
         </p>
         {activeTool.github && (

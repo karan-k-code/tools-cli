@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Terminal, Check } from "lucide-react";
 import { toolsData } from "./data/toolsData";
 import Sidebar from "./components/Sidebar";
@@ -15,9 +15,6 @@ export default function App() {
 
   // Interactive options state
   const [builderOpts, setBuilderOpts] = useState({});
-  const [generatedCmd, setGeneratedCmd] = useState("");
-  const [cmdExplanation, setCmdExplanation] = useState([]);
-  const [simulatedOutput, setSimulatedOutput] = useState("");
 
   // Execution state for terminal
   const [runCmdSignal, setRunCmdSignal] = useState("");
@@ -91,6 +88,18 @@ export default function App() {
   // Find active tool
   const activeTool = toolsData.find((t) => t.id === activeToolId);
 
+  // Derived interactive builder states
+  let generatedCmd = "";
+  let cmdExplanation = [];
+  let simulatedOutput = "";
+
+  if (activeTool && activeTool.interactiveBuilder) {
+    const generated = activeTool.interactiveBuilder.generator(builderOpts);
+    generatedCmd = generated.command;
+    cmdExplanation = generated.explanation;
+    simulatedOutput = activeTool.interactiveBuilder.simulatedOutput(builderOpts);
+  }
+
   // Sync builder options when tool changes
   useEffect(() => {
     if (activeTool && activeTool.interactiveBuilder) {
@@ -98,22 +107,11 @@ export default function App() {
       activeTool.interactiveBuilder.options.forEach((opt) => {
         defaults[opt.id] = opt.defaultValue;
       });
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setBuilderOpts(defaults);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeToolId]);
-
-  // Recalculate generated command when builder options change
-  useEffect(() => {
-    if (activeTool && activeTool.interactiveBuilder) {
-      const { command, explanation } =
-        activeTool.interactiveBuilder.generator(builderOpts);
-      setGeneratedCmd(command);
-      setCmdExplanation(explanation);
-      setSimulatedOutput(
-        activeTool.interactiveBuilder.simulatedOutput(builderOpts),
-      );
-    }
-  }, [builderOpts, activeToolId]);
 
   // Handle Option change in form
   const handleOptChange = (id, value) => {

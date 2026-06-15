@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Inline GitHub SVG Icon (Since Lucide v1.x doesn't export brand icons)
 export const GithubIcon = ({ size = 18, ...props }) => (
   <svg 

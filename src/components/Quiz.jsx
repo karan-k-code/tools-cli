@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { quizQuestions } from '../data/toolsData';
-import { Award, CheckCircle, AlertCircle, RefreshCw, X } from 'lucide-react';
+import { CheckCircle, AlertCircle, RefreshCw, X } from 'lucide-react';
 import './Quiz.css';
 
 export default function Quiz({ onClose }) {
@@ -51,7 +51,6 @@ export default function Quiz({ onClose }) {
   };
 
   const progressPercent = ((currentIdx) / quizQuestions.length) * 100;
-  const finalProgress = showResults ? 100 : progressPercent;
 
   return (
     <div className="quiz-panel-overlay">

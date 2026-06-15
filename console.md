@@ -85,6 +85,7 @@ You can type the following commands manually into the simulator command prompt t
 | **`clear`** | None | Wipes the entire screen buffer (wipes the `history` state array). |
 | **`git`** | `init`, `status`, `log` | Simulates localized repository initialization, tracked changes, or commit history logs. |
 | **`ollama`**| `list`, `run <model>` | Simulates querying local AI models list or launching a chat conversation shell. |
+| **`gemini`**| `configure`, `--list-models`, `<prompt>` | Simulates Gemini configuration, listing models, or generating AI answers. |
 | **`ffmpeg`**| `-i input.mp4 ...` | Simulates high-speed video/audio conversion status progress loops. |
 | **`yt-dlp`**| `<url>` | Prints mock logs of web page downloading, file packaging, and completion status. |
 | **`python`**| `--version`, `-V` | Simulates Python runtime version checks. |

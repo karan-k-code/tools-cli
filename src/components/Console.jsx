@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Terminal, Trash2, HelpCircle, RefreshCw } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Trash2 } from 'lucide-react';
 import './Console.css';
 
 export default function Console({ activeCommand, simulatedOutput, onCommandRunComplete }) {
@@ -23,13 +23,6 @@ export default function Console({ activeCommand, simulatedOutput, onCommandRunCo
       terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
     }
   }, [history, isTyping, typedContent]);
-
-  // Handle run commands triggered externally from the page builder
-  useEffect(() => {
-    if (activeCommand) {
-      triggerExternalCommand(activeCommand, simulatedOutput);
-    }
-  }, [activeCommand]);
 
   const triggerExternalCommand = (cmd, output) => {
     setIsTyping(true);
@@ -58,6 +51,15 @@ export default function Console({ activeCommand, simulatedOutput, onCommandRunCo
     }, 25);
   };
 
+  // Handle run commands triggered externally from the page builder
+  useEffect(() => {
+    if (activeCommand) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      triggerExternalCommand(activeCommand, simulatedOutput);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeCommand]);
+
   const handleInputSubmit = (e) => {
     e.preventDefault();
     if (isTyping) return;
@@ -81,7 +83,7 @@ export default function Console({ activeCommand, simulatedOutput, onCommandRunCo
         setHistory([]);
         return;
       case 'help':
-        output = 'Available CLI Mock Engines:\n  - \x1b[33mgit\x1b[0m: git init, git add, git status, git commit\n  - \x1b[35mollama\x1b[0m: ollama list, ollama run <model>\n  - \x1b[32mffmpeg\x1b[0m: ffmpeg -i input.mp4\n  - \x1b[31myt-dlp\x1b[0m: yt-dlp <url>\n  - \x1b[36mpython\x1b[0m / \x1b[36mpip\x1b[0m: python --version, pip list\n  - \x1b[33mdocker\x1b[0m: docker run, docker ps\n  - \x1b[34mclear\x1b[0m: Wipe the console screen.';
+        output = 'Available CLI Mock Engines:\n  - \x1b[33mgit\x1b[0m: git init, git add, git status, git commit\n  - \x1b[36mgemini\x1b[0m: gemini "prompt", gemini configure\n  - \x1b[35mollama\x1b[0m: ollama list, ollama run <model>\n  - \x1b[32mffmpeg\x1b[0m: ffmpeg -i input.mp4\n  - \x1b[31myt-dlp\x1b[0m: yt-dlp <url>\n  - \x1b[36mpython\x1b[0m / \x1b[36mpip\x1b[0m: python --version, pip list\n  - \x1b[33mdocker\x1b[0m: docker run, docker ps\n  - \x1b[34mclear\x1b[0m: Wipe the console screen.';
         break;
       case 'git':
         if (args[1] === 'status') {
@@ -101,6 +103,20 @@ export default function Console({ activeCommand, simulatedOutput, onCommandRunCo
           output = `\x1b[35m[Ollama] Loading model ${args[2] || 'llama3'}...\x1b[0m\n>>> Hello! How can I help you today?\nI am a local AI assistant running on your terminal.`;
         } else {
           output = 'Ollama engine active. Commands: ollama list, ollama run llama3';
+        }
+        break;
+      case 'gemini':
+        if (args[1] === 'configure') {
+          output = '? Enter your Google Gemini API Key: ****************************************\n\x1b[32m✔ Configuration saved to ~/.geminirc\x1b[0m';
+        } else if (args[1] === '--list-models') {
+          output = 'NAME                  TYPE          MAX TOKENS\ngemini-2.5-flash      multimodal    1,048,576\ngemini-2.5-pro        multimodal    2,097,152\ngemini-1.5-flash      multimodal    1,048,576';
+        } else if (args.slice(1).join(' ').includes('--file')) {
+          const filePath = args[args.indexOf('--file') + 1] || 'data.csv';
+          output = `\x1b[35m[Gemini Multimodal Parser]\x1b[0m\nReading file ${filePath}...\nAnalysis: File processed successfully. Key trends and data summarized.\n\n\x1b[32m[Finished Processing]\x1b[0m`;
+        } else if (args[1]) {
+          output = `\x1b[35m[Gemini AI Response]\x1b[0m\nQuantum computing uses qubits instead of classical bits. Classical bits represent 0 or 1, but qubits can exist in a superposition of both states.\n\n\x1b[32m[Tokens: 124 input, 68 output]\x1b[0m`;
+        } else {
+          output = 'Gemini CLI active. Try: gemini "hello", gemini configure, gemini --list-models';
         }
         break;
       case 'ffmpeg':
@@ -148,16 +164,15 @@ export default function Console({ activeCommand, simulatedOutput, onCommandRunCo
     if (!text) return '';
     
     // Split text by ESC code
+    /* eslint-disable-next-line no-control-regex */
     const parts = text.split(/(\x1b\[\d+(?:;\d+)?m)/g);
     let currentColorClass = '';
-    let currentBgColorClass = '';
 
     return parts.map((part, index) => {
       if (part.startsWith('\x1b[')) {
         const code = part.substring(2, part.length - 1);
         if (code === '0') {
           currentColorClass = '';
-          currentBgColorClass = '';
         } else if (code === '31') {
           currentColorClass = 'text-red-500'; // red
         } else if (code === '32') {
