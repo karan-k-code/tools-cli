@@ -1,3 +1,5 @@
+//  author: https://github.com/karan-k-code/tools-cli
+
 import { useState, useEffect } from "react";
 import { Terminal, Check } from "lucide-react";
 import { toolsData } from "./data/toolsData";
@@ -97,7 +99,8 @@ export default function App() {
     const generated = activeTool.interactiveBuilder.generator(builderOpts);
     generatedCmd = generated.command;
     cmdExplanation = generated.explanation;
-    simulatedOutput = activeTool.interactiveBuilder.simulatedOutput(builderOpts);
+    simulatedOutput =
+      activeTool.interactiveBuilder.simulatedOutput(builderOpts);
   }
 
   // Sync builder options when tool changes

@@ -1,38 +1,41 @@
-import { 
-  Terminal, 
-  Search, 
-  Layers, 
+import {
+  Terminal,
+  Search,
+  Layers,
   Award,
-  GitBranch, 
-  Cpu, 
-  Video, 
-  Download, 
+  GitBranch,
+  Cpu,
+  Video,
+  Download,
   Code,
   Triangle,
-  Sparkles
-} from 'lucide-react';
-import './Sidebar.css';
+  Sparkles,
+  Smartphone,
+} from "lucide-react";
+import "./Sidebar.css";
 
 const getToolIcon = (id, size = 20) => {
   switch (id) {
-    case 'git':
+    case "git":
       return <GitBranch size={size} />;
-    case 'ollama':
+    case "ollama":
       return <Cpu size={size} />;
-    case 'ffmpeg':
+    case "ffmpeg":
       return <Video size={size} />;
-    case 'yt-dlp':
+    case "yt-dlp":
       return <Download size={size} />;
-    case 'python-pip':
+    case "python-pip":
       return <Terminal size={size} />;
-    case 'utils':
+    case "utils":
       return <Layers size={size} />;
-    case 'node-npm':
+    case "node-npm":
       return <Code size={size} />;
-    case 'vercel':
+    case "vercel":
       return <Triangle size={size} fill="currentColor" />;
-    case 'gemini':
+    case "gemini":
       return <Sparkles size={size} />;
+    case "adb":
+      return <Smartphone size={size} />;
     default:
       return <Terminal size={size} />;
   }
@@ -45,15 +48,15 @@ export default function Sidebar({
   searchQuery,
   setSearchQuery,
   activeCategory,
-  setActiveCategory
+  setActiveCategory,
 }) {
   return (
     <aside className="sidebar">
-      <div 
-        className="logo-section" 
-        style={{ cursor: 'pointer', marginBottom: '1.5rem' }}
+      <div
+        className="logo-section"
+        style={{ cursor: "pointer", marginBottom: "1.5rem" }}
         onClick={() => {
-          window.location.hash = '';
+          window.location.hash = "";
         }}
       >
         <Terminal className="logo-icon" />
@@ -72,21 +75,32 @@ export default function Sidebar({
       </div>
 
       <div className="nav-section-title">Categories</div>
-      <div style={{ display: 'flex', gap: '0.25rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-        {['All', 'VCS', 'AI', 'Media', 'Utilities'].map((cat) => (
+      <div
+        style={{
+          display: "flex",
+          gap: "0.25rem",
+          marginBottom: "1rem",
+          flexWrap: "wrap",
+        }}
+      >
+        {["All", "VCS", "AI", "Media", "Utilities"].map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
             style={{
-              background: activeCategory === cat ? 'var(--accent-glow)' : 'none',
-              border: '1px solid',
-              borderColor: activeCategory === cat ? 'var(--accent-color)' : 'var(--border-color)',
-              borderRadius: '6px',
-              color: activeCategory === cat ? '#fff' : 'var(--text-secondary)',
-              fontSize: '0.75rem',
-              padding: '0.25rem 0.5rem',
-              cursor: 'pointer',
-              transition: 'all var(--transition-fast)'
+              background:
+                activeCategory === cat ? "var(--accent-glow)" : "none",
+              border: "1px solid",
+              borderColor:
+                activeCategory === cat
+                  ? "var(--accent-color)"
+                  : "var(--border-color)",
+              borderRadius: "6px",
+              color: activeCategory === cat ? "#fff" : "var(--text-secondary)",
+              fontSize: "0.75rem",
+              padding: "0.25rem 0.5rem",
+              cursor: "pointer",
+              transition: "all var(--transition-fast)",
             }}
           >
             {cat}
@@ -96,10 +110,10 @@ export default function Sidebar({
 
       <div className="nav-section-title">CLI Engines</div>
       <nav className="nav-links">
-        <div 
-          className={`nav-item ${activeToolId === null && !showQuiz ? 'active' : ''}`}
+        <div
+          className={`nav-item ${activeToolId === null && !showQuiz ? "active" : ""}`}
           onClick={() => {
-            window.location.hash = '';
+            window.location.hash = "";
           }}
         >
           <span className="nav-item-left">
@@ -111,12 +125,18 @@ export default function Sidebar({
         {filteredTools.map((tool) => (
           <div
             key={tool.id}
-            className={`nav-item ${activeToolId === tool.id && !showQuiz ? 'active' : ''}`}
+            className={`nav-item ${activeToolId === tool.id && !showQuiz ? "active" : ""}`}
             onClick={() => {
               window.location.hash = `#/${tool.id}`;
             }}
           >
-            <span className="nav-item-left" style={{ color: activeToolId === tool.id ? 'var(--accent-color)' : 'inherit' }}>
+            <span
+              className="nav-item-left"
+              style={{
+                color:
+                  activeToolId === tool.id ? "var(--accent-color)" : "inherit",
+              }}
+            >
               {getToolIcon(tool.id, 16)}
               <span>{tool.name}</span>
             </span>
@@ -126,7 +146,12 @@ export default function Sidebar({
       </nav>
 
       <div className="sidebar-footer">
-        <button className="quiz-btn" onClick={() => { window.location.hash = '#/quiz'; }}>
+        <button
+          className="quiz-btn"
+          onClick={() => {
+            window.location.hash = "#/quiz";
+          }}
+        >
           <Award size={16} />
           <span>Test CLI Knowledge</span>
         </button>

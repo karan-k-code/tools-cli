@@ -26,6 +26,7 @@
   --node-color: #339933;
   --vercel-color: #ffffff;
   --gemini-color: #38bdf8;
+  --adb-color: #3ddc84;
 
   --accent-color: var(--ollama-color); /* default fallback */
   --accent-glow: rgba(168, 85, 247, 0.25);
@@ -149,6 +150,10 @@ body {
 .gemini-accent {
   --accent-color: var(--gemini-color);
   --accent-glow: rgba(56, 189, 248, 0.25);
+}
+.adb-accent {
+  --accent-color: var(--adb-color);
+  --accent-glow: rgba(61, 220, 132, 0.25);
 }
 
 /* Layout Elements */

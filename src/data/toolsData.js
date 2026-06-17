@@ -1561,6 +1561,253 @@ export const toolsData = [
     ]
   },
 
+  {
+    id: 'adb',
+    name: 'Android Debug Bridge (ADB)',
+    category: 'Utilities',
+    color: '#3ddc84',
+    accentClass: 'adb-accent',
+    github: 'https://github.com/aosp-mirror/platform_system_core',
+    tagline: 'Versatile command-line tool to communicate with Android devices.',
+    description: 'Android Debug Bridge (adb) is a versatile command-line tool that lets you communicate with a device. The adb command facilitates a variety of device actions, such as installing and debugging apps, running shells, transferring files, and viewing system logs.',
+    install: {
+      windows: 'winget install -e --id Google.Adk.PlatformTools',
+      mac: 'brew install android-platform-tools',
+      linux: 'sudo apt install android-tools-adb'
+    },
+    visualConcept: {
+      title: 'ADB Architecture',
+      steps: [
+        { name: 'ADB Client', desc: 'Command line terminal on your PC sending user instructions.', status: 'modified' },
+        { name: 'ADB Server', desc: 'Background process on your PC coordinating client-device requests.', status: 'staged' },
+        { name: 'ADB Daemon (adbd)', desc: 'Background process running on the connected Android device/emulator.', status: 'committed' },
+        { name: 'Device Shell', desc: 'Secure Unix shell inside the Android OS executing system level commands.', status: 'remote' }
+      ]
+    },
+    interactiveBuilder: {
+      title: 'ADB Command Architect',
+      description: 'Configure parameters to generate ADB commands for device tracking, file management, app execution, and logcat monitoring.',
+      options: [
+        {
+          id: 'action',
+          label: 'Action Type',
+          type: 'select',
+          defaultValue: 'devices',
+          choices: [
+            { value: 'devices', label: 'List Connected Devices' },
+            { value: 'install', label: 'Install App (APK)' },
+            { value: 'uninstall', label: 'Uninstall App (Package)' },
+            { value: 'push', label: 'Push File to Device' },
+            { value: 'pull', label: 'Pull File from Device' },
+            { value: 'shell', label: 'Run Shell Command' },
+            { value: 'logcat', label: 'View Device Logs (Logcat)' },
+            { value: 'reboot', label: 'Reboot Device' }
+          ]
+        },
+        {
+          id: 'targetDevice',
+          label: 'Target Device Serial (-s) (optional)',
+          type: 'text',
+          defaultValue: ''
+        },
+        {
+          id: 'apkPath',
+          label: 'APK File Path',
+          type: 'text',
+          defaultValue: 'app-debug.apk',
+          condition: (opts) => opts.action === 'install'
+        },
+        {
+          id: 'packageId',
+          label: 'App Package ID',
+          type: 'text',
+          defaultValue: 'com.example.myapp',
+          condition: (opts) => opts.action === 'uninstall'
+        },
+        {
+          id: 'localPath',
+          label: 'Local File Path',
+          type: 'text',
+          defaultValue: 'photo.jpg',
+          condition: (opts) => opts.action === 'push' || opts.action === 'pull'
+        },
+        {
+          id: 'remotePath',
+          label: 'Remote File Path (on device)',
+          type: 'text',
+          defaultValue: '/sdcard/Pictures/',
+          condition: (opts) => opts.action === 'push' || opts.action === 'pull'
+        },
+        {
+          id: 'shellCmd',
+          label: 'Shell Command',
+          type: 'text',
+          defaultValue: 'pm list packages',
+          condition: (opts) => opts.action === 'shell'
+        },
+        {
+          id: 'logFilter',
+          label: 'Logcat Filter (Tag:Priority)',
+          type: 'text',
+          defaultValue: 'ActivityManager:I *:S',
+          condition: (opts) => opts.action === 'logcat'
+        },
+        {
+          id: 'rebootMode',
+          label: 'Reboot Mode',
+          type: 'select',
+          defaultValue: 'normal',
+          choices: [
+            { value: 'normal', label: 'Normal Reboot' },
+            { value: 'recovery', label: 'Recovery Mode' },
+            { value: 'bootloader', label: 'Bootloader (Fastboot)' }
+          ],
+          condition: (opts) => opts.action === 'reboot'
+        }
+      ],
+      generator: (opts) => {
+        const deviceFlag = opts.targetDevice ? `-s ${opts.targetDevice} ` : '';
+        switch (opts.action) {
+          case 'devices':
+            return {
+              command: `adb devices`,
+              explanation: [
+                { part: 'adb', desc: 'Invokes the Android Debug Bridge command line tool.' },
+                { part: 'devices', desc: 'Queries the ADB server and lists all currently connected emulator or physical Android devices.' }
+              ]
+            };
+          case 'install':
+            return {
+              command: `adb ${deviceFlag}install ${opts.apkPath || 'app-debug.apk'}`,
+              explanation: [
+                { part: 'adb', desc: 'Invokes the Android Debug Bridge command line tool.' },
+                ...(opts.targetDevice ? [{ part: `-s ${opts.targetDevice}`, desc: 'Directs the command to the specific connected device with this serial number.' }] : []),
+                { part: 'install', desc: 'Pushes the target application APK package to the device and performs installation.' },
+                { part: opts.apkPath || 'app-debug.apk', desc: 'Local path of the installation APK package file.' }
+              ]
+            };
+          case 'uninstall':
+            return {
+              command: `adb ${deviceFlag}uninstall ${opts.packageId || 'com.example.myapp'}`,
+              explanation: [
+                { part: 'adb', desc: 'Invokes the Android Debug Bridge command line tool.' },
+                ...(opts.targetDevice ? [{ part: `-s ${opts.targetDevice}`, desc: 'Directs the command to the specific device.' }] : []),
+                { part: 'uninstall', desc: 'Instructs the device package manager to uninstall the given app package.' },
+                { part: opts.packageId || 'com.example.myapp', desc: 'The unique bundle identifier or package name of the app to delete.' }
+              ]
+            };
+          case 'push':
+            return {
+              command: `adb ${deviceFlag}push ${opts.localPath || 'photo.jpg'} ${opts.remotePath || '/sdcard/Pictures/'}`,
+              explanation: [
+                { part: 'adb', desc: 'Invokes the Android Debug Bridge command line tool.' },
+                ...(opts.targetDevice ? [{ part: `-s ${opts.targetDevice}`, desc: 'Directs the command to the specific device.' }] : []),
+                { part: 'push', desc: 'Copies specified file or folder from host machine to device storage.' },
+                { part: opts.localPath || 'photo.jpg', desc: 'The source file or folder path on the local PC.' },
+                { part: opts.remotePath || '/sdcard/Pictures/', desc: 'The target destination path inside the connected Android device filesystem.' }
+              ]
+            };
+          case 'pull':
+            return {
+              command: `adb ${deviceFlag}pull ${opts.remotePath || '/sdcard/Pictures/'} ${opts.localPath || 'photo.jpg'}`,
+              explanation: [
+                { part: 'adb', desc: 'Invokes the Android Debug Bridge command line tool.' },
+                ...(opts.targetDevice ? [{ part: `-s ${opts.targetDevice}`, desc: 'Directs the command to the specific device.' }] : []),
+                { part: 'pull', desc: 'Retrieves a file or directory from the device filesystem back to the host machine.' },
+                { part: opts.remotePath || '/sdcard/Pictures/', desc: 'The source file/folder path on the device.' },
+                { part: opts.localPath || 'photo.jpg', desc: 'The destination file/folder path on the host computer.' }
+              ]
+            };
+          case 'shell':
+            return {
+              command: `adb ${deviceFlag}shell "${opts.shellCmd || 'pm list packages'}"`,
+              explanation: [
+                { part: 'adb', desc: 'Invokes the Android Debug Bridge command line tool.' },
+                ...(opts.targetDevice ? [{ part: `-s ${opts.targetDevice}`, desc: 'Directs the command to the specific device.' }] : []),
+                { part: 'shell', desc: 'Executes a Unix shell command payload directly on the connected device\'s operating system.' },
+                { part: `"${opts.shellCmd || 'pm list packages'}"`, desc: 'The shell command string parameter sent to the device for execution.' }
+              ]
+            };
+          case 'logcat':
+            return {
+              command: `adb ${deviceFlag}logcat ${opts.logFilter || 'ActivityManager:I *:S'}`,
+              explanation: [
+                { part: 'adb', desc: 'Invokes the Android Debug Bridge command line tool.' },
+                ...(opts.targetDevice ? [{ part: `-s ${opts.targetDevice}`, desc: 'Directs the command to the specific device.' }] : []),
+                { part: 'logcat', desc: 'Streams real-time device logs. Allows filtering by process, tag, or log severity.' },
+                { part: opts.logFilter || 'ActivityManager:I *:S', desc: 'Log filter parameters to isolate specific debug logs and suppress others.' }
+              ]
+            };
+          case 'reboot': {
+            const rebootType = opts.rebootMode === 'normal' ? '' : ` ${opts.rebootMode}`;
+            return {
+              command: `adb ${deviceFlag}reboot${rebootType}`,
+              explanation: [
+                { part: 'adb', desc: 'Invokes the Android Debug Bridge command line tool.' },
+                ...(opts.targetDevice ? [{ part: `-s ${opts.targetDevice}`, desc: 'Directs the command to the specific device.' }] : []),
+                { part: `reboot${rebootType}`, desc: `Triggers a hardware power cycle. ${opts.rebootMode === 'normal' ? 'Restarts device back to normal Android OS.' : opts.rebootMode === 'recovery' ? 'Reboots device into Recovery UI.' : 'Reboots device into Bootloader (Fastboot) mode.'}` }
+              ]
+            };
+          }
+          default:
+            return { command: 'adb --help', explanation: [] };
+        }
+      },
+      simulatedOutput: (opts) => {
+        const serial = opts.targetDevice || 'emulator-5554';
+        switch (opts.action) {
+          case 'devices':
+            return `List of devices attached\n${serial}\tdevice\n192.168.1.102:5555\tdevice`;
+          case 'install':
+            return `Performing Streamed Install\nSuccess`;
+          case 'uninstall':
+            return `Success`;
+          case 'push':
+            return `${opts.localPath || 'photo.jpg'}: 1 file pushed, 0 skipped. 18.5 MB/s (102456 bytes in 0.005s)`;
+          case 'pull':
+            return `${opts.remotePath || '/sdcard/Pictures/'}: 1 file pulled, 0 skipped. 15.2 MB/s (102456 bytes in 0.006s)`;
+          case 'shell':
+            if (opts.shellCmd === 'pm list packages') {
+              return `package:android\npackage:com.android.providers.telephony\npackage:com.android.providers.contacts\npackage:com.google.android.youtube\npackage:${opts.packageId || 'com.example.myapp'}`;
+            }
+            return `\x1b[32m[Executing shell: ${opts.shellCmd}]\x1b[0m\nuid=2000(shell) gid=2000(shell) groups=2000(shell),1004(input),3003(inet)\n`;
+          case 'logcat':
+            return `\x1b[36m--------- beginning of main\x1b[0m\n06-17 09:55:01.214  1420  1450 I ActivityManager: Start proc 12455:com.android.chrome/u0a115 for service\n06-17 09:55:01.442  1420  1460 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity: +210ms\n\x1b[33m[Streaming logcat... Press Ctrl+C to terminate]\x1b[0m`;
+          case 'reboot':
+            return `\x1b[31mRebooting device ${serial} (${opts.rebootMode || 'normal'}) ...\x1b[0m\nDevice connection terminated.`;
+          default:
+            return '';
+        }
+      }
+    },
+    cheatsheets: [
+      {
+        section: 'Connection & Discovery',
+        items: [
+          { cmd: 'adb devices -l', desc: 'List connected devices with model and USB interface info.' },
+          { cmd: 'adb connect 192.168.1.100:5555', desc: 'Connect to an Android device over Wi-Fi network.' },
+          { cmd: 'adb disconnect', desc: 'Disconnect from all TCP/IP connected Android devices.' }
+        ]
+      },
+      {
+        section: 'File & App Management',
+        items: [
+          { cmd: 'adb install -r app.apk', desc: 'Reinstall / upgrade an existing application, keeping its user data.' },
+          { cmd: 'adb shell pm list packages -3', desc: 'List all third-party app packages installed on the device.' },
+          { cmd: 'adb shell pm clear com.example.app', desc: 'Clear all runtime cache and data for the target package.' }
+        ]
+      },
+      {
+        section: 'Debugging & Logs',
+        items: [
+          { cmd: 'adb logcat -c', desc: 'Clear/flush the active device logcat buffer.' },
+          { cmd: 'adb shell screencap -p /sdcard/screenshot.png', desc: 'Take a screenshot and save it to SDCard storage.' },
+          { cmd: 'adb shell dumpsys battery', desc: 'Display device battery level, charge status, and health metrics.' }
+        ]
+      }
+    ]
+  },
+
 ];
 
 export const quizQuestions = [
