@@ -352,7 +352,7 @@ export default function App() {
                 TOOLS CLI
               </span>
               <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>
-                v1.0.0
+                v1.0.0-Beta
               </span>
             </div>
 
@@ -363,7 +363,7 @@ export default function App() {
                 margin: 0,
               }}
             >
-              &copy; {new Date().getFullYear()} Tools CLI. Built with React &
+              &copy; {new Date().getFullYear()} kosnhu.in. Built with React &
               Vite. Released under the MIT License.
             </p>
 
