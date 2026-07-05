@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link id="favicon" rel="icon" href="k-log-tr-v1.png" type="image/png" />
+    <link id="favicon" rel="icon" href="k.logo.webp" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta Tags -->
@@ -22,6 +22,7 @@
     <meta name="author" content="karan-k-code Developer" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#090a0f" />
+    <link rel="canonical" href="https://tools-cli.konshu.in/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -34,7 +35,7 @@
       property="og:description"
       content="Configure, simulate, and master CLI tools like Git, Ollama, FFmpeg, Python, Docker, jq, and tmux in a premium browser dashboard."
     />
-    <meta property="og:image" content="/src/assets/hero.png" />
+    <meta property="og:image" content="https://tools-cli.konshu.in/hero.webp" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -47,38 +48,65 @@
       property="twitter:description"
       content="Configure, simulate, and master CLI tools like Git, Ollama, FFmpeg, Python, Docker, jq, and tmux in a premium browser dashboard."
     />
-    <meta property="twitter:image" content="/src/assets/hero.png" />
+    <meta
+      property="twitter:image"
+      content="https://tools-cli.konshu.in/hero.webp"
+    />
+
+    <!-- Google Rich Snippets / JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Tools Cli",
+        "url": "https://tools-cli.konshu.in/",
+        "description": "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.",
+        "applicationCategory": "DeveloperApplication, EducationalApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "image": "https://tools-cli.konshu.in/hero.webp",
+        "author": {
+          "@type": "Person",
+          "name": "karan-k-code"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
       // Dynamically switch favicon based on user's color scheme preference
-      (function () {
-        const favicon =
-          document.getElementById("favicon") ||
-          (() => {
-            const l = document.createElement("link");
-            l.id = "favicon";
-            l.rel = "icon";
-            document.head.appendChild(l);
-            return l;
-          })();
+      // (function () {
+      //   const favicon =
+      //     document.getElementById("favicon") ||
+      //     (() => {
+      //       const l = document.createElement("link");
+      //       l.id = "favicon";
+      //       l.rel = "icon";
+      //       document.head.appendChild(l);
+      //       return l;
+      //     })();
 
-        function setFavicon(isDark) {
-          favicon.href = isDark ? "k-log-tr-v1.png" : "k_logo_black.png";
-        }
+      //   // function setFavicon(isDark) {
+      //   //   favicon.href = isDark ? "k-log-tr-v1.png" : "k_logo_black.png";
+      //   // }
 
-        const mql = window.matchMedia("(prefers-color-scheme: dark)");
-        setFavicon(mql.matches);
+      //   const mql = window.matchMedia("(prefers-color-scheme: dark)");
+      //   setFavicon(mql.matches);
 
-        // Listen for changes (supports addEventListener and addListener)
-        if (mql.addEventListener) {
-          mql.addEventListener("change", (e) => setFavicon(e.matches));
-        } else if (mql.addListener) {
-          mql.addListener((e) => setFavicon(e.matches));
-        }
-      })();
+      //   // Listen for changes (supports addEventListener and addListener)
+      //   if (mql.addEventListener) {
+      //     mql.addEventListener("change", (e) => setFavicon(e.matches));
+      //   } else if (mql.addListener) {
+      //     mql.addListener((e) => setFavicon(e.matches));
+      //   }
+      // })();
     </script>
   </body>
 </html>

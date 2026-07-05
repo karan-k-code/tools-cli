@@ -1,0 +1,122 @@
+.legal-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.4s ease-out;
+  text-align: left;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.legal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.legal-title-section h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.legal-last-updated {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.close-btn {
+  background: var(--bg-active);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  margin-top: 0.25rem;
+}
+
+.close-btn:hover {
+  background: var(--border-focus);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.legal-content {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.legal-section {
+  margin-bottom: 2.5rem;
+}
+
+.legal-section h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legal-section p {
+  color: var(--text-secondary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.legal-section ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-secondary);
+}
+
+.legal-section li {
+  margin-bottom: 0.5rem;
+}
+
+.legal-highlight-box {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--accent-color);
+  padding: 1.25rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.legal-highlight-box p {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}

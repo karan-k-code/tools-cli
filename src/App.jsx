@@ -1,12 +1,15 @@
 //  author: https://github.com/karan-k-code/tools-cli
 
 import { useState, useEffect } from "react";
-import { Terminal, Check } from "lucide-react";
+import { Terminal, Check, Heart } from "lucide-react";
 import { toolsData } from "./data/toolsData";
 import Sidebar from "./components/Sidebar";
 import DashboardHome from "./components/DashboardHome";
 import ToolDetail from "./components/ToolDetail";
 import Quiz from "./components/Quiz";
+import Donate from "./components/Donate";
+import Terms from "./components/Terms";
+import Privacy from "./components/Privacy";
 import { GithubIcon } from "./components/icons";
 import "./App.css";
 
@@ -34,12 +37,42 @@ export default function App() {
   // Quiz Overlay Toggle
   const [showQuiz, setShowQuiz] = useState(false);
 
+  // Donate Overlay Toggle
+  const [showDonate, setShowDonate] = useState(false);
+
+  // Terms Overlay Toggle
+  const [showTerms, setShowTerms] = useState(false);
+
+  // Privacy Overlay Toggle
+  const [showPrivacy, setShowPrivacy] = useState(false);
+
   // Sync state with URL hash routing
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash === "#/quiz" || hash === "#quiz") {
         setShowQuiz(true);
+        setShowDonate(false);
+        setShowTerms(false);
+        setShowPrivacy(false);
+        setActiveToolId(null);
+      } else if (hash === "#/donate" || hash === "#donate" || hash === "#/donent" || hash === "#donent") {
+        setShowDonate(true);
+        setShowQuiz(false);
+        setShowTerms(false);
+        setShowPrivacy(false);
+        setActiveToolId(null);
+      } else if (hash === "#/terms" || hash === "#terms") {
+        setShowTerms(true);
+        setShowQuiz(false);
+        setShowDonate(false);
+        setShowPrivacy(false);
+        setActiveToolId(null);
+      } else if (hash === "#/privacy" || hash === "#privacy") {
+        setShowPrivacy(true);
+        setShowQuiz(false);
+        setShowDonate(false);
+        setShowTerms(false);
         setActiveToolId(null);
       } else if (hash.startsWith("#/")) {
         const toolId = hash.substring(2);
@@ -47,9 +80,15 @@ export default function App() {
         if (exists) {
           setActiveToolId(toolId);
           setShowQuiz(false);
+          setShowDonate(false);
+          setShowTerms(false);
+          setShowPrivacy(false);
         } else {
           setActiveToolId(null);
           setShowQuiz(false);
+          setShowDonate(false);
+          setShowTerms(false);
+          setShowPrivacy(false);
           window.location.hash = "";
         }
       } else if (hash.startsWith("#")) {
@@ -58,15 +97,24 @@ export default function App() {
         if (exists) {
           setActiveToolId(toolId);
           setShowQuiz(false);
+          setShowDonate(false);
+          setShowTerms(false);
+          setShowPrivacy(false);
           window.location.hash = `#/${toolId}`;
         } else {
           setActiveToolId(null);
           setShowQuiz(false);
+          setShowDonate(false);
+          setShowTerms(false);
+          setShowPrivacy(false);
           window.location.hash = "";
         }
       } else {
         setActiveToolId(null);
         setShowQuiz(false);
+        setShowDonate(false);
+        setShowTerms(false);
+        setShowPrivacy(false);
       }
     };
 
@@ -115,6 +163,68 @@ export default function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeToolId]);
+
+  // Dynamically update document title and meta elements for Google SEO
+  useEffect(() => {
+    let title = "Tools Cli - Git, Ollama, FFmpeg, Python & Utilities";
+    let desc = "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.";
+    let path = "";
+
+    if (showQuiz) {
+      title = "Interactive CLI Quiz - Test Your Command Line Skills | Tools Cli";
+      desc = "Test your knowledge of Git, Ollama, FFmpeg, Docker, and other terminal commands with our interactive CLI quiz.";
+      path = "#/quiz";
+    } else if (showDonate) {
+      title = "Donate & Support - Tools Cli Project";
+      desc = "Support the development of Tools Cli, an open-source companion for terminal and developer CLI tools.";
+      path = "#/donate";
+    } else if (showTerms) {
+      title = "Terms of Service - Tools Cli";
+      desc = "Review the Terms of Service and guidelines for using the Tools Cli interactive CLI dashboard.";
+      path = "#/terms";
+    } else if (showPrivacy) {
+      title = "Privacy Policy - Tools Cli";
+      desc = "Read our Privacy Policy to understand how we handle data and respect user privacy on Tools Cli.";
+      path = "#/privacy";
+    } else if (activeTool) {
+      title = `${activeTool.name} Command Companion - Simulator & Guide | Tools Cli`;
+      desc = activeTool.description || activeTool.tagline || `Learn, configure, and simulate ${activeTool.name} commands interactively.`;
+      path = `#/${activeTool.id}`;
+    }
+
+    document.title = title;
+
+    // Update Meta Description
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) descMeta.setAttribute("content", desc);
+
+    const ogDescMeta = document.querySelector('meta[property="og:description"]');
+    if (ogDescMeta) ogDescMeta.setAttribute("content", desc);
+
+    const twitterDescMeta = document.querySelector('meta[property="twitter:description"]');
+    if (twitterDescMeta) twitterDescMeta.setAttribute("content", desc);
+
+    // Update Meta Title
+    const titleMeta = document.querySelector('meta[name="title"]');
+    if (titleMeta) titleMeta.setAttribute("content", title);
+
+    const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+    if (ogTitleMeta) ogTitleMeta.setAttribute("content", title);
+
+    const twitterTitleMeta = document.querySelector('meta[property="twitter:title"]');
+    if (twitterTitleMeta) twitterTitleMeta.setAttribute("content", title);
+
+    // Update Canonical and URLs
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    const fullUrl = `https://tools-cli.konshu.in/${path}`;
+    if (canonicalLink) canonicalLink.setAttribute("href", fullUrl);
+
+    const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+    if (ogUrlMeta) ogUrlMeta.setAttribute("content", fullUrl);
+
+    const twitterUrlMeta = document.querySelector('meta[property="twitter:url"]');
+    if (twitterUrlMeta) twitterUrlMeta.setAttribute("content", fullUrl);
+  }, [activeTool, activeToolId, showQuiz, showDonate, showTerms, showPrivacy]);
 
   // Handle Option change in form
   const handleOptChange = (id, value) => {
@@ -255,9 +365,15 @@ export default function App() {
             >
               {showQuiz
                 ? "CLI Quiz"
-                : activeTool
-                  ? activeTool.name
-                  : "Dashboard Overview"}
+                : showDonate
+                  ? "Support Tools CLI"
+                  : showTerms
+                    ? "Terms of Service"
+                    : showPrivacy
+                      ? "Privacy Policy"
+                      : activeTool
+                        ? activeTool.name
+                        : "Dashboard Overview"}
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -282,6 +398,24 @@ export default function App() {
         <main className="main-content">
           {showQuiz ? (
             <Quiz
+              onClose={() => {
+                window.location.hash = "";
+              }}
+            />
+          ) : showDonate ? (
+            <Donate
+              onClose={() => {
+                window.location.hash = "";
+              }}
+            />
+          ) : showTerms ? (
+            <Terms
+              onClose={() => {
+                window.location.hash = "";
+              }}
+            />
+          ) : showPrivacy ? (
+            <Privacy
               onClose={() => {
                 window.location.hash = "";
               }}
@@ -367,7 +501,53 @@ export default function App() {
               Vite. Released under the MIT License.
             </p>
 
-            <div style={{ display: "flex", gap: "1.25rem" }}>
+            <div style={{ display: "flex", gap: "1.25rem", alignItems: "center" }}>
+              <a
+                href="#/terms"
+                style={{
+                  color: "var(--text-secondary)",
+                  textDecoration: "none",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  transition: "color var(--transition-fast)",
+                }}
+                className="hover-accent"
+              >
+                Terms
+              </a>
+              <span style={{ color: "var(--border-color)", fontSize: "0.85rem" }}>|</span>
+              <a
+                href="#/privacy"
+                style={{
+                  color: "var(--text-secondary)",
+                  textDecoration: "none",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  transition: "color var(--transition-fast)",
+                }}
+                className="hover-accent"
+              >
+                Privacy
+              </a>
+              <span style={{ color: "var(--border-color)", fontSize: "0.85rem" }}>|</span>
+              <a
+                href="#/donate"
+                style={{
+                  color: "var(--text-secondary)",
+                  textDecoration: "none",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  transition: "color var(--transition-fast)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.35rem"
+                }}
+                className="hover-accent"
+              >
+                <Heart size={14} style={{ color: "var(--ytdlp-color)" }} />
+                Donate
+              </a>
+              <span style={{ color: "var(--border-color)", fontSize: "0.85rem" }}>|</span>
               <a
                 href="https://github.com/karan-k-code/tools-cli"
                 target="_blank"
