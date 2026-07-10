@@ -11,6 +11,7 @@ import {
   Triangle,
   Sparkles,
   Smartphone,
+  Image,
 } from "lucide-react";
 import "./Sidebar.css";
 
@@ -36,6 +37,8 @@ const getToolIcon = (id, size = 20) => {
       return <Sparkles size={size} />;
     case "adb":
       return <Smartphone size={size} />;
+    case "magick":
+      return <Image size={size} />;
     default:
       return <Terminal size={size} />;
   }

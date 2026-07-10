@@ -13,7 +13,10 @@ import {
   Video,
   Download,
   Layers,
-  Triangle
+  Triangle,
+  Sparkles,
+  Smartphone,
+  Image
 } from "lucide-react";
 import { GithubIcon } from "./icons";
 import './DashboardHome.css';
@@ -36,6 +39,12 @@ const getToolIcon = (id, size = 20) => {
       return <Code size={size} />;
     case "vercel":
       return <Triangle size={size} fill="currentColor" />;
+    case "gemini":
+      return <Sparkles size={size} />;
+    case "adb":
+      return <Smartphone size={size} />;
+    case "magick":
+      return <Image size={size} />;
     default:
       return <Terminal size={size} />;
   }

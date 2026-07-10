@@ -11,7 +11,10 @@ import {
   Terminal, 
   Layers,
   Triangle,
-  ExternalLink
+  ExternalLink,
+  Sparkles,
+  Smartphone,
+  Image
 } from 'lucide-react';
 import Console from './Console';
 import { GithubIcon } from './icons';
@@ -35,6 +38,12 @@ const getToolIcon = (id, size = 20) => {
       return <Code size={size} />;
     case 'vercel':
       return <Triangle size={size} fill="currentColor" />;
+    case 'gemini':
+      return <Sparkles size={size} />;
+    case 'adb':
+      return <Smartphone size={size} />;
+    case 'magick':
+      return <Image size={size} />;
     default:
       return <Terminal size={size} />;
   }
