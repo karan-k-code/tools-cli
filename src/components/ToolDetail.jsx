@@ -1,48 +1,48 @@
-import { 
-  BookOpen, 
-  Code, 
-  Copy, 
-  Heart, 
+import {
+  BookOpen,
+  Code,
+  Copy,
+  Heart,
   Play,
-  GitBranch, 
-  Cpu, 
-  Video, 
-  Download, 
-  Terminal, 
+  GitBranch,
+  Cpu,
+  Video,
+  Download,
+  Terminal,
   Layers,
   Triangle,
   ExternalLink,
   Sparkles,
   Smartphone,
-  Image
-} from 'lucide-react';
-import Console from './Console';
-import { GithubIcon } from './icons';
-import './ToolDetail.css';
+  Image,
+} from "lucide-react";
+import Console from "./Console";
+import { GithubIcon } from "./icons";
+import "./css/ToolDetail.css";
 
 const getToolIcon = (id, size = 20) => {
   switch (id) {
-    case 'git':
+    case "git":
       return <GitBranch size={size} />;
-    case 'ollama':
+    case "ollama":
       return <Cpu size={size} />;
-    case 'ffmpeg':
+    case "ffmpeg":
       return <Video size={size} />;
-    case 'yt-dlp':
+    case "yt-dlp":
       return <Download size={size} />;
-    case 'python-pip':
+    case "python-pip":
       return <Terminal size={size} />;
-    case 'utils':
+    case "utils":
       return <Layers size={size} />;
-    case 'node-npm':
+    case "node-npm":
       return <Code size={size} />;
-    case 'vercel':
+    case "vercel":
       return <Triangle size={size} fill="currentColor" />;
-    case 'gemini':
+    case "gemini":
       return <Sparkles size={size} />;
-    case 'adb':
+    case "adb":
       return <Smartphone size={size} />;
-    case 'magick':
+    case "magick":
       return <Image size={size} />;
     default:
       return <Terminal size={size} />;
@@ -64,7 +64,7 @@ export default function ToolDetail({
   runCmdSignal,
   runCmdOutput,
   setRunCmdSignal,
-  setRunCmdOutput
+  setRunCmdOutput,
 }) {
   return (
     <div>
@@ -73,10 +73,16 @@ export default function ToolDetail({
         <div className="tool-header-row">
           <div className="tool-title-desc">
             <h1>
-              <span style={{ color: 'var(--accent-color)', display: 'inline-flex', alignItems: 'center' }}>
+              <span
+                style={{
+                  color: "var(--accent-color)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                }}
+              >
                 {getToolIcon(activeTool.id, 38)}
               </span>
-              <span style={{ marginLeft: '0.5rem' }}>{activeTool.name}</span>
+              <span style={{ marginLeft: "0.5rem" }}>{activeTool.name}</span>
               <span className="tool-badge-category">{activeTool.category}</span>
             </h1>
             <p className="tool-tagline">{activeTool.tagline}</p>
@@ -85,10 +91,10 @@ export default function ToolDetail({
           {/* Install Panel */}
           <div className="install-tabs">
             <div className="install-tab-header">
-              {['windows', 'mac', 'linux'].map((os) => (
+              {["windows", "mac", "linux"].map((os) => (
                 <button
                   key={os}
-                  className={`install-tab-btn ${activeOsTab === os ? 'active' : ''}`}
+                  className={`install-tab-btn ${activeOsTab === os ? "active" : ""}`}
                   onClick={() => setActiveOsTab(os)}
                 >
                   {os.toUpperCase()}
@@ -96,12 +102,25 @@ export default function ToolDetail({
               ))}
             </div>
             <div className="install-code-box">
-              <span style={{ marginRight: '1rem', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <span
+                style={{
+                  marginRight: "1rem",
+                  color: "var(--text-secondary)",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+              >
                 {activeTool.install[activeOsTab]}
               </span>
-              <button 
+              <button
                 className="copy-btn"
-                onClick={() => handleCopyToClipboard(activeTool.install[activeOsTab], 'Install command')}
+                onClick={() =>
+                  handleCopyToClipboard(
+                    activeTool.install[activeOsTab],
+                    "Install command",
+                  )
+                }
                 title="Copy install command"
               >
                 <Copy size={14} />
@@ -109,37 +128,46 @@ export default function ToolDetail({
             </div>
           </div>
         </div>
-        <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginTop: '1rem', maxWidth: '800px', whiteSpace: 'pre-wrap' }}>
+        <p
+          style={{
+            fontSize: "0.95rem",
+            color: "var(--text-secondary)",
+            lineHeight: 1.6,
+            marginTop: "1rem",
+            maxWidth: "800px",
+            whiteSpace: "pre-wrap",
+          }}
+        >
           {activeTool.description}
         </p>
         {activeTool.github && (
-          <div style={{ marginTop: '1.25rem' }}>
-            <a 
+          <div style={{ marginTop: "1.25rem" }}>
+            <a
               href={activeTool.github}
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.45rem',
-                fontSize: '0.85rem',
-                color: 'var(--text-secondary)',
-                textDecoration: 'none',
-                background: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid var(--border-color)',
-                padding: '0.5rem 0.85rem',
-                borderRadius: '6px',
-                transition: 'all var(--transition-fast)'
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+                fontSize: "0.85rem",
+                color: "var(--text-secondary)",
+                textDecoration: "none",
+                background: "rgba(255, 255, 255, 0.03)",
+                border: "1px solid var(--border-color)",
+                padding: "0.5rem 0.85rem",
+                borderRadius: "6px",
+                transition: "all var(--transition-fast)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#fff';
-                e.currentTarget.style.borderColor = 'var(--accent-color)';
-                e.currentTarget.style.background = 'var(--accent-glow)';
+                e.currentTarget.style.color = "#fff";
+                e.currentTarget.style.borderColor = "var(--accent-color)";
+                e.currentTarget.style.background = "var(--accent-glow)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--text-secondary)';
-                e.currentTarget.style.borderColor = 'var(--border-color)';
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                e.currentTarget.style.color = "var(--text-secondary)";
+                e.currentTarget.style.borderColor = "var(--border-color)";
+                e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
               }}
             >
               <GithubIcon size={14} />
@@ -154,7 +182,7 @@ export default function ToolDetail({
       {activeTool.visualConcept && (
         <section className="concept-section">
           <div className="concept-title">
-            <BookOpen size={18} style={{ color: 'var(--accent-color)' }} />
+            <BookOpen size={18} style={{ color: "var(--accent-color)" }} />
             <span>{activeTool.visualConcept.title}</span>
           </div>
           <div className="flowchart-container">
@@ -171,15 +199,16 @@ export default function ToolDetail({
 
       {/* Main Interactive Grid */}
       <div className="interactive-grid">
-        
         {/* Option Configurator & Generator */}
         <div className="config-card">
           <div className="card-title">
-            <Code size={20} style={{ color: 'var(--accent-color)' }} />
+            <Code size={20} style={{ color: "var(--accent-color)" }} />
             <span>{activeTool.interactiveBuilder.title}</span>
           </div>
-          <p className="card-desc">{activeTool.interactiveBuilder.description}</p>
-          
+          <p className="card-desc">
+            {activeTool.interactiveBuilder.description}
+          </p>
+
           <div className="options-form">
             {activeTool.interactiveBuilder.options.map((opt) => {
               // Check conditional rendering
@@ -188,32 +217,36 @@ export default function ToolDetail({
               return (
                 <div key={opt.id} className="form-group">
                   <label className="form-label">{opt.label}</label>
-                  {opt.type === 'select' && (
-                    <select 
+                  {opt.type === "select" && (
+                    <select
                       className="form-select"
-                      value={builderOpts[opt.id] || ''}
+                      value={builderOpts[opt.id] || ""}
                       onChange={(e) => handleOptChange(opt.id, e.target.value)}
                     >
                       {opt.choices.map((c) => (
-                        <option key={c.value} value={c.value}>{c.label}</option>
+                        <option key={c.value} value={c.value}>
+                          {c.label}
+                        </option>
                       ))}
                     </select>
                   )}
-                  {opt.type === 'text' && (
+                  {opt.type === "text" && (
                     <input
                       type="text"
                       className="form-input"
-                      value={builderOpts[opt.id] || ''}
+                      value={builderOpts[opt.id] || ""}
                       onChange={(e) => handleOptChange(opt.id, e.target.value)}
                     />
                   )}
-                  {opt.type === 'boolean' && (
+                  {opt.type === "boolean" && (
                     <label className="form-checkbox-label">
                       <input
                         type="checkbox"
                         className="form-checkbox"
                         checked={!!builderOpts[opt.id]}
-                        onChange={(e) => handleOptChange(opt.id, e.target.checked)}
+                        onChange={(e) =>
+                          handleOptChange(opt.id, e.target.checked)
+                        }
                       />
                       <span>Enable flag parameter</span>
                     </label>
@@ -226,15 +259,15 @@ export default function ToolDetail({
             <div className="command-generator-box">
               <div className="generated-command-row">
                 <div className="generated-command-text">
-                  <span style={{ color: 'var(--text-muted)' }}>$ </span>
+                  <span style={{ color: "var(--text-muted)" }}>$ </span>
                   {generatedCmd}
                 </div>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <div style={{ display: "flex", gap: "0.5rem" }}>
                   <button
                     className="copy-btn"
                     onClick={() => handleCopyToClipboard(generatedCmd)}
                     title="Copy command"
-                    style={{ padding: '8px' }}
+                    style={{ padding: "8px" }}
                   >
                     <Copy size={16} />
                   </button>
@@ -242,7 +275,7 @@ export default function ToolDetail({
                     className="copy-btn"
                     onClick={handleSaveCommand}
                     title="Bookmark command"
-                    style={{ padding: '8px' }}
+                    style={{ padding: "8px" }}
                   >
                     <Heart size={16} />
                   </button>
@@ -252,7 +285,9 @@ export default function ToolDetail({
               {/* Line-by-line flags analysis */}
               {cmdExplanation.length > 0 && (
                 <div className="explanation-container">
-                  <div className="explanation-title">Flags / Arguments Breakdown</div>
+                  <div className="explanation-title">
+                    Flags / Arguments Breakdown
+                  </div>
                   <div className="explanation-list">
                     {cmdExplanation.map((part, i) => (
                       <div key={i} className="explanation-item">
@@ -265,11 +300,11 @@ export default function ToolDetail({
               )}
             </div>
 
-            <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+            <div style={{ marginTop: "auto", paddingTop: "1.5rem" }}>
               <button
                 className="run-cmd-btn"
                 onClick={() => handleRunCommand(generatedCmd, simulatedOutput)}
-                style={{ width: '100%', justifyContent: 'center' }}
+                style={{ width: "100%", justifyContent: "center" }}
               >
                 <Play size={16} />
                 <span>Inject & Run Command</span>
@@ -283,8 +318,8 @@ export default function ToolDetail({
           activeCommand={runCmdSignal}
           simulatedOutput={runCmdOutput}
           onCommandRunComplete={() => {
-            setRunCmdSignal('');
-            setRunCmdOutput('');
+            setRunCmdSignal("");
+            setRunCmdOutput("");
           }}
         />
       </div>
@@ -292,7 +327,14 @@ export default function ToolDetail({
       {/* Cheat sheets */}
       {activeTool.cheatsheets && (
         <section className="cheatsheet-section">
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.25rem', color: '#fff' }}>
+          <h3
+            style={{
+              fontSize: "1.25rem",
+              fontWeight: 700,
+              marginBottom: "1.25rem",
+              color: "#fff",
+            }}
+          >
             Quick Cheat Sheets
           </h3>
           <div className="cheatsheet-grid">

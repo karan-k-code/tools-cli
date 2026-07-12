@@ -13,7 +13,7 @@ import UpiPaymentForm from "./donate/UpiPaymentForm";
 import PaymentSimulator from "./donate/PaymentSimulator";
 import BackerCertificate from "./donate/BackerCertificate";
 import SponsorWall from "./donate/SponsorWall";
-import "./Donate.css";
+import "./css/Donate.css";
 
 const PRESETS = [
   { amount: 5, label: "Buy a Coffee ☕", desc: "Support ongoing hosting" },

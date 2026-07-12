@@ -13,7 +13,7 @@ import {
   Smartphone,
   Image,
 } from "lucide-react";
-import "./Sidebar.css";
+import "./css/Sidebar.css";
 
 const getToolIcon = (id, size = 20) => {
   switch (id) {

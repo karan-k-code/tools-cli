@@ -16,10 +16,10 @@ import {
   Triangle,
   Sparkles,
   Smartphone,
-  Image
+  Image,
 } from "lucide-react";
 import { GithubIcon } from "./icons";
-import './DashboardHome.css';
+import "./css/DashboardHome.css";
 
 const getToolIcon = (id, size = 20) => {
   switch (id) {

@@ -15,7 +15,13 @@ import "./App.css";
 
 export default function App() {
   const [activeToolId, setActiveToolId] = useState(null); // null = Home Dashboard
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("q") || "";
+    }
+    return "";
+  });
   const [activeCategory, setActiveCategory] = useState("All");
 
   // Interactive options state
@@ -224,6 +230,75 @@ export default function App() {
 
     const twitterUrlMeta = document.querySelector('meta[property="twitter:url"]');
     if (twitterUrlMeta) twitterUrlMeta.setAttribute("content", fullUrl);
+
+    // Update Dynamic JSON-LD Structured Data Schema
+    const schemaScript = document.getElementById("json-ld-schema");
+    if (schemaScript) {
+      let activeSchema;
+      if (activeTool) {
+        // Advanced SoftwareApplication Schema for specific tools
+        activeSchema = {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": `${activeTool.name} CLI Companion - Tools Cli`,
+          "url": `https://tools-cli.konshu.in/#/${activeTool.id}`,
+          "description": activeTool.description || activeTool.tagline,
+          "applicationCategory": "DeveloperApplication, EducationalApplication",
+          "operatingSystem": "Windows, macOS, Linux",
+          "softwareRequirements": "Requires terminal. Requires web browser.",
+          "downloadUrl": activeTool.github || "https://github.com/",
+          "image": "https://tools-cli.konshu.in/hero.webp",
+          "author": {
+            "@type": "Person",
+            "name": "karan-k-code"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        };
+      } else {
+        // Combines WebSite (with Sitelinks Searchbox action) + General WebApplication schema
+        activeSchema = [
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Tools Cli",
+            "url": "https://tools-cli.konshu.in/",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://tools-cli.konshu.in/?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Tools Cli",
+            "url": "https://tools-cli.konshu.in/",
+            "description": "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.",
+            "applicationCategory": "DeveloperApplication, EducationalApplication",
+            "operatingSystem": "Windows, macOS, Linux",
+            "browserRequirements": "Requires JavaScript. Requires HTML5.",
+            "image": "https://tools-cli.konshu.in/hero.webp",
+            "author": {
+              "@type": "Person",
+              "name": "karan-k-code"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          }
+        ];
+      }
+      schemaScript.textContent = JSON.stringify(activeSchema);
+    }
   }, [activeTool, activeToolId, showQuiz, showDonate, showTerms, showPrivacy]);
 
   // Handle Option change in form
