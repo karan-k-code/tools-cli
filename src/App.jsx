@@ -62,7 +62,12 @@ export default function App() {
         setShowTerms(false);
         setShowPrivacy(false);
         setActiveToolId(null);
-      } else if (hash === "#/donate" || hash === "#donate" || hash === "#/donent" || hash === "#donent") {
+      } else if (
+        hash === "#/donate" ||
+        hash === "#donate" ||
+        hash === "#/donent" ||
+        hash === "#donent"
+      ) {
         setShowDonate(true);
         setShowQuiz(false);
         setShowTerms(false);
@@ -173,28 +178,37 @@ export default function App() {
   // Dynamically update document title and meta elements for Google SEO
   useEffect(() => {
     let title = "Tools Cli - Git, Ollama, FFmpeg, Python & Utilities";
-    let desc = "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.";
+    let desc =
+      "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.";
     let path = "";
 
     if (showQuiz) {
-      title = "Interactive CLI Quiz - Test Your Command Line Skills | Tools Cli";
-      desc = "Test your knowledge of Git, Ollama, FFmpeg, Docker, and other terminal commands with our interactive CLI quiz.";
+      title =
+        "Interactive CLI Quiz - Test Your Command Line Skills | Tools Cli";
+      desc =
+        "Test your knowledge of Git, Ollama, FFmpeg, Docker, and other terminal commands with our interactive CLI quiz.";
       path = "#/quiz";
     } else if (showDonate) {
       title = "Donate & Support - Tools Cli Project";
-      desc = "Support the development of Tools Cli, an open-source companion for terminal and developer CLI tools.";
+      desc =
+        "Support the development of Tools Cli, an open-source companion for terminal and developer CLI tools.";
       path = "#/donate";
     } else if (showTerms) {
       title = "Terms of Service - Tools Cli";
-      desc = "Review the Terms of Service and guidelines for using the Tools Cli interactive CLI dashboard.";
+      desc =
+        "Review the Terms of Service and guidelines for using the Tools Cli interactive CLI dashboard.";
       path = "#/terms";
     } else if (showPrivacy) {
       title = "Privacy Policy - Tools Cli";
-      desc = "Read our Privacy Policy to understand how we handle data and respect user privacy on Tools Cli.";
+      desc =
+        "Read our Privacy Policy to understand how we handle data and respect user privacy on Tools Cli.";
       path = "#/privacy";
     } else if (activeTool) {
       title = `${activeTool.name} Command Companion - Simulator & Guide | Tools Cli`;
-      desc = activeTool.description || activeTool.tagline || `Learn, configure, and simulate ${activeTool.name} commands interactively.`;
+      desc =
+        activeTool.description ||
+        activeTool.tagline ||
+        `Learn, configure, and simulate ${activeTool.name} commands interactively.`;
       path = `#/${activeTool.id}`;
     }
 
@@ -204,10 +218,14 @@ export default function App() {
     const descMeta = document.querySelector('meta[name="description"]');
     if (descMeta) descMeta.setAttribute("content", desc);
 
-    const ogDescMeta = document.querySelector('meta[property="og:description"]');
+    const ogDescMeta = document.querySelector(
+      'meta[property="og:description"]',
+    );
     if (ogDescMeta) ogDescMeta.setAttribute("content", desc);
 
-    const twitterDescMeta = document.querySelector('meta[property="twitter:description"]');
+    const twitterDescMeta = document.querySelector(
+      'meta[property="twitter:description"]',
+    );
     if (twitterDescMeta) twitterDescMeta.setAttribute("content", desc);
 
     // Update Meta Title
@@ -217,7 +235,9 @@ export default function App() {
     const ogTitleMeta = document.querySelector('meta[property="og:title"]');
     if (ogTitleMeta) ogTitleMeta.setAttribute("content", title);
 
-    const twitterTitleMeta = document.querySelector('meta[property="twitter:title"]');
+    const twitterTitleMeta = document.querySelector(
+      'meta[property="twitter:title"]',
+    );
     if (twitterTitleMeta) twitterTitleMeta.setAttribute("content", title);
 
     // Update Canonical and URLs
@@ -228,7 +248,9 @@ export default function App() {
     const ogUrlMeta = document.querySelector('meta[property="og:url"]');
     if (ogUrlMeta) ogUrlMeta.setAttribute("content", fullUrl);
 
-    const twitterUrlMeta = document.querySelector('meta[property="twitter:url"]');
+    const twitterUrlMeta = document.querySelector(
+      'meta[property="twitter:url"]',
+    );
     if (twitterUrlMeta) twitterUrlMeta.setAttribute("content", fullUrl);
 
     // Update Dynamic JSON-LD Structured Data Schema
@@ -240,23 +262,23 @@ export default function App() {
         activeSchema = {
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          "name": `${activeTool.name} CLI Companion - Tools Cli`,
-          "url": `https://tools-cli.konshu.in/#/${activeTool.id}`,
-          "description": activeTool.description || activeTool.tagline,
-          "applicationCategory": "DeveloperApplication, EducationalApplication",
-          "operatingSystem": "Windows, macOS, Linux",
-          "softwareRequirements": "Requires terminal. Requires web browser.",
-          "downloadUrl": activeTool.github || "https://github.com/",
-          "image": "https://tools-cli.konshu.in/hero.webp",
-          "author": {
+          name: `${activeTool.name} CLI Companion - Tools Cli`,
+          url: `https://tools-cli.konshu.in/#/${activeTool.id}`,
+          description: activeTool.description || activeTool.tagline,
+          applicationCategory: "DeveloperApplication, EducationalApplication",
+          operatingSystem: "Windows, macOS, Linux",
+          softwareRequirements: "Requires terminal. Requires web browser.",
+          downloadUrl: activeTool.github || "https://github.com/",
+          image: "https://tools-cli.konshu.in/hero.webp",
+          author: {
             "@type": "Person",
-            "name": "karan-k-code"
+            name: "karan-k-code",
           },
-          "offers": {
+          offers: {
             "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
+            price: "0",
+            priceCurrency: "USD",
+          },
         };
       } else {
         // Combines WebSite (with Sitelinks Searchbox action) + General WebApplication schema
@@ -264,37 +286,39 @@ export default function App() {
           {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "Tools Cli",
-            "url": "https://tools-cli.konshu.in/",
-            "potentialAction": {
+            name: "Tools Cli",
+            url: "https://tools-cli.konshu.in/",
+            potentialAction: {
               "@type": "SearchAction",
-              "target": {
+              target: {
                 "@type": "EntryPoint",
-                "urlTemplate": "https://tools-cli.konshu.in/?q={search_term_string}"
+                urlTemplate:
+                  "https://tools-cli.konshu.in/?q={search_term_string}",
               },
-              "query-input": "required name=search_term_string"
-            }
+              "query-input": "required name=search_term_string",
+            },
           },
           {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Tools Cli",
-            "url": "https://tools-cli.konshu.in/",
-            "description": "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.",
-            "applicationCategory": "DeveloperApplication, EducationalApplication",
-            "operatingSystem": "Windows, macOS, Linux",
-            "browserRequirements": "Requires JavaScript. Requires HTML5.",
-            "image": "https://tools-cli.konshu.in/hero.webp",
-            "author": {
+            name: "Tools Cli",
+            url: "https://tools-cli.konshu.in/",
+            description:
+              "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.",
+            applicationCategory: "DeveloperApplication, EducationalApplication",
+            operatingSystem: "Windows, macOS, Linux",
+            browserRequirements: "Requires JavaScript. Requires HTML5.",
+            image: "https://tools-cli.konshu.in/hero.webp",
+            author: {
               "@type": "Person",
-              "name": "karan-k-code"
+              name: "karan-k-code",
             },
-            "offers": {
+            offers: {
               "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            }
-          }
+              price: "0",
+              priceCurrency: "USD",
+            },
+          },
         ];
       }
       schemaScript.textContent = JSON.stringify(activeSchema);
@@ -572,11 +596,13 @@ export default function App() {
                 margin: 0,
               }}
             >
-              &copy; {new Date().getFullYear()} kosnhu.in. Built with React &
+              &copy; {new Date().getFullYear()} konshu.in Built with React &
               Vite. Released under the MIT License.
             </p>
 
-            <div style={{ display: "flex", gap: "1.25rem", alignItems: "center" }}>
+            <div
+              style={{ display: "flex", gap: "1.25rem", alignItems: "center" }}
+            >
               <a
                 href="#/terms"
                 style={{
@@ -590,7 +616,11 @@ export default function App() {
               >
                 Terms
               </a>
-              <span style={{ color: "var(--border-color)", fontSize: "0.85rem" }}>|</span>
+              <span
+                style={{ color: "var(--border-color)", fontSize: "0.85rem" }}
+              >
+                |
+              </span>
               <a
                 href="#/privacy"
                 style={{
@@ -604,7 +634,11 @@ export default function App() {
               >
                 Privacy
               </a>
-              <span style={{ color: "var(--border-color)", fontSize: "0.85rem" }}>|</span>
+              <span
+                style={{ color: "var(--border-color)", fontSize: "0.85rem" }}
+              >
+                |
+              </span>
               <a
                 href="#/donate"
                 style={{
@@ -615,14 +649,18 @@ export default function App() {
                   transition: "color var(--transition-fast)",
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.35rem"
+                  gap: "0.35rem",
                 }}
                 className="hover-accent"
               >
                 <Heart size={14} style={{ color: "var(--ytdlp-color)" }} />
                 Donate
               </a>
-              <span style={{ color: "var(--border-color)", fontSize: "0.85rem" }}>|</span>
+              <span
+                style={{ color: "var(--border-color)", fontSize: "0.85rem" }}
+              >
+                |
+              </span>
               <a
                 href="https://github.com/karan-k-code/tools-cli"
                 target="_blank"
