@@ -33,6 +33,8 @@ The companion currently includes deep configurations, lifecycles, and interactiv
 5. **Favorites / Bookmark Drawer**: Locally save frequently used config commands into a persistent localStorage favorites list.
 6. **Insecure Context Copy Fallback**: Uses a fallback textarea copy utility supporting local area network IP addresses (e.g. `http://10.23.126.23:3000/`) where standard `navigator.clipboard` is blocked by browsers.
 7. **GitHub Repository Integration**: Instant redirection links to official tool GitHub repositories built right into the hero layouts.
+8. **Dynamic Modular SEO**: Dynamic titles, descriptions, and structured JSON-LD schemas managed independently within each page using the custom `useSEO` hook.
+9. **Clean Path Routing**: Path-based routing structure (no hashes like `/#/`) powered by React Router `BrowserRouter`.
 
 ---
 
@@ -42,10 +44,12 @@ The project has been refactored into a highly clean, modular React component arc
 
 ```text
 src/
-├── App.jsx                 # Main entry app layout, routing hooks, and global state
+├── App.jsx                 # Main entry app layout, routing, and global state
 ├── App.css                 # Base container styling definitions
 ├── index.css               # Core CSS variables, color tokens, and animations
-├── main.jsx                # DOM mounting entry script
+├── main.jsx                # DOM mounting entry script wrapped in BrowserRouter
+├── hooks/                  # Reusable Custom React Hooks
+│   └── useSEO.js           # Reusable custom hook for modular page-specific SEO
 ├── components/             # Reusable UI Components
 │   ├── Sidebar.jsx         # Sidebar navigation, searches, and category toggles
 │   ├── Sidebar.css         # Sidebar component styling
@@ -88,7 +92,7 @@ Make sure you have Node.js (v18+) and npm installed locally.
 ### Production Build
 To build the application assets for production delivery:
 ```bash
-npm run dev
+npm run build
 # OR if script execution is blocked on Windows:
 npm.cmd run build
 ```
@@ -102,11 +106,19 @@ To deploy this project to the Vercel edge network:
    ```bash
    npm install -g vercel
    ```
-2. Navigate to the project root and run deployment:
+2. Make sure the `vercel.json` SPA rewrite rules configuration is in place to support path-based history routing:
+   ```json
+   {
+     "rewrites": [
+       { "source": "/(.*)", "destination": "/index.html" }
+     ]
+   }
+   ```
+3. Navigate to the project root and run deployment:
    ```bash
    vercel
    ```
-3. Follow the CLI login and project creation prompts to link and deploy your static build.
+4. Follow the CLI login and project creation prompts to link and deploy your static build.
 
 ---
 

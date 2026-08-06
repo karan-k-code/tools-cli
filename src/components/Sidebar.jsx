@@ -13,6 +13,7 @@ import {
   Smartphone,
   Image,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import "./css/Sidebar.css";
 
 const getToolIcon = (id, size = 20) => {
@@ -53,13 +54,15 @@ export default function Sidebar({
   activeCategory,
   setActiveCategory,
 }) {
+  const navigate = useNavigate();
+
   return (
     <aside className="sidebar">
       <div
         className="logo-section"
         style={{ cursor: "pointer", marginBottom: "1.5rem" }}
         onClick={() => {
-          window.location.hash = "";
+          navigate("/");
         }}
       >
         <Terminal className="logo-icon" />
@@ -116,7 +119,7 @@ export default function Sidebar({
         <div
           className={`nav-item ${activeToolId === null && !showQuiz ? "active" : ""}`}
           onClick={() => {
-            window.location.hash = "";
+            navigate("/");
           }}
         >
           <span className="nav-item-left">
@@ -130,7 +133,7 @@ export default function Sidebar({
             key={tool.id}
             className={`nav-item ${activeToolId === tool.id && !showQuiz ? "active" : ""}`}
             onClick={() => {
-              window.location.hash = `#/${tool.id}`;
+              navigate(`/${tool.id}`);
             }}
           >
             <span
@@ -152,7 +155,7 @@ export default function Sidebar({
         <button
           className="quiz-btn"
           onClick={() => {
-            window.location.hash = "#/quiz";
+            navigate("/quiz");
           }}
         >
           <Award size={16} />

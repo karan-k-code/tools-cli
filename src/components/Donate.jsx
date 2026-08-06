@@ -6,8 +6,8 @@ import {
   CreditCard,
   DollarSign,
   User,
-  Coffee,
 } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
 import CardPaymentForm from "./donate/CardPaymentForm";
 import UpiPaymentForm from "./donate/UpiPaymentForm";
 import PaymentSimulator from "./donate/PaymentSimulator";
@@ -82,6 +82,12 @@ PAYMENT_METHODS[2].icon = <QrCode size={20} />;
 const MOCK_SPONSORS = [];
 
 export default function Donate({ onClose }) {
+  useSEO({
+    title: "Donate & Support - Tools Cli Project",
+    description: "Support the development of Tools Cli, an open-source companion for terminal and developer CLI tools.",
+    path: "donate"
+  });
+
   const [sponsorType, setSponsorType] = useState("one-time");
   const [amountType, setAmountType] = useState("preset");
   const [selectedPreset, setSelectedPreset] = useState(15);

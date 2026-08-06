@@ -1,7 +1,14 @@
 import { X, Scale, Shield, HelpCircle, Terminal } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
 import "./css/Legal.css";
 
 export default function Terms({ onClose }) {
+  useSEO({
+    title: "Terms of Service - Tools Cli",
+    description: "Review the Terms of Service and guidelines for using the Tools Cli interactive CLI dashboard.",
+    path: "terms"
+  });
+
   return (
     <div className="legal-container">
       <div className="legal-header">

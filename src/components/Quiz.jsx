@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { quizQuestions } from "../data/toolsData";
 import { CheckCircle, AlertCircle, RefreshCw, X } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
 import "./css/Quiz.css";
 
 export default function Quiz({ onClose }) {
+  useSEO({
+    title: "Interactive CLI Quiz - Test Your Command Line Skills | Tools Cli",
+    description: "Test your knowledge of Git, Ollama, FFmpeg, Docker, and other terminal commands with our interactive CLI quiz.",
+    path: "quiz"
+  });
+
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);

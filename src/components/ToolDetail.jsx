@@ -16,6 +16,7 @@ import {
   Smartphone,
   Image,
 } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
 import Console from "./Console";
 import { GithubIcon } from "./icons";
 import "./css/ToolDetail.css";
@@ -66,6 +67,36 @@ export default function ToolDetail({
   setRunCmdSignal,
   setRunCmdOutput,
 }) {
+  useSEO({
+    title: `${activeTool.name} Command Companion - Simulator & Guide | Tools Cli`,
+    description: activeTool.description || activeTool.tagline || `Learn, configure, and simulate ${activeTool.name} commands interactively.`,
+    path: activeTool.id,
+    activeSchema: {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: `${activeTool.name} CLI Companion - Tools Cli`,
+      url: `https://tools-cli.konshu.in/${activeTool.id}`,
+      description: activeTool.description || activeTool.tagline,
+      applicationCategory: "DeveloperApplication, EducationalApplication",
+      operatingSystem: "Windows, macOS, Linux",
+      softwareRequirements: "Requires terminal. Requires web browser.",
+      downloadUrl: activeTool.github || "https://github.com/",
+      image: "https://tools-cli.konshu.in/hero.webp",
+      author: {
+        "@type": "Person",
+        name: "karan-k-code",
+      },
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    }
+  });
+
+  // Todo : Add a useEffect to reset builderOpts when activeTool changes
+  //* fetch the default options for the new tool and set them in builderOpts
+
   return (
     <div>
       {/* Hero header */}

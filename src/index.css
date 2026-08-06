@@ -252,3 +252,58 @@ body {
   animation: slide-in var(--transition-fast);
   backdrop-filter: blur(8px);
 }
+
+/* Breadcrumb and Status Dot Styles */
+.breadcrumb-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.breadcrumb-root {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.breadcrumb-root:hover {
+  color: var(--accent-color);
+}
+
+.breadcrumb-separator {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.breadcrumb-current {
+  font-size: 0.85rem;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: background-color var(--transition-normal), box-shadow var(--transition-normal);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.75;
+  }
+}

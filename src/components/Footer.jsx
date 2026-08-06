@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { GithubIcon } from "./icons";
 import { Terminal, Heart } from "lucide-react";
 import "./css/Footer.css";
@@ -27,16 +27,16 @@ function Footer() {
         </p>
 
         <div className="footer-links">
-          <a href="#/terms" className="hover-accent">
+          <Link to="/terms" className="hover-accent">
             Terms
-          </a>
+          </Link>
           <span>|</span>
-          <a href="#/privacy" className="hover-accent">
+          <Link to="/privacy" className="hover-accent">
             Privacy
-          </a>
+          </Link>
           <span>|</span>
-          <a
-            href="#/donate"
+          <Link
+            to="/donate"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -46,7 +46,7 @@ function Footer() {
           >
             <Heart size={14} style={{ color: "var(--ytdlp-color)" }} />
             Donate
-          </a>
+          </Link>
           <span>|</span>
           <a
             href="https://github.com/karan-k-code/tools-cli"

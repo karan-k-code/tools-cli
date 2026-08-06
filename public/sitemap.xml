@@ -3,105 +3,105 @@
   <!-- Main Home Dashboard -->
   <url>
     <loc>https://tools-cli.konshu.in/</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <!-- Git Builder -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/git</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/git</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Ollama Companion -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/ollama</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/ollama</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- FFmpeg Generator -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/ffmpeg</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/ffmpeg</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- yt-dlp Companion -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/yt-dlp</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/yt-dlp</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Python and Pip -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/python-pip</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/python-pip</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Other CLI Utilities -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/utils</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/utils</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Node & npm -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/node-npm</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/node-npm</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Vercel CLI -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/vercel</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/vercel</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Gemini CLI -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/gemini</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/gemini</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- ADB CLI -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/adb</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/adb</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- ImageMagick -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/magick</loc>
-    <lastmod>2026-07-10</lastmod>
+    <loc>https://tools-cli.konshu.in/magick</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Quiz Section -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/quiz</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/quiz</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <!-- Terms of Service -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/terms</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/terms</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <!-- Privacy Policy -->
   <url>
-    <loc>https://tools-cli.konshu.in/#/privacy</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://tools-cli.konshu.in/privacy</loc>
+    <lastmod>2026-08-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

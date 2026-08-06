@@ -1,7 +1,14 @@
 import { X, Lock, Database, EyeOff, Terminal } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
 import "./css/Legal.css";
 
 export default function Privacy({ onClose }) {
+  useSEO({
+    title: "Privacy Policy - Tools Cli",
+    description: "Read our Privacy Policy to understand how we handle data and respect user privacy on Tools Cli.",
+    path: "privacy"
+  });
+
   return (
     <div className="legal-container">
       <div className="legal-header">

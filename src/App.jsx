@@ -1,6 +1,7 @@
 //  author: https://github.com/karan-k-code/tools-cli
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { Routes, Route, useLocation, useNavigate, Navigate, Link } from "react-router-dom";
 import "./App.css";
 
 // app pages
@@ -11,14 +12,28 @@ import Privacy from "./components/Privacy";
 import Footer from "./components/Footer";
 
 // main content components
-import { Terminal, Check, Heart } from "lucide-react";
+import { Check } from "lucide-react";
 import { toolsData } from "./data/toolsData";
 import Sidebar from "./components/Sidebar";
 import DashboardHome from "./components/DashboardHome";
 import ToolDetail from "./components/ToolDetail";
 
 export default function App() {
-  const [activeToolId, setActiveToolId] = useState(null); // null = Home Dashboard
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Derived routing states from URL path (using cleanPath to support clean parsing)
+  const cleanPath = location.pathname.replace(/^\//, "");
+  const showQuiz = cleanPath === "quiz";
+  const showDonate = cleanPath === "donate" || cleanPath === "donent";
+  const showTerms = cleanPath === "terms";
+  const showPrivacy = cleanPath === "privacy";
+
+  // Find active tool from route param
+  const activeToolId = (!showQuiz && !showDonate && !showTerms && !showPrivacy && cleanPath !== "")
+    ? cleanPath
+    : null;
+
   const [searchQuery, setSearchQuery] = useState(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
@@ -44,127 +59,36 @@ export default function App() {
   // Installation OS Tabs
   const [activeOsTab, setActiveOsTab] = useState("windows");
 
-  // Quiz Overlay Toggle
-  const [showQuiz, setShowQuiz] = useState(false);
-
-  // Donate Overlay Toggle
-  const [showDonate, setShowDonate] = useState(false);
-
-  // Terms Overlay Toggle
-  const [showTerms, setShowTerms] = useState(false);
-
-  // Privacy Overlay Toggle
-  const [showPrivacy, setShowPrivacy] = useState(false);
-
-  // Sync state with URL hash routing
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === "#/quiz" || hash === "#quiz") {
-        setShowQuiz(true);
-        setShowDonate(false);
-        setShowTerms(false);
-        setShowPrivacy(false);
-        setActiveToolId(null);
-      } else if (
-        hash === "#/donate" ||
-        hash === "#donate" ||
-        hash === "#/donent" ||
-        hash === "#donent"
-      ) {
-        setShowDonate(true);
-        setShowQuiz(false);
-        setShowTerms(false);
-        setShowPrivacy(false);
-        setActiveToolId(null);
-      } else if (hash === "#/terms" || hash === "#terms") {
-        setShowTerms(true);
-        setShowQuiz(false);
-        setShowDonate(false);
-        setShowPrivacy(false);
-        setActiveToolId(null);
-      } else if (hash === "#/privacy" || hash === "#privacy") {
-        setShowPrivacy(true);
-        setShowQuiz(false);
-        setShowDonate(false);
-        setShowTerms(false);
-        setActiveToolId(null);
-      } else if (hash.startsWith("#/")) {
-        const toolId = hash.substring(2);
-        const exists = toolsData.some((t) => t.id === toolId);
-        if (exists) {
-          setActiveToolId(toolId);
-          setShowQuiz(false);
-          setShowDonate(false);
-          setShowTerms(false);
-          setShowPrivacy(false);
-        } else {
-          setActiveToolId(null);
-          setShowQuiz(false);
-          setShowDonate(false);
-          setShowTerms(false);
-          setShowPrivacy(false);
-          window.location.hash = "";
-        }
-      } else if (hash.startsWith("#")) {
-        const toolId = hash.substring(1);
-        const exists = toolsData.some((t) => t.id === toolId);
-        if (exists) {
-          setActiveToolId(toolId);
-          setShowQuiz(false);
-          setShowDonate(false);
-          setShowTerms(false);
-          setShowPrivacy(false);
-          window.location.hash = `#/${toolId}`;
-        } else {
-          setActiveToolId(null);
-          setShowQuiz(false);
-          setShowDonate(false);
-          setShowTerms(false);
-          setShowPrivacy(false);
-          window.location.hash = "";
-        }
-      } else {
-        setActiveToolId(null);
-        setShowQuiz(false);
-        setShowDonate(false);
-        setShowTerms(false);
-        setShowPrivacy(false);
-      }
-    };
-
-    handleHashChange();
-
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
-
   // Toast Notifications
   const [toasts, setToasts] = useState([]);
 
-  const showToast = (message, type = "success") => {
+  const showToast = useCallback((message, type = "success") => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
     }, 3000);
-  };
+  }, []);
 
   // Find active tool
-  const activeTool = toolsData.find((t) => t.id === activeToolId);
+  const activeTool = useMemo(() => {
+    return toolsData.find((t) => t.id === activeToolId);
+  }, [activeToolId]);
 
   // Derived interactive builder states
-  let generatedCmd = "";
-  let cmdExplanation = [];
-  let simulatedOutput = "";
-
-  if (activeTool && activeTool.interactiveBuilder) {
+  const builderResults = useMemo(() => {
+    if (!activeTool || !activeTool.interactiveBuilder) {
+      return { generatedCmd: "", cmdExplanation: [], simulatedOutput: "" };
+    }
     const generated = activeTool.interactiveBuilder.generator(builderOpts);
-    generatedCmd = generated.command;
-    cmdExplanation = generated.explanation;
-    simulatedOutput =
-      activeTool.interactiveBuilder.simulatedOutput(builderOpts);
-  }
+    return {
+      generatedCmd: generated.command,
+      cmdExplanation: generated.explanation,
+      simulatedOutput: activeTool.interactiveBuilder.simulatedOutput(builderOpts),
+    };
+  }, [activeTool, builderOpts]);
+
+  const { generatedCmd, cmdExplanation, simulatedOutput } = builderResults;
 
   // Sync builder options when tool changes
   useEffect(() => {
@@ -179,192 +103,27 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeToolId]);
 
-  // Dynamically update document title and meta elements for Google SEO
-  useEffect(() => {
-    let title = "Tools Cli - Git, Ollama, FFmpeg, Python & Utilities";
-    let desc =
-      "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.";
-    let path = "";
-
-    if (showQuiz) {
-      title =
-        "Interactive CLI Quiz - Test Your Command Line Skills | Tools Cli";
-      desc =
-        "Test your knowledge of Git, Ollama, FFmpeg, Docker, and other terminal commands with our interactive CLI quiz.";
-      path = "#/quiz";
-    } else if (showDonate) {
-      title = "Donate & Support - Tools Cli Project";
-      desc =
-        "Support the development of Tools Cli, an open-source companion for terminal and developer CLI tools.";
-      path = "#/donate";
-    } else if (showTerms) {
-      title = "Terms of Service - Tools Cli";
-      desc =
-        "Review the Terms of Service and guidelines for using the Tools Cli interactive CLI dashboard.";
-      path = "#/terms";
-    } else if (showPrivacy) {
-      title = "Privacy Policy - Tools Cli";
-      desc =
-        "Read our Privacy Policy to understand how we handle data and respect user privacy on Tools Cli.";
-      path = "#/privacy";
-    } else if (activeTool) {
-      title = `${activeTool.name} Command Companion - Simulator & Guide | Tools Cli`;
-      desc =
-        activeTool.description ||
-        activeTool.tagline ||
-        `Learn, configure, and simulate ${activeTool.name} commands interactively.`;
-      path = `#/${activeTool.id}`;
-    }
-
-    document.title = title;
-
-    // Update Meta Description
-    const descMeta = document.querySelector('meta[name="description"]');
-    if (descMeta) descMeta.setAttribute("content", desc);
-
-    const ogDescMeta = document.querySelector(
-      'meta[property="og:description"]',
-    );
-    if (ogDescMeta) ogDescMeta.setAttribute("content", desc);
-
-    const twitterDescMeta = document.querySelector(
-      'meta[property="twitter:description"]',
-    );
-    if (twitterDescMeta) twitterDescMeta.setAttribute("content", desc);
-
-    // Update Meta Title
-    const titleMeta = document.querySelector('meta[name="title"]');
-    if (titleMeta) titleMeta.setAttribute("content", title);
-
-    const ogTitleMeta = document.querySelector('meta[property="og:title"]');
-    if (ogTitleMeta) ogTitleMeta.setAttribute("content", title);
-
-    const twitterTitleMeta = document.querySelector(
-      'meta[property="twitter:title"]',
-    );
-    if (twitterTitleMeta) twitterTitleMeta.setAttribute("content", title);
-
-    // Update Canonical and URLs
-    const canonicalLink = document.querySelector('link[rel="canonical"]');
-    const fullUrl = `https://tools-cli.konshu.in/${path}`;
-    if (canonicalLink) canonicalLink.setAttribute("href", fullUrl);
-
-    const ogUrlMeta = document.querySelector('meta[property="og:url"]');
-    if (ogUrlMeta) ogUrlMeta.setAttribute("content", fullUrl);
-
-    const twitterUrlMeta = document.querySelector(
-      'meta[property="twitter:url"]',
-    );
-    if (twitterUrlMeta) twitterUrlMeta.setAttribute("content", fullUrl);
-
-    // Update Dynamic JSON-LD Structured Data Schema
-    const schemaScript = document.getElementById("json-ld-schema");
-    if (schemaScript) {
-      let activeSchema;
-      if (activeTool) {
-        // Advanced SoftwareApplication Schema for specific tools
-        activeSchema = {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          name: `${activeTool.name} CLI Companion - Tools Cli`,
-          url: `https://tools-cli.konshu.in/#/${activeTool.id}`,
-          description: activeTool.description || activeTool.tagline,
-          applicationCategory: "DeveloperApplication, EducationalApplication",
-          operatingSystem: "Windows, macOS, Linux",
-          softwareRequirements: "Requires terminal. Requires web browser.",
-          downloadUrl: activeTool.github || "https://github.com/",
-          image: "https://tools-cli.konshu.in/hero.webp",
-          author: {
-            "@type": "Person",
-            name: "karan-k-code",
-          },
-          offers: {
-            "@type": "Offer",
-            price: "0",
-            priceCurrency: "USD",
-          },
-        };
-      } else {
-        // Combines WebSite (with Sitelinks Searchbox action) + General WebApplication schema
-        activeSchema = [
-          {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: "Tools Cli",
-            url: "https://tools-cli.konshu.in/",
-            potentialAction: {
-              "@type": "SearchAction",
-              target: {
-                "@type": "EntryPoint",
-                urlTemplate:
-                  "https://tools-cli.konshu.in/?q={search_term_string}",
-              },
-              "query-input": "required name=search_term_string",
-            },
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            name: "Tools Cli",
-            url: "https://tools-cli.konshu.in/",
-            description:
-              "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.",
-            applicationCategory: "DeveloperApplication, EducationalApplication",
-            operatingSystem: "Windows, macOS, Linux",
-            browserRequirements: "Requires JavaScript. Requires HTML5.",
-            image: "https://tools-cli.konshu.in/hero.webp",
-            author: {
-              "@type": "Person",
-              name: "karan-k-code",
-            },
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-          },
-        ];
-      }
-      schemaScript.textContent = JSON.stringify(activeSchema);
-    }
-  }, [activeTool, activeToolId, showQuiz, showDonate, showTerms, showPrivacy]);
-
   // Handle Option change in form
-  const handleOptChange = (id, value) => {
+  const handleOptChange = useCallback((id, value) => {
     setBuilderOpts((prev) => ({
       ...prev,
       [id]: value,
     }));
-  };
+  }, []);
 
   // Filter tools for Sidebar
-  const filteredTools = toolsData.filter((tool) => {
-    const matchesSearch =
-      tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tool.tagline.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory =
-      activeCategory === "All" || tool.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredTools = useMemo(() => {
+    return toolsData.filter((tool) => {
+      const matchesSearch =
+        tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        tool.tagline.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory =
+        activeCategory === "All" || tool.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchQuery, activeCategory]);
 
-  // Copy code to clipboard (supports fallback for insecure contexts like HTTP IP addresses)
-  const handleCopyToClipboard = (text, type = "Command") => {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard
-        .writeText(text)
-        .then(() => {
-          showToast(`${type} copied to clipboard!`);
-        })
-        .catch((err) => {
-          console.warn("Clipboard API failed, trying fallback:", err);
-          fallbackCopyToClipboard(text, type);
-        });
-    } else {
-      fallbackCopyToClipboard(text, type);
-    }
-  };
-
-  const fallbackCopyToClipboard = (text, type) => {
+  const fallbackCopyToClipboard = useCallback((text, type) => {
     try {
       const textArea = document.createElement("textarea");
       textArea.value = text;
@@ -391,18 +150,35 @@ export default function App() {
       console.error("Fallback copy failed: ", err);
       showToast(`Failed to copy ${type}.`);
     }
-  };
+  }, [showToast]);
+
+  // Copy code to clipboard (supports fallback for insecure contexts like HTTP IP addresses)
+  const handleCopyToClipboard = useCallback((text, type = "Command") => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          showToast(`${type} copied to clipboard!`);
+        })
+        .catch((err) => {
+          console.warn("Clipboard API failed, trying fallback:", err);
+          fallbackCopyToClipboard(text, type);
+        });
+    } else {
+      fallbackCopyToClipboard(text, type);
+    }
+  }, [showToast, fallbackCopyToClipboard]);
 
   // Run command in Terminal
-  const handleRunCommand = (cmd, output) => {
+  const handleRunCommand = useCallback((cmd, output) => {
     setRunCmdSignal(cmd);
     setRunCmdOutput(output);
     showToast("Executing command in terminal simulator...");
-  };
+  }, [showToast]);
 
   // Save/Bookmark command
-  const handleSaveCommand = () => {
-    if (!generatedCmd) return;
+  const handleSaveCommand = useCallback(() => {
+    if (!generatedCmd || !activeTool) return;
     const isAlreadySaved = favorites.some(
       (fav) => fav.command === generatedCmd,
     );
@@ -423,15 +199,15 @@ export default function App() {
     setFavorites(updated);
     localStorage.setItem("toolscli_favorites", JSON.stringify(updated));
     showToast("Command bookmarked to favorites!");
-  };
+  }, [favorites, generatedCmd, activeTool, simulatedOutput, showToast]);
 
   // Delete saved command
-  const handleDeleteFavorite = (id) => {
+  const handleDeleteFavorite = useCallback((id) => {
     const updated = favorites.filter((fav) => fav.id !== id);
     setFavorites(updated);
     localStorage.setItem("toolscli_favorites", JSON.stringify(updated));
     showToast("Removed from favorites.");
-  };
+  }, [favorites, showToast]);
 
   return (
     <div
@@ -459,13 +235,12 @@ export default function App() {
       >
         {/* Header */}
         <header className="app-header">
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
-              Workspace /
-            </span>
-            <span
-              style={{ fontSize: "0.85rem", color: "#fff", fontWeight: 600 }}
-            >
+          <div className="breadcrumb-container">
+            <Link to="/" className="breadcrumb-root">
+              Workspace
+            </Link>
+            <span className="breadcrumb-separator">/</span>
+            <span className="breadcrumb-current">
               {showQuiz
                 ? "CLI Quiz"
                 : showDonate
@@ -486,70 +261,72 @@ export default function App() {
               Local Host: 127.0.0.1
             </span>
             <span
+              className="status-dot"
               style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                backgroundColor: "var(--ffmpeg-color)",
-                boxShadow: "0 0 8px var(--ffmpeg-color)",
+                backgroundColor: activeTool ? activeTool.color : "var(--accent-color)",
+                boxShadow: `0 0 8px ${activeTool ? activeTool.color : "var(--accent-color)"}`,
               }}
             />
           </div>
         </header>
 
-        {/* Content Body */}
         <main className="main-content">
-          {showQuiz ? (
-            <Quiz
-              onClose={() => {
-                window.location.hash = "";
-              }}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <DashboardHome
+                  toolsData={toolsData}
+                  favorites={favorites}
+                  handleCopyToClipboard={handleCopyToClipboard}
+                  handleRunCommand={handleRunCommand}
+                  handleDeleteFavorite={handleDeleteFavorite}
+                />
+              }
             />
-          ) : showDonate ? (
-            <Donate
-              onClose={() => {
-                window.location.hash = "";
-              }}
+            <Route
+              path="/terms"
+              element={<Terms onClose={() => navigate("/")} />}
             />
-          ) : showTerms ? (
-            <Terms
-              onClose={() => {
-                window.location.hash = "";
-              }}
+            <Route
+              path="/privacy"
+              element={<Privacy onClose={() => navigate("/")} />}
             />
-          ) : showPrivacy ? (
-            <Privacy
-              onClose={() => {
-                window.location.hash = "";
-              }}
+            <Route
+              path="/donate"
+              element={<Donate onClose={() => navigate("/")} />}
             />
-          ) : activeTool ? (
-            <ToolDetail
-              activeTool={activeTool}
-              activeOsTab={activeOsTab}
-              setActiveOsTab={setActiveOsTab}
-              builderOpts={builderOpts}
-              handleOptChange={handleOptChange}
-              generatedCmd={generatedCmd}
-              cmdExplanation={cmdExplanation}
-              simulatedOutput={simulatedOutput}
-              handleCopyToClipboard={handleCopyToClipboard}
-              handleSaveCommand={handleSaveCommand}
-              handleRunCommand={handleRunCommand}
-              runCmdSignal={runCmdSignal}
-              runCmdOutput={runCmdOutput}
-              setRunCmdSignal={setRunCmdSignal}
-              setRunCmdOutput={setRunCmdOutput}
+            <Route
+              path="/quiz"
+              element={<Quiz onClose={() => navigate("/")} />}
             />
-          ) : (
-            <DashboardHome
-              toolsData={toolsData}
-              favorites={favorites}
-              handleCopyToClipboard={handleCopyToClipboard}
-              handleRunCommand={handleRunCommand}
-              handleDeleteFavorite={handleDeleteFavorite}
+            <Route
+              path="/:toolId"
+              element={
+                activeTool ? (
+                  <ToolDetail
+                    activeTool={activeTool}
+                    activeOsTab={activeOsTab}
+                    setActiveOsTab={setActiveOsTab}
+                    builderOpts={builderOpts}
+                    handleOptChange={handleOptChange}
+                    generatedCmd={generatedCmd}
+                    cmdExplanation={cmdExplanation}
+                    simulatedOutput={simulatedOutput}
+                    handleCopyToClipboard={handleCopyToClipboard}
+                    handleSaveCommand={handleSaveCommand}
+                    handleRunCommand={handleRunCommand}
+                    runCmdSignal={runCmdSignal}
+                    runCmdOutput={runCmdOutput}
+                    setRunCmdSignal={setRunCmdSignal}
+                    setRunCmdOutput={setRunCmdOutput}
+                  />
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
             />
-          )}
+          </Routes>
         </main>
 
         {/* Footer */}

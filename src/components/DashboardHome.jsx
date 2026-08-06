@@ -18,6 +18,8 @@ import {
   Smartphone,
   Image,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useSEO } from "../hooks/useSEO";
 import { GithubIcon } from "./icons";
 import "./css/DashboardHome.css";
 
@@ -57,6 +59,14 @@ export default function DashboardHome({
   handleRunCommand,
   handleDeleteFavorite,
 }) {
+  const navigate = useNavigate();
+
+  useSEO({
+    title: "Tools Cli - Git, Ollama, FFmpeg, Python & Utilities",
+    description: "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.",
+    path: ""
+  });
+
   return (
     <div>
       {/* Dashboard Welcome Hero */}
@@ -146,7 +156,7 @@ export default function DashboardHome({
             className="landing-card"
             style={{ "--accent-color": tool.color }}
             onClick={() => {
-              window.location.hash = `#/${tool.id}`;
+              navigate(`/${tool.id}`);
             }}
           >
             <div className="landing-card-header">
