@@ -1,17 +1,21 @@
 //  author: https://github.com/karan-k-code/tools-cli
 
 import { useState, useEffect } from "react";
+import "./App.css";
+
+// app pages
+import Quiz from "./components/Quiz";
+import Donate from "./components/Donate";
+import Terms from "./components/Terms";
+import Privacy from "./components/Privacy";
+import Footer from "./components/Footer";
+
+// main content components
 import { Terminal, Check, Heart } from "lucide-react";
 import { toolsData } from "./data/toolsData";
 import Sidebar from "./components/Sidebar";
 import DashboardHome from "./components/DashboardHome";
 import ToolDetail from "./components/ToolDetail";
-import Quiz from "./components/Quiz";
-import Donate from "./components/Donate";
-import Terms from "./components/Terms";
-import Privacy from "./components/Privacy";
-import { GithubIcon } from "./components/icons";
-import "./App.css";
 
 export default function App() {
   const [activeToolId, setActiveToolId] = useState(null); // null = Home Dashboard
@@ -549,135 +553,7 @@ export default function App() {
         </main>
 
         {/* Footer */}
-        <footer
-          style={{
-            marginTop: "auto",
-            borderTop: "1px solid var(--border-color)",
-            background: "var(--bg-secondary)",
-            padding: "2rem 1.5rem",
-            textAlign: "center",
-            boxSizing: "border-box",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "1200px",
-              margin: "0 auto",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: "1rem",
-            }}
-          >
-            <div
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-            >
-              <Terminal size={18} style={{ color: "var(--accent-color)" }} />
-              <span
-                style={{
-                  fontWeight: 700,
-                  fontSize: "0.9rem",
-                  color: "#fff",
-                  letterSpacing: "-0.5px",
-                }}
-              >
-                TOOLS CLI
-              </span>
-              <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>
-                v1.0.0-Beta
-              </span>
-            </div>
-
-            <p
-              style={{
-                fontSize: "0.8rem",
-                color: "var(--text-secondary)",
-                margin: 0,
-              }}
-            >
-              &copy; {new Date().getFullYear()} konshu.in Built with React &
-              Vite. Released under the MIT License.
-            </p>
-
-            <div
-              style={{ display: "flex", gap: "1.25rem", alignItems: "center" }}
-            >
-              <a
-                href="#/terms"
-                style={{
-                  color: "var(--text-secondary)",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: 600,
-                  transition: "color var(--transition-fast)",
-                }}
-                className="hover-accent"
-              >
-                Terms
-              </a>
-              <span
-                style={{ color: "var(--border-color)", fontSize: "0.85rem" }}
-              >
-                |
-              </span>
-              <a
-                href="#/privacy"
-                style={{
-                  color: "var(--text-secondary)",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: 600,
-                  transition: "color var(--transition-fast)",
-                }}
-                className="hover-accent"
-              >
-                Privacy
-              </a>
-              <span
-                style={{ color: "var(--border-color)", fontSize: "0.85rem" }}
-              >
-                |
-              </span>
-              <a
-                href="#/donate"
-                style={{
-                  color: "var(--text-secondary)",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: 600,
-                  transition: "color var(--transition-fast)",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.35rem",
-                }}
-                className="hover-accent"
-              >
-                <Heart size={14} style={{ color: "var(--ytdlp-color)" }} />
-                Donate
-              </a>
-              <span
-                style={{ color: "var(--border-color)", fontSize: "0.85rem" }}
-              >
-                |
-              </span>
-              <a
-                href="https://github.com/karan-k-code/tools-cli"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "var(--text-secondary)",
-                  transition: "color var(--transition-fast)",
-                  display: "inline-flex",
-                  alignItems: "center",
-                }}
-                title="GitHub"
-              >
-                <GithubIcon size={18} />
-              </a>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
 
       {/* Toast Notification Container */}
