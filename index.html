@@ -12,18 +12,18 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
     <!-- Primary Meta Tags -->
-    <title>Tools Cli - Git, Ollama, FFmpeg, Python & Utilities</title>
+    <title>Tools CLI - Interactive Command Line Companion</title>
     <meta
       name="title"
-      content="Tools Cli - Git, Ollama, FFmpeg, Python & Utilities"
+      content="Tools CLI - Interactive Command Line Companion"
     />
     <meta
       name="description"
-      content="An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages."
+      content="Master terminal workflows with interactive generators, simulations, and curated command references for Git, Ollama, FFmpeg, Python, Docker, jq, tmux, and more."
     />
     <meta
       name="keywords"
-      content="cli companion, command line helper, git builder, ollama command generator, ffmpeg commands, yt-dlp mp3, docker container runner, jq json query, tmux cheatsheet, terminal generator"
+      content="command line, interactive CLI, developer dashboard, Git commands, FFmpeg generator, Ollama assistant, terminal tutorials, Python CLI, Docker commands, yt-dlp, tmux, jq"
     />
     <meta name="author" content="karan-k-code Developer" />
     <meta name="robots" content="index, follow" />
@@ -32,87 +32,91 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tools CLI" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://tools-cli.konshu.in/" />
     <meta
       property="og:title"
-      content="Tools Cli - Git, Ollama, FFmpeg, Python & Utilities"
+      content="Tools CLI - Interactive Command Line Companion"
     />
     <meta
       property="og:description"
-      content="Configure, simulate, and master CLI tools like Git, Ollama, FFmpeg, Python, Docker, jq, and tmux in a premium browser dashboard."
+      content="Master terminal workflows with interactive generators, simulations, and curated command references for Git, Ollama, FFmpeg, Python, Docker, jq, tmux, and more."
     />
     <meta property="og:image" content="https://tools-cli.konshu.in/hero.webp" />
+    <meta
+      property="og:image:alt"
+      content="Tools CLI interactive developer command line dashboard preview"
+    />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:site" content="@karan_k_code" />
+    <meta property="twitter:creator" content="@karan_k_code" />
     <meta property="twitter:url" content="https://tools-cli.konshu.in/" />
     <meta
       property="twitter:title"
-      content="Tools Cli - Git, Ollama, FFmpeg, Python & Utilities"
+      content="Tools CLI - Interactive Command Line Companion"
     />
     <meta
       property="twitter:description"
-      content="Configure, simulate, and master CLI tools like Git, Ollama, FFmpeg, Python, Docker, jq, and tmux in a premium browser dashboard."
+      content="Master terminal workflows with interactive generators, simulations, and curated command references for Git, Ollama, FFmpeg, Python, Docker, jq, tmux, and more."
     />
     <meta
       property="twitter:image"
       content="https://tools-cli.konshu.in/hero.webp"
     />
+    <meta
+      property="twitter:image:alt"
+      content="Tools CLI interactive developer command line dashboard preview"
+    />
 
     <!-- Google Rich Snippets / JSON-LD Structured Data -->
     <script id="json-ld-schema" type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Tools Cli",
-        "url": "https://tools-cli.konshu.in/",
-        "description": "An interactive web dashboard for learning and configuring command line tools: Git, Ollama, FFmpeg, yt-dlp, Python, Pip, Docker, jq, tmux, and npm packages.",
-        "applicationCategory": "DeveloperApplication, EducationalApplication",
-        "operatingSystem": "Windows, macOS, Linux",
-        "browserRequirements": "Requires JavaScript. Requires HTML5.",
-        "image": "https://tools-cli.konshu.in/hero.webp",
-        "author": {
-          "@type": "Person",
-          "name": "karan-k-code"
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Tools CLI",
+          "url": "https://tools-cli.konshu.in/",
+          "sameAs": [
+            "https://github.com/karan-k-code/tools-cli",
+            "https://twitter.com/karan_k_code"
+          ],
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://tools-cli.konshu.in/?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
         },
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Tools CLI",
+          "url": "https://tools-cli.konshu.in/",
+          "description": "Master terminal workflows with interactive generators, simulations, and curated command references for Git, Ollama, FFmpeg, Python, Docker, jq, tmux, and more.",
+          "applicationCategory": "DeveloperApplication, EducationalApplication",
+          "operatingSystem": "Windows, macOS, Linux",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "image": "https://tools-cli.konshu.in/hero.webp",
+          "author": {
+            "@type": "Person",
+            "name": "karan-k-code"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
         }
-      }
+      ]
     </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
-      // Dynamically switch favicon based on user's color scheme preference
-      // (function () {
-      //   const favicon =
-      //     document.getElementById("favicon") ||
-      //     (() => {
-      //       const l = document.createElement("link");
-      //       l.id = "favicon";
-      //       l.rel = "icon";
-      //       document.head.appendChild(l);
-      //       return l;
-      //     })();
-
-      //   // function setFavicon(isDark) {
-      //   //   favicon.href = isDark ? "k-log-tr-v1.png" : "k_logo_black.png";
-      //   // }
-
-      //   const mql = window.matchMedia("(prefers-color-scheme: dark)");
-      //   setFavicon(mql.matches);
-
-      //   // Listen for changes (supports addEventListener and addListener)
-      //   if (mql.addEventListener) {
-      //     mql.addEventListener("change", (e) => setFavicon(e.matches));
-      //   } else if (mql.addListener) {
-      //     mql.addListener((e) => setFavicon(e.matches));
-      //   }
-      // })();
-    </script>
   </body>
 </html>

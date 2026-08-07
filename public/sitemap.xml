@@ -84,6 +84,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+    <!-- About Section -->
+  <url>
+    <loc>https://tools-cli.konshu.in/about</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Quiz Section -->
   <url>
     <loc>https://tools-cli.konshu.in/quiz</loc>
@@ -91,6 +98,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+
   <!-- Terms of Service -->
   <url>
     <loc>https://tools-cli.konshu.in/terms</loc>

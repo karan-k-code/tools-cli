@@ -1,0 +1,65 @@
+# Tools CLI - Interactive CLI Companion
+
+An interactive, high-fidelity developer dashboard designed to help master advanced command line interface (CLI) engines (Git, Ollama, FFmpeg, yt-dlp, Docker, jq, tmux, adb, ImageMagick, etc.).
+
+## Supported Engines Cheatsheet & Links
+You can navigate directly to specific builders and modules using the links below:
+- [Tools CLI Home](https://tools-cli.konshu.in): Main interactive developer dashboard overview.
+- [About Tools CLI](https://tools-cli.konshu.in/about): Learn more about the CLI dashboard architecture and mission.
+- [Git Builder](https://tools-cli.konshu.in/git): Staging, branching, and commit rollback configurator.
+- [Ollama AI](https://tools-cli.konshu.in/ollama): Local LLM model download and parameter prompt builder.
+- [FFmpeg Renderer](https://tools-cli.konshu.in/ffmpeg): Audio/video conversions, compression filters, and crops.
+- [yt-dlp Downloader](https://tools-cli.konshu.in/yt-dlp): High-speed media extraction and download script builder.
+- [Python & Pip](https://tools-cli.konshu.in/python-pip): Virtual environments manager and compiler config setups.
+- [Node & NPM](https://tools-cli.konshu.in/node-npm): Dependency resolve scripts and package setups.
+- [Vercel CLI](https://tools-cli.konshu.in/vercel): Server deployments, preview links, and environment bindings.
+- [Gemini CLI](https://tools-cli.konshu.in/gemini): Google Gemini API configurations and parameters setup.
+- [ADB Tools](https://tools-cli.konshu.in/adb): Android debugging command generator and terminal utilities.
+- [ImageMagick](https://tools-cli.konshu.in/magick): Image cropping, sizing, and format conversion scripts.
+- [CLI Utilities](https://tools-cli.konshu.in/utils): Stream processor configs (jq, ripgrep, tmux, curl, docker).
+- [CLI Knowledge Quiz](https://tools-cli.konshu.in/quiz): Multi-choice interactive terminal syntax test.
+- [Terms of Service](https://tools-cli.konshu.in/terms): User guidelines and MIT license info.
+- [Privacy Policy](https://tools-cli.konshu.in/privacy): Local storage usage and privacy statements.
+
+## Technology Stack
+- **Framework**: Vite + React 19 (JavaScript)
+- **Routing**: React Router v7 (`BrowserRouter` history-based routing)
+- **Icons**: Lucide React
+- **Deployment**: Vercel (static SPA deployment with rewrite rules)
+
+## Key Architecture
+- **Single Page Application Routing**: Converted from hash-based routing (`/#/tool`) to clean path-based routing (`/tool`). Supports full history fallbacks locally via Vite dev/preview server and in production using `vercel.json` rewrites.
+- **Modular SEO**: Dynamically updates HTML titles, meta descriptors, Open Graph tags, canonical URLs, and structured JSON-LD schemas using a reusable custom hook `useSEO` located in `src/hooks/useSEO.js`.
+
+## Codebase Structure
+```text
+src/
+├── App.jsx                 # Layout wrapper, routes declaration, and global state
+├── App.css                 # Base container layouts
+├── index.css               # Styling variables, color themes, and pulsing status dot
+├── main.jsx                # App mounter wrapped with BrowserRouter
+├── hooks/
+│   └── useSEO.js           # Reusable custom SEO hook for metadata and JSON-LD
+├── components/
+│   ├── Sidebar.jsx         # Navigation sidebar and category filtering
+│   ├── DashboardHome.jsx   # Grid of available tools, bookmarks, and copy histories
+│   ├── ToolDetail.jsx      # Flowchart concept maps, interactive commands builder, and cheat sheets
+│   ├── Console.jsx         # Mock terminal emulator screen
+│   ├── Quiz.jsx            # Multi-choice interactive terminal quiz
+│   ├── Footer.jsx          # Policy links and project credits
+│   └── icons.jsx           # SVG wrappers for non-standard symbols (e.g. GithubIcon)
+└── data/
+    └── toolsData.js        # The single-source-of-truth file containing all CLI parameters and choices
+```
+
+## Adding a New Engine
+1. **Define Data**: Update `src/data/toolsData.js` by appending a tool config object inside the `toolsData` array. Include metadata, options, command generator, and simulated terminal outputs.
+2. **Icons**: Define the tool icon switch case in the `getToolIcon` helper inside `src/components/Sidebar.jsx` and `src/components/DashboardHome.jsx`.
+3. **Accent styling**: Append CSS variables in `src/index.css` for `--accent-color` and `--accent-glow`.
+
+## Development Commands
+- **Local Dev Server**: `npm run dev`
+- **Linter Checks**: `npm run lint`
+- **Compile Production Assets**: `npm run build`
+- **Serve Production Assets Locally**: `npm run preview`
+- **Single-page Fallback Serve**: `npx serve -s dist`

@@ -27,6 +27,10 @@ function Footer() {
         </p>
 
         <div className="footer-links">
+          <Link to="/about" className="hover-accent">
+            About
+          </Link>
+          <span>|</span>
           <Link to="/terms" className="hover-accent">
             Terms
           </Link>

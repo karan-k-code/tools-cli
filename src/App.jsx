@@ -1,7 +1,14 @@
 //  author: https://github.com/karan-k-code/tools-cli
 
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { Routes, Route, useLocation, useNavigate, Navigate, Link } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Navigate,
+  Link,
+} from "react-router-dom";
 import "./App.css";
 
 // app pages
@@ -10,6 +17,7 @@ import Donate from "./components/Donate";
 import Terms from "./components/Terms";
 import Privacy from "./components/Privacy";
 import Footer from "./components/Footer";
+import About from "./components/About";
 
 // main content components
 import { Check } from "lucide-react";
@@ -28,11 +36,21 @@ export default function App() {
   const showDonate = cleanPath === "donate" || cleanPath === "donent";
   const showTerms = cleanPath === "terms";
   const showPrivacy = cleanPath === "privacy";
+  const isAboutPage = cleanPath === "about";
+  const isDonatePage = cleanPath === "donate" || cleanPath === "donent";
+  const isFullPage = isAboutPage || isDonatePage;
 
   // Find active tool from route param
-  const activeToolId = (!showQuiz && !showDonate && !showTerms && !showPrivacy && cleanPath !== "")
-    ? cleanPath
-    : null;
+  const activeToolId =
+    !showQuiz &&
+    !showDonate &&
+    !showTerms &&
+    !showPrivacy &&
+    !isAboutPage &&
+    !isDonatePage &&
+    cleanPath !== ""
+      ? cleanPath
+      : null;
 
   const [searchQuery, setSearchQuery] = useState(() => {
     if (typeof window !== "undefined") {
@@ -84,7 +102,8 @@ export default function App() {
     return {
       generatedCmd: generated.command,
       cmdExplanation: generated.explanation,
-      simulatedOutput: activeTool.interactiveBuilder.simulatedOutput(builderOpts),
+      simulatedOutput:
+        activeTool.interactiveBuilder.simulatedOutput(builderOpts),
     };
   }, [activeTool, builderOpts]);
 
@@ -123,58 +142,67 @@ export default function App() {
     });
   }, [searchQuery, activeCategory]);
 
-  const fallbackCopyToClipboard = useCallback((text, type) => {
-    try {
-      const textArea = document.createElement("textarea");
-      textArea.value = text;
-      // Prevent page scrolling and make it completely invisible
-      textArea.style.position = "fixed";
-      textArea.style.top = "0";
-      textArea.style.left = "0";
-      textArea.style.opacity = "0";
-      textArea.style.pointerEvents = "none";
+  const fallbackCopyToClipboard = useCallback(
+    (text, type) => {
+      try {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        // Prevent page scrolling and make it completely invisible
+        textArea.style.position = "fixed";
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.opacity = "0";
+        textArea.style.pointerEvents = "none";
 
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
 
-      const successful = document.execCommand("copy");
-      document.body.removeChild(textArea);
+        const successful = document.execCommand("copy");
+        document.body.removeChild(textArea);
 
-      if (successful) {
-        showToast(`${type} copied to clipboard!`);
-      } else {
+        if (successful) {
+          showToast(`${type} copied to clipboard!`);
+        } else {
+          showToast(`Failed to copy ${type}.`);
+        }
+      } catch (err) {
+        console.error("Fallback copy failed: ", err);
         showToast(`Failed to copy ${type}.`);
       }
-    } catch (err) {
-      console.error("Fallback copy failed: ", err);
-      showToast(`Failed to copy ${type}.`);
-    }
-  }, [showToast]);
+    },
+    [showToast],
+  );
 
   // Copy code to clipboard (supports fallback for insecure contexts like HTTP IP addresses)
-  const handleCopyToClipboard = useCallback((text, type = "Command") => {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard
-        .writeText(text)
-        .then(() => {
-          showToast(`${type} copied to clipboard!`);
-        })
-        .catch((err) => {
-          console.warn("Clipboard API failed, trying fallback:", err);
-          fallbackCopyToClipboard(text, type);
-        });
-    } else {
-      fallbackCopyToClipboard(text, type);
-    }
-  }, [showToast, fallbackCopyToClipboard]);
+  const handleCopyToClipboard = useCallback(
+    (text, type = "Command") => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            showToast(`${type} copied to clipboard!`);
+          })
+          .catch((err) => {
+            console.warn("Clipboard API failed, trying fallback:", err);
+            fallbackCopyToClipboard(text, type);
+          });
+      } else {
+        fallbackCopyToClipboard(text, type);
+      }
+    },
+    [showToast, fallbackCopyToClipboard],
+  );
 
   // Run command in Terminal
-  const handleRunCommand = useCallback((cmd, output) => {
-    setRunCmdSignal(cmd);
-    setRunCmdOutput(output);
-    showToast("Executing command in terminal simulator...");
-  }, [showToast]);
+  const handleRunCommand = useCallback(
+    (cmd, output) => {
+      setRunCmdSignal(cmd);
+      setRunCmdOutput(output);
+      showToast("Executing command in terminal simulator...");
+    },
+    [showToast],
+  );
 
   // Save/Bookmark command
   const handleSaveCommand = useCallback(() => {
@@ -202,27 +230,32 @@ export default function App() {
   }, [favorites, generatedCmd, activeTool, simulatedOutput, showToast]);
 
   // Delete saved command
-  const handleDeleteFavorite = useCallback((id) => {
-    const updated = favorites.filter((fav) => fav.id !== id);
-    setFavorites(updated);
-    localStorage.setItem("toolscli_favorites", JSON.stringify(updated));
-    showToast("Removed from favorites.");
-  }, [favorites, showToast]);
+  const handleDeleteFavorite = useCallback(
+    (id) => {
+      const updated = favorites.filter((fav) => fav.id !== id);
+      setFavorites(updated);
+      localStorage.setItem("toolscli_favorites", JSON.stringify(updated));
+      showToast("Removed from favorites.");
+    },
+    [favorites, showToast],
+  );
 
   return (
     <div
-      className={`app-container ${activeTool ? activeTool.accentClass : "ollama-accent"}`}
+      className={`app-container ${activeTool ? activeTool.accentClass : "ollama-accent"} ${isFullPage ? "full-page" : ""}`}
     >
       {/* Sidebar Navigation */}
-      <Sidebar
-        filteredTools={filteredTools}
-        activeToolId={activeToolId}
-        showQuiz={showQuiz}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        activeCategory={activeCategory}
-        setActiveCategory={setActiveCategory}
-      />
+      {!isFullPage && (
+        <Sidebar
+          filteredTools={filteredTools}
+          activeToolId={activeToolId}
+          showQuiz={showQuiz}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+        />
+      )}
 
       {/* Main Container */}
       <div
@@ -234,43 +267,47 @@ export default function App() {
         }}
       >
         {/* Header */}
-        <header className="app-header">
-          <div className="breadcrumb-container">
-            <Link to="/" className="breadcrumb-root">
-              Workspace
-            </Link>
-            <span className="breadcrumb-separator">/</span>
-            <span className="breadcrumb-current">
-              {showQuiz
-                ? "CLI Quiz"
-                : showDonate
-                  ? "Support Tools CLI"
-                  : showTerms
-                    ? "Terms of Service"
-                    : showPrivacy
-                      ? "Privacy Policy"
-                      : activeTool
-                        ? activeTool.name
-                        : "Dashboard Overview"}
-            </span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <span
-              style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}
-            >
-              Local Host: 127.0.0.1
-            </span>
-            <span
-              className="status-dot"
-              style={{
-                backgroundColor: activeTool ? activeTool.color : "var(--accent-color)",
-                boxShadow: `0 0 8px ${activeTool ? activeTool.color : "var(--accent-color)"}`,
-              }}
-            />
-          </div>
-        </header>
+        {!isFullPage && (
+          <header className="app-header">
+            <div className="breadcrumb-container">
+              <Link to="/" className="breadcrumb-root">
+                Workspace
+              </Link>
+              <span className="breadcrumb-separator">/</span>
+              <span className="breadcrumb-current">
+                {showQuiz
+                  ? "CLI Quiz"
+                  : showDonate
+                    ? "Support Tools CLI"
+                    : showTerms
+                      ? "Terms of Service"
+                      : showPrivacy
+                        ? "Privacy Policy"
+                        : activeTool
+                          ? activeTool.name
+                          : "Dashboard Overview"}
+              </span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <span
+                style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}
+              >
+                Local Host: 127.0.0.1
+              </span>
+              <span
+                className="status-dot"
+                style={{
+                  backgroundColor: activeTool
+                    ? activeTool.color
+                    : "var(--accent-color)",
+                  boxShadow: `0 0 8px ${activeTool ? activeTool.color : "var(--accent-color)"}`,
+                }}
+              />
+            </div>
+          </header>
+        )}
 
-        <main className="main-content">
+        <main className={isFullPage ? "main-content-full" : "main-content"}>
           <Routes>
             <Route
               path="/"
@@ -284,6 +321,7 @@ export default function App() {
                 />
               }
             />
+            <Route path="/about" element={<About />} />
             <Route
               path="/terms"
               element={<Terms onClose={() => navigate("/")} />}
@@ -328,7 +366,6 @@ export default function App() {
             />
           </Routes>
         </main>
-
         {/* Footer */}
         <Footer />
       </div>

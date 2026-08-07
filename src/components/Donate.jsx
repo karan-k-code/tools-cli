@@ -1,11 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import {
   Heart,
   Gift,
-  X,
   CreditCard,
   DollarSign,
   User,
+  ArrowLeft,
 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import CardPaymentForm from "./donate/CardPaymentForm";
@@ -84,8 +85,9 @@ const MOCK_SPONSORS = [];
 export default function Donate({ onClose }) {
   useSEO({
     title: "Donate & Support - Tools Cli Project",
-    description: "Support the development of Tools Cli, an open-source companion for terminal and developer CLI tools.",
-    path: "donate"
+    description:
+      "Support the development of Tools Cli, an open-source companion for terminal and developer CLI tools.",
+    path: "donate",
   });
 
   const [sponsorType, setSponsorType] = useState("one-time");
@@ -245,27 +247,26 @@ export default function Donate({ onClose }) {
   return (
     <div className="donate-panel-overlay">
       <div className="donate-container">
-        <button
-          onClick={onClose}
+        <Link
+          to="/"
           style={{
             position: "absolute",
             top: "1.25rem",
-            right: "1.25rem",
-            background: "none",
-            border: "none",
-            color: "var(--text-secondary)",
-            cursor: "pointer",
-            padding: "6px",
-            borderRadius: "6px",
-            transition: "all var(--transition-fast)",
+            left: "1.25rem",
             display: "inline-flex",
             alignItems: "center",
+            gap: "0.5rem",
+            color: "var(--text-secondary)",
+            textDecoration: "none",
+            fontSize: "0.9rem",
+            fontWeight: 600,
+            transition: "all var(--transition-fast)",
           }}
-          title="Close Page"
-          className="hover-accent"
+          className="hover-accent-link"
         >
-          <X size={22} />
-        </button>
+          <ArrowLeft size={16} />
+          <span>Back to Workspace</span>
+        </Link>
 
         {!isSimulating && !isSuccess ? (
           <>

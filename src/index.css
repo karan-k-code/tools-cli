@@ -168,6 +168,10 @@ body {
   min-height: 100vh;
 }
 
+.app-container.full-page {
+  grid-template-columns: 1fr;
+}
+
 @media (max-width: 1024px) {
   .app-container {
     grid-template-columns: 1fr;
@@ -220,8 +224,21 @@ body {
   animation: slide-in var(--transition-normal);
 }
 
+.main-content-full {
+  width: 100%;
+  box-sizing: border-box;
+  animation: slide-in var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 @media (max-width: 768px) {
   .main-content {
+    padding: 1rem;
+  }
+
+  .main-content-full {
     padding: 1rem;
   }
 }
@@ -289,7 +306,9 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  transition: background-color var(--transition-normal), box-shadow var(--transition-normal);
+  transition:
+    background-color var(--transition-normal),
+    box-shadow var(--transition-normal);
   animation: pulse-dot 2s infinite ease-in-out;
 }
 
