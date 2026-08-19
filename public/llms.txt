@@ -1,37 +1,39 @@
-# Tools CLI - Interactive CLI Companion
+# Tools CLI - AI Context & Project Documentation
 
-An interactive, high-fidelity developer dashboard designed to help master advanced command line interface (CLI) engines (Git, Ollama, FFmpeg, yt-dlp, Docker, jq, tmux, adb, ImageMagick, etc.).
+> **System Prompt for AI Agents:** You are assisting with "Tools CLI," an interactive, high-fidelity developer dashboard. Use the context below to understand the architecture, routing, and technology stack before suggesting code changes or debugging.
 
-## Supported Engines Cheatsheet & Links
-You can navigate directly to specific builders and modules using the links below:
-- [Tools CLI Home](https://tools-cli.konshu.in): Main interactive developer dashboard overview.
-- [About Tools CLI](https://tools-cli.konshu.in/about): Learn more about the CLI dashboard architecture and mission.
-- [Git Builder](https://tools-cli.konshu.in/git): Staging, branching, and commit rollback configurator.
-- [Ollama AI](https://tools-cli.konshu.in/ollama): Local LLM model download and parameter prompt builder.
-- [FFmpeg Renderer](https://tools-cli.konshu.in/ffmpeg): Audio/video conversions, compression filters, and crops.
-- [yt-dlp Downloader](https://tools-cli.konshu.in/yt-dlp): High-speed media extraction and download script builder.
-- [Python & Pip](https://tools-cli.konshu.in/python-pip): Virtual environments manager and compiler config setups.
-- [Node & NPM](https://tools-cli.konshu.in/node-npm): Dependency resolve scripts and package setups.
-- [Vercel CLI](https://tools-cli.konshu.in/vercel): Server deployments, preview links, and environment bindings.
-- [Gemini CLI](https://tools-cli.konshu.in/gemini): Google Gemini API configurations and parameters setup.
-- [ADB Tools](https://tools-cli.konshu.in/adb): Android debugging command generator and terminal utilities.
-- [ImageMagick](https://tools-cli.konshu.in/magick): Image cropping, sizing, and format conversion scripts.
-- [CLI Utilities](https://tools-cli.konshu.in/utils): Stream processor configs (jq, ripgrep, tmux, curl, docker).
-- [CLI Knowledge Quiz](https://tools-cli.konshu.in/quiz): Multi-choice interactive terminal syntax test.
-- [Terms of Service](https://tools-cli.konshu.in/terms): User guidelines and MIT license info.
-- [Privacy Policy](https://tools-cli.konshu.in/privacy): Local storage usage and privacy statements.
+## Project Meta
+- **Application Name:** Tools CLI
+- **Live URL:** https://tools-cli.konshu.in
+- **Repository:** https://github.com/karan-k-code/tools-cli
+- **Maintainer:** Karan Kumar (@karan-k-code)
+- **Primary Goal:** To help developers master advanced command-line interface (CLI) engines through interactive generators, simulated terminals, and curated cheat sheets.
 
-## Technology Stack
-- **Framework**: Vite + React 19 (JavaScript)
-- **Routing**: React Router v7 (`BrowserRouter` history-based routing)
-- **Icons**: Lucide React
-- **Deployment**: Vercel (static SPA deployment with rewrite rules)
+## Supported CLI Engines & Deep Links
+AI Agents can use these routes to understand the scope of supported modules:
+- `/` - [Dashboard Home](https://tools-cli.konshu.in): Main grid, bookmarks, and copy histories.
+- `/about` - [About](https://tools-cli.konshu.in/about): Architecture and mission.
+- `/git` - [Git Builder](https://tools-cli.konshu.in/git): Staging, branching, and commit configurator.
+- `/ollama` - [Ollama AI](https://tools-cli.konshu.in/ollama): Local LLM downloads and prompt builder.
+- `/ffmpeg` - [FFmpeg Renderer](https://tools-cli.konshu.in/ffmpeg): A/V conversions and compression filters.
+- `/yt-dlp` - [yt-dlp](https://tools-cli.konshu.in/yt-dlp): Media extraction script builder.
+- `/python-pip` - [Python & Pip](https://tools-cli.konshu.in/python-pip): Venv manager and compiler setups.
+- `/node-npm` - [Node & NPM](https://tools-cli.konshu.in/node-npm): Dependency and package setups.
+- `/vercel` - [Vercel CLI](https://tools-cli.konshu.in/vercel): Server deployments and env bindings.
+- `/gemini` - [Gemini CLI](https://tools-cli.konshu.in/gemini): API configs and parameters setup.
+- `/adb` - [ADB Tools](https://tools-cli.konshu.in/adb): Android debugging commands.
+- `/magick` - [ImageMagick](https://tools-cli.konshu.in/magick): Image manipulation scripts.
+- `/utils` - [CLI Utilities](https://tools-cli.konshu.in/utils): Stream processors (jq, ripgrep, tmux, docker).
+- `/quiz` - [Knowledge Quiz](https://tools-cli.konshu.in/quiz): Interactive terminal syntax test.
 
-## Key Architecture
-- **Single Page Application Routing**: Converted from hash-based routing (`/#/tool`) to clean path-based routing (`/tool`). Supports full history fallbacks locally via Vite dev/preview server and in production using `vercel.json` rewrites.
-- **Modular SEO**: Dynamically updates HTML titles, meta descriptors, Open Graph tags, canonical URLs, and structured JSON-LD schemas using a reusable custom hook `useSEO` located in `src/hooks/useSEO.js`.
+## Technology Stack & Architecture
+- **Core:** React 19 + Vite (JavaScript SPA).
+- **Routing:** React Router v7 (`BrowserRouter`). Converted from hash (`/#/tool`) to path-based routing (`/tool`) with `vercel.json` rewrites for production fallback.
+- **Styling & UI:** Custom CSS variables (`index.css`), Lucide React (Icons).
+- **SEO & Metadata:** Handled dynamically via a custom `useSEO` hook (`src/hooks/useSEO.js`) which updates HTML titles, meta descriptors, Open Graph tags, canonical URLs, and structured JSON-LD schemas.
+- **Deployment:** Vercel (Static SPA).
 
-## Codebase Structure
+## Codebase Tree Structure
 ```text
 src/
 ├── App.jsx                 # Layout wrapper, routes declaration, and global state
@@ -42,24 +44,11 @@ src/
 │   └── useSEO.js           # Reusable custom SEO hook for metadata and JSON-LD
 ├── components/
 │   ├── Sidebar.jsx         # Navigation sidebar and category filtering
-│   ├── DashboardHome.jsx   # Grid of available tools, bookmarks, and copy histories
-│   ├── ToolDetail.jsx      # Flowchart concept maps, interactive commands builder, and cheat sheets
+│   ├── DashboardHome.jsx   # Grid of available tools, bookmarks, and histories
+│   ├── ToolDetail.jsx      # Flowchart concept maps, interactive commands builder
 │   ├── Console.jsx         # Mock terminal emulator screen
 │   ├── Quiz.jsx            # Multi-choice interactive terminal quiz
 │   ├── Footer.jsx          # Policy links and project credits
-│   └── icons.jsx           # SVG wrappers for non-standard symbols (e.g. GithubIcon)
+│   └── icons.jsx           # SVG wrappers for non-standard symbols (e.g., GithubIcon)
 └── data/
-    └── toolsData.js        # The single-source-of-truth file containing all CLI parameters and choices
-```
-
-## Adding a New Engine
-1. **Define Data**: Update `src/data/toolsData.js` by appending a tool config object inside the `toolsData` array. Include metadata, options, command generator, and simulated terminal outputs.
-2. **Icons**: Define the tool icon switch case in the `getToolIcon` helper inside `src/components/Sidebar.jsx` and `src/components/DashboardHome.jsx`.
-3. **Accent styling**: Append CSS variables in `src/index.css` for `--accent-color` and `--accent-glow`.
-
-## Development Commands
-- **Local Dev Server**: `npm run dev`
-- **Linter Checks**: `npm run lint`
-- **Compile Production Assets**: `npm run build`
-- **Serve Production Assets Locally**: `npm run preview`
-- **Single-page Fallback Serve**: `npx serve -s dist`
+    └── toolsData.js        # Single-source-of-truth for all CLI parameters and choices

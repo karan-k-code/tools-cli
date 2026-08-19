@@ -73,46 +73,86 @@
 
     <!-- Google Rich Snippets / JSON-LD Structured Data -->
     <script id="json-ld-schema" type="application/ld+json">
-      [
-        {
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "name": "Tools CLI",
-          "url": "https://tools-cli.konshu.in/",
-          "sameAs": [
-            "https://github.com/karan-k-code/tools-cli",
-            "https://twitter.com/karan_k_code"
-          ],
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "https://tools-cli.konshu.in/?q={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@context": "https://schema.org",
-          "@type": "WebApplication",
-          "name": "Tools CLI",
-          "url": "https://tools-cli.konshu.in/",
-          "description": "Master terminal workflows with interactive generators, simulations, and curated command references for Git, Ollama, FFmpeg, Python, Docker, jq, tmux, and more.",
-          "applicationCategory": "DeveloperApplication, EducationalApplication",
-          "operatingSystem": "Windows, macOS, Linux",
-          "browserRequirements": "Requires JavaScript. Requires HTML5.",
-          "image": "https://tools-cli.konshu.in/hero.webp",
-          "author": {
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
             "@type": "Person",
-            "name": "karan-k-code"
+            "@id": "https://tools-cli.konshu.in/#creator",
+            "name": "Karan Kumar",
+            "alternateName": "karan-k-code",
+            "url": "https://github.com/karan-k-code",
+            "sameAs": [
+              "https://x.com/karan_k_code",
+              "https://github.com/karan-k-code/tools-cli"
+            ]
           },
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
+          {
+            "@type": "WebSite",
+            "@id": "https://tools-cli.konshu.in/#website",
+            "url": "https://tools-cli.konshu.in/",
+            "name": "Tools CLI",
+            "description": "Interactive terminal workflows and command reference generators.",
+            "publisher": {
+              "@id": "https://tools-cli.konshu.in/#creator"
+            },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://tools-cli.konshu.in/?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://tools-cli.konshu.in/#webapp",
+            "name": "Tools CLI",
+            "url": "https://tools-cli.konshu.in/",
+            "description": "Master terminal workflows with interactive generators, simulations, and curated command references for Git, Ollama, FFmpeg, Python, Docker, jq, tmux, and more.",
+            "applicationCategory": [
+              "DeveloperApplication",
+              "EducationalApplication"
+            ],
+            "operatingSystem": "Windows, macOS, Linux",
+            "browserRequirements": "Requires JavaScript, HTML5",
+            "image": "https://tools-cli.konshu.in/hero.webp",
+            "keywords": [
+              "CLI tools",
+              "terminal workflows",
+              "developer productivity tools",
+              "interactive command generator",
+              "Git command reference",
+              "Ollama CLI commands",
+              "FFmpeg command builder",
+              "Docker terminal reference",
+              "jq JSON parser CLI",
+              "tmux cheat sheet",
+              "Python terminal scripts",
+              "command line simulator",
+              "bash scripting utilities",
+              "curated developer references"
+            ],
+            "featureList": [
+              "Interactive Terminal Generators",
+              "Curated Command References",
+              "Workflow Simulations"
+            ],
+            "author": {
+              "@id": "https://tools-cli.konshu.in/#creator"
+            },
+            "mainEntityOfPage": {
+              "@id": "https://tools-cli.konshu.in/#website"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
           }
-        }
-      ]
+        ]
+      }
     </script>
   </head>
   <body>
