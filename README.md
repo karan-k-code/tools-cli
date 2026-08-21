@@ -3,7 +3,7 @@
 [![Vite Build](https://img.shields.io/badge/Vite-v5.0+-purple.svg?style=flat-square)](https://vite.dev)
 [![React](https://img.shields.io/badge/React-v19.0+-blue.svg?style=flat-square)](https://react.dev)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Initiative-gradient.svg?style=flat-square)](#open-source-initiative)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](./LICENSE)
 
 An interactive, high-fidelity developer dashboard designed to help master advanced command line interface (CLI) engines. Configure parameters, preview auto-generated commands, inspect syntax breakdowns, and run simulated shell outputs directly in a sleek, glassmorphic dark-theme browser interface.
 
