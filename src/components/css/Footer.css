@@ -64,3 +64,10 @@ footer-logo {
   color: var(--border-color);
   font-size: 0.85rem;
 }
+
+@media (max-width: 768px) {
+  .footer-links {
+    flex-direction: auto;
+    gap: 0.5rem;
+  }
+}

@@ -17,7 +17,7 @@ function Footer() {
               marginLeft: "0.5rem",
             }}
           >
-            v1.0.0-Beta
+            v1.0.1-Beta
           </span>
         </div>
 
