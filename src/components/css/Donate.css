@@ -288,7 +288,6 @@
   margin-bottom: 2.5rem;
 }
 
-
 .payment-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
@@ -926,4 +925,36 @@
 .hover-accent-link:hover {
   color: var(--ollama-color) !important;
   transform: translateX(-2px);
+}
+
+/* UPI Icon-only App Buttons */
+.upi-app-btn {
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px;
+  width: auto;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast) !important;
+  padding: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.upi-app-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-color: var(--text-primary) !important;
+}
+
+.upi-app-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.upi-app-btn img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
 }

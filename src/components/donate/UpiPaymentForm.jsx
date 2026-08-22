@@ -1,4 +1,15 @@
 import { Check, Copy } from "lucide-react";
+import gpayIcon from "../../assets/gpay.svg";
+import phonepeIcon from "../../assets/phonepe.svg";
+import paytmIcon from "../../assets/paytm.svg";
+import bhimIcon from "../../assets/bhim.svg";
+
+const upiApps = [
+  { name: "GPay", id: "GPay", icon: gpayIcon },
+  { name: "PhonePe", id: "PhonePe", icon: phonepeIcon },
+  { name: "Paytm", id: "Paytm", icon: paytmIcon },
+  { name: "BHIM", id: "BHIM", icon: bhimIcon },
+];
 
 export default function UpiPaymentForm({
   activeAmount,
@@ -80,16 +91,20 @@ export default function UpiPaymentForm({
         <span style={{ fontSize: "0.7rem", color: "var(--text-muted)", display: "block", marginBottom: "0.5rem" }}>
           On mobile? Tap one of these to pay directly:
         </span>
-        <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center", flexWrap: "wrap" }}>
-          {["GPay", "PhonePe", "Paytm", "BHIM"].map((app) => (
+        <div style={{ display: "flex", gap: "0.85rem", justifyContent: "center", flexWrap: "wrap", marginTop: "0.75rem" }}>
+          {upiApps.map((app) => (
             <button
-              key={app}
+              key={app.id}
               type="button"
-              className="crypto-copy-btn"
-              style={{ padding: "6px 12px", fontSize: "0.75rem" }}
-              onClick={() => handleUpiPayClick(app)}
+              className="upi-app-btn"
+              title={app.name}
+              aria-label={app.name}
+              onClick={() => handleUpiPayClick(app.id)}
             >
-              {app}
+              <img 
+                src={app.icon} 
+                alt={app.name} 
+              />
             </button>
           ))}
         </div>
