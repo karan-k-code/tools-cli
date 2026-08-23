@@ -16,6 +16,8 @@ import BackerCertificate from "./donate/BackerCertificate";
 import SponsorWall from "./donate/SponsorWall";
 import "./css/Donate.css";
 
+const dollorPriceInrCurent = 95;
+
 const PRESETS = [
   { amount: 5, label: "Buy a Coffee ☕", desc: "Support ongoing hosting" },
   { amount: 15, label: "Backer Tier 🛡️", desc: "Recognized on sponsors wall" },
@@ -98,7 +100,7 @@ export default function Donate({ onClose }) {
   const [donorEmail, setDonorEmail] = useState("");
   const [donorMessage, setDonorMessage] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [paymentMethod, setPaymentMethod] = useState("upi");
 
   // Simulation states
   const [isSimulating, setIsSimulating] = useState(false);
@@ -163,7 +165,7 @@ export default function Donate({ onClose }) {
 
   const activeAmount =
     amountType === "preset" ? selectedPreset : parseFloat(customAmount) || 0;
-  const inrAmount = (activeAmount * 83).toFixed(2);
+  const inrAmount = (activeAmount * dollorPriceInrCurent).toFixed(2);
   const upiUrl = `upi://pay?pa=konshu@ptyes&pn=kOnshuPlant&am=${inrAmount}&cu=INR`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
 
