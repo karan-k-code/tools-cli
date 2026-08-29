@@ -7,8 +7,8 @@ The **Console Simulator** is a high-fidelity client-side interactive shell emula
 ## 📂 Component Map & Files
 
 The terminal simulator is implemented across two key files:
-1. **Logic & Markup**: [Console.jsx](file:///C:/projects/tools/src/components/Console.jsx) - Handles CLI inputs, command matching, state history, character-by-character simulation, and ANSI sequence parsing.
-2. **Styles**: [Console.css](file:///C:/projects/tools/src/components/Console.css) - Defines the terminal viewport, matrix-green scanlines, cursor blink animations, and scrollbars.
+1. **Logic & Markup**: [Console.jsx](/src/components/Console.jsx) - Handles CLI inputs, command matching, state history, character-by-character simulation, and ANSI sequence parsing.
+2. **Styles**: [Console.css](/src/components/Console.css) - Defines the terminal viewport, matrix-green scanlines, cursor blink animations, and scrollbars.
 
 ---
 
