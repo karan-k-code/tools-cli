@@ -39,6 +39,10 @@ function Footer() {
             Privacy
           </Link>
           <span>|</span>
+          <Link to="/disclaimer" className="hover-accent">
+            Disclaimer
+          </Link>
+          <span>|</span>
           <Link
             to="/donate"
             style={{

@@ -16,6 +16,7 @@ import Quiz from "./components/Quiz";
 import Donate from "./components/Donate";
 import Terms from "./components/Terms";
 import Privacy from "./components/Privacy";
+import Disclaimer from "./components/Disclaimer";
 import Footer from "./components/Footer";
 import About from "./components/About";
 
@@ -36,6 +37,7 @@ export default function App() {
   const showDonate = cleanPath === "donate" || cleanPath === "donent";
   const showTerms = cleanPath === "terms";
   const showPrivacy = cleanPath === "privacy";
+  const showDisclaimer = cleanPath === "disclaimer";
   const isAboutPage = cleanPath === "about";
   const isDonatePage = cleanPath === "donate" || cleanPath === "donent";
   const isFullPage = isAboutPage || isDonatePage;
@@ -46,6 +48,7 @@ export default function App() {
     !showDonate &&
     !showTerms &&
     !showPrivacy &&
+    !showDisclaimer &&
     !isAboutPage &&
     !isDonatePage &&
     cleanPath !== ""
@@ -283,9 +286,11 @@ export default function App() {
                       ? "Terms of Service"
                       : showPrivacy
                         ? "Privacy Policy"
-                        : activeTool
-                          ? activeTool.name
-                          : "Dashboard Overview"}
+                        : showDisclaimer
+                          ? "Disclaimer"
+                          : activeTool
+                            ? activeTool.name
+                            : "Dashboard Overview"}
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -329,6 +334,10 @@ export default function App() {
             <Route
               path="/privacy"
               element={<Privacy onClose={() => navigate("/")} />}
+            />
+            <Route
+              path="/disclaimer"
+              element={<Disclaimer onClose={() => navigate("/")} />}
             />
             <Route
               path="/donate"
