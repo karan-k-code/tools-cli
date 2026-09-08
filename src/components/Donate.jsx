@@ -18,6 +18,15 @@ import "./css/Donate.css";
 
 const dollorPriceInrCurent = 95;
 
+const IS_INDIA = (() => {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return tz === "Asia/Calcutta" || tz === "Asia/Kolkata";
+  } catch (e) {
+    return false;
+  }
+})();
+
 const PRESETS = [
   { amount: 5, label: "Buy a Coffee ☕", desc: "Support ongoing hosting" },
   { amount: 15, label: "Backer Tier 🛡️", desc: "Recognized on sponsors wall" },
@@ -33,6 +42,24 @@ const PRESETS = [
     desc: "Featured spotlight backer",
   },
 ];
+
+const INDIA_PRESETS = [
+  { amount: 100, label: "Buy a Coffee ☕", desc: "Support ongoing hosting" },
+  { amount: 250, label: "Backer Tier 🛡️", desc: "Recognized on sponsors wall" },
+  { amount: 500, label: "Power User 🚀", desc: "Full backer certificate" },
+  {
+    amount: 1000,
+    label: "Developer Tier ⭐",
+    desc: "Special recognition + certificate",
+  },
+  {
+    amount: 2000,
+    label: "Sponsor Master 👑",
+    desc: "Featured spotlight backer",
+  },
+];
+
+const ACTIVE_PRESETS = IS_INDIA ? INDIA_PRESETS : PRESETS;
 
 const PAYMENT_METHODS = [
   { id: "card", name: "Credit Card", icon: <CreditCard size={20} /> },
@@ -94,7 +121,7 @@ export default function Donate({ onClose }) {
 
   const [sponsorType, setSponsorType] = useState("one-time");
   const [amountType, setAmountType] = useState("preset");
-  const [selectedPreset, setSelectedPreset] = useState(15);
+  const [selectedPreset, setSelectedPreset] = useState(IS_INDIA ? 250 : 15);
   const [customAmount, setCustomAmount] = useState("");
   const [donorName, setDonorName] = useState("");
   const [donorEmail, setDonorEmail] = useState("");
@@ -163,25 +190,17 @@ export default function Donate({ onClose }) {
     return () => clearTimeout(timer);
   }, [isSimulating, simulationIndex, simulationSteps]);
 
-  const isIndia = useMemo(() => {
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      return tz === "Asia/Calcutta" || tz === "Asia/Kolkata";
-    } catch (e) {
-      return false;
-    }
-  }, []);
-
-  const currencySymbol = isIndia ? "₹" : "$";
+  const currencySymbol = IS_INDIA ? "₹" : "$";
 
   const activeAmount =
     amountType === "preset"
-      ? (isIndia ? selectedPreset * dollorPriceInrCurent : selectedPreset)
+      ? selectedPreset
       : parseFloat(customAmount) || 0;
 
-  const activeUsdAmount = isIndia ? activeAmount / dollorPriceInrCurent : activeAmount;
+  // Scale INR amount by 20 to map to the equivalent USD tier correctly
+  const activeUsdAmount = IS_INDIA ? activeAmount / 20 : activeAmount;
   
-  const inrAmount = isIndia ? activeAmount.toFixed(2) : (activeAmount * dollorPriceInrCurent).toFixed(2);
+  const inrAmount = IS_INDIA ? activeAmount.toFixed(2) : (activeAmount * dollorPriceInrCurent).toFixed(2);
   const upiUrl = `upi://pay?pa=konshu@ptyes&pn=kOnshuPlant&am=${inrAmount}&cu=INR`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
 
@@ -334,7 +353,7 @@ export default function Donate({ onClose }) {
                 Select Amount
               </div>
               <div className="donate-presets-grid">
-                {PRESETS.map((preset) => (
+                {ACTIVE_PRESETS.map((preset) => (
                   <div
                     key={preset.amount}
                     className={`donate-preset-card ${amountType === "preset" && selectedPreset === preset.amount ? "active" : ""}`}
@@ -344,7 +363,7 @@ export default function Donate({ onClose }) {
                     }}
                   >
                     <span className="donate-preset-amount">
-                      {currencySymbol}{isIndia ? preset.amount * dollorPriceInrCurent : preset.amount}
+                      {currencySymbol}{preset.amount}
                     </span>
                     <span className="donate-preset-label">{preset.label}</span>
                   </div>
