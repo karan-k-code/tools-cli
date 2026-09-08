@@ -1,6 +1,6 @@
 import { Check, Download } from "lucide-react";
 
-export default function BackerCertificate({ donorName, activeAmount, onClose, onDownload }) {
+export default function BackerCertificate({ donorName, activeAmount, activeUsdAmount, currencySymbol = "$", onClose, onDownload }) {
   return (
     <div className="donate-success-card">
       <div className="success-badge-container">
@@ -18,7 +18,7 @@ export default function BackerCertificate({ donorName, activeAmount, onClose, on
           {donorName || "Honorable Backer"}
         </div>
         <p className="certificate-details">
-          For contribution of <strong>${activeAmount}</strong> to the development of Tools CLI. Your support aids the promotion of open-source CLI learning systems.
+          For contribution of <strong>{currencySymbol}{activeAmount}</strong> to the development of Tools CLI. Your support aids the promotion of open-source CLI learning systems.
         </p>
         <div className="certificate-meta">
           <div className="certificate-meta-item">
@@ -27,7 +27,7 @@ export default function BackerCertificate({ donorName, activeAmount, onClose, on
           </div>
           <div className="certificate-meta-item">
             <strong>TIER</strong>
-            <span>{activeAmount >= 100 ? "Gold Sponsor" : activeAmount >= 50 ? "Platinum Backer" : activeAmount >= 25 ? "Developer Backer" : "Supporter"}</span>
+            <span>{(activeUsdAmount || activeAmount) >= 100 ? "Gold Sponsor" : (activeUsdAmount || activeAmount) >= 50 ? "Platinum Backer" : (activeUsdAmount || activeAmount) >= 25 ? "Developer Backer" : "Supporter"}</span>
           </div>
           <div className="certificate-meta-item">
             <strong>SIGNATURE</strong>

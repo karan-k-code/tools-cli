@@ -163,9 +163,25 @@ export default function Donate({ onClose }) {
     return () => clearTimeout(timer);
   }, [isSimulating, simulationIndex, simulationSteps]);
 
+  const isIndia = useMemo(() => {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return tz === "Asia/Calcutta" || tz === "Asia/Kolkata";
+    } catch (e) {
+      return false;
+    }
+  }, []);
+
+  const currencySymbol = isIndia ? "₹" : "$";
+
   const activeAmount =
-    amountType === "preset" ? selectedPreset : parseFloat(customAmount) || 0;
-  const inrAmount = (activeAmount * dollorPriceInrCurent).toFixed(2);
+    amountType === "preset"
+      ? (isIndia ? selectedPreset * dollorPriceInrCurent : selectedPreset)
+      : parseFloat(customAmount) || 0;
+
+  const activeUsdAmount = isIndia ? activeAmount / dollorPriceInrCurent : activeAmount;
+  
+  const inrAmount = isIndia ? activeAmount.toFixed(2) : (activeAmount * dollorPriceInrCurent).toFixed(2);
   const upiUrl = `upi://pay?pa=konshu@ptyes&pn=kOnshuPlant&am=${inrAmount}&cu=INR`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
 
@@ -328,7 +344,7 @@ export default function Donate({ onClose }) {
                     }}
                   >
                     <span className="donate-preset-amount">
-                      ${preset.amount}
+                      {currencySymbol}{isIndia ? preset.amount * dollorPriceInrCurent : preset.amount}
                     </span>
                     <span className="donate-preset-label">{preset.label}</span>
                   </div>
@@ -345,7 +361,7 @@ export default function Donate({ onClose }) {
               {/* Custom Amount input */}
               {amountType === "custom" && (
                 <div className="custom-amount-container">
-                  <span className="custom-amount-prefix">$</span>
+                  <span className="custom-amount-prefix">{currencySymbol}</span>
                   <input
                     type="number"
                     min="1"
@@ -509,7 +525,7 @@ export default function Donate({ onClose }) {
                   disabled={activeAmount <= 0}
                 >
                   <Heart size={16} fill="currentColor" />
-                  <span>Donate ${activeAmount}</span>
+                  <span>Donate {currencySymbol}{activeAmount}</span>
                 </button>
               </div>
             </form>
@@ -523,6 +539,8 @@ export default function Donate({ onClose }) {
           <BackerCertificate
             donorName={donorName}
             activeAmount={activeAmount}
+            activeUsdAmount={activeUsdAmount}
+            currencySymbol={currencySymbol}
             onClose={onClose}
             onDownload={triggerMockCertificateDownload}
           />
