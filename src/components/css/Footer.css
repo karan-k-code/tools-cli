@@ -19,7 +19,7 @@
 
 /* Footer Logo */
 
-footer-logo {
+.footer-logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -66,8 +66,23 @@ footer-logo {
 }
 
 @media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  .footer-logo {
+    justify-content: center;
+  }
+
   .footer-links {
-    flex-direction: auto;
-    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 1.25rem;
+  }
+
+  .footer-links > span {
+    display: none;
   }
 }
