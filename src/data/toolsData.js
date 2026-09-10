@@ -2619,52 +2619,125 @@ export const toolsData = [
       {
         section: "Connection & Discovery",
         items: [
-          {
-            cmd: "adb devices -l",
-            desc: "List connected devices with model and USB interface info.",
-          },
-          {
-            cmd: "adb connect 192.168.1.100:5555",
-            desc: "Connect to an Android device over Wi-Fi network.",
-          },
-          {
-            cmd: "adb disconnect",
-            desc: "Disconnect from all TCP/IP connected Android devices.",
-          },
+          { cmd: "adb kill-server", desc: "Kill the ADB server process." },
+          { cmd: "adb start-server", desc: "Start the ADB server process." },
+          { cmd: "adb devices", desc: "List attached devices." },
+          { cmd: "adb devices -l", desc: "List connected devices with product/model info." },
+          { cmd: "adb connect <ip_address>", desc: "Connect to a device over Wi-Fi." },
+          { cmd: "adb disconnect", desc: "Disconnect from all TCP/IP connected Android devices." },
+          { cmd: "adb usb", desc: "Restart ADB listening on USB." },
+          { cmd: "fastboot devices", desc: "Check connection and list devices in bootloader mode." },
         ],
       },
       {
-        section: "File & App Management",
+        section: "Device Rebooting",
         items: [
-          {
-            cmd: "adb install -r app.apk",
-            desc: "Reinstall / upgrade an existing application, keeping its user data.",
-          },
-          {
-            cmd: "adb shell pm list packages -3",
-            desc: "List all third-party app packages installed on the device.",
-          },
-          {
-            cmd: "adb shell pm clear com.example.app",
-            desc: "Clear all runtime cache and data for the target package.",
-          },
+          { cmd: "adb reboot", desc: "Reboot the device normally." },
+          { cmd: "adb reboot recovery", desc: "Reboot device into recovery mode." },
+          { cmd: "adb reboot-bootloader", desc: "Reboot device into bootloader/fastboot mode." },
+          { cmd: "adb root", desc: "Restart adbd with root permissions." },
         ],
       },
       {
-        section: "Debugging & Logs",
+        section: "App & Package Management",
         items: [
-          {
-            cmd: "adb logcat -c",
-            desc: "Clear/flush the active device logcat buffer.",
-          },
-          {
-            cmd: "adb shell screencap -p /sdcard/screenshot.png",
-            desc: "Take a screenshot and save it to SDCard storage.",
-          },
-          {
-            cmd: "adb shell dumpsys battery",
-            desc: "Display device battery level, charge status, and health metrics.",
-          },
+          { cmd: "adb install path/to/app.apk", desc: "Install an app." },
+          { cmd: "adb install -r app.apk", desc: "Reinstall/upgrade an existing app, keeping its data." },
+          { cmd: "adb uninstall com.myAppPackage", desc: "Uninstall an app." },
+          { cmd: "adb uninstall -k com.myAppPackage", desc: "Uninstall app without deleting data." },
+          { cmd: "adb shell pm clear com.example.app", desc: "Delete all data associated with a package." },
+          { cmd: "adb shell pm list packages", desc: "List all package names." },
+          { cmd: "adb shell pm list packages -3", desc: "List third-party package names." },
+          { cmd: "adb shell pm list packages -s", desc: "List only system packages." },
+          { cmd: "adb shell pm list packages -u", desc: "List package names including uninstalled ones." },
+          { cmd: "adb shell dumpsys package packages", desc: "List detailed info on all apps." },
+          { cmd: "adb shell path com.example.app", desc: "Print the path to the APK file for a package." },
+        ],
+      },
+      {
+        section: "Permissions",
+        items: [
+          { cmd: "adb shell pm grant [packageName] [Permission]", desc: "Grant a permission to an app." },
+          { cmd: "adb shell pm revoke [packageName] [Permission]", desc: "Revoke a permission from an app." },
+          { cmd: "adb shell pm reset-permissions -p [packageName]", desc: "Reset permissions for a specific app." },
+        ],
+      },
+      {
+        section: "File Management",
+        items: [
+          { cmd: "adb push [source] [destination]", desc: "Copy files from your computer to your phone." },
+          { cmd: "adb pull [device_location] [local_location]", desc: "Copy files from your phone to your computer." },
+          { cmd: "adb shell ls -s", desc: "List directory contents with sizes." },
+          { cmd: "adb shell ls -R", desc: "List subdirectories recursively." },
+        ],
+      },
+      {
+        section: "Activity Manager (Intents)",
+        items: [
+          { cmd: "adb shell am start -a android.intent.action.VIEW", desc: "Start an activity with VIEW action." },
+          { cmd: "adb shell am start -a android.intent.action.VIEW -d URL", desc: "Open a URL." },
+          { cmd: "adb shell am broadcast -a 'my_action'", desc: "Send a broadcast intent." },
+          { cmd: "adb shell am start -a android.intent.action.CALL -d tel:+123456789", desc: "Make a phone call." },
+          { cmd: "adb shell am start -W -c android.intent.category.HOME -a android.intent.action.MAIN", desc: "Go to Home screen." },
+        ],
+      },
+      {
+        section: "Input & Key Events",
+        items: [
+          { cmd: "adb shell input text 'hello'", desc: "Print text into the focused input field." },
+          { cmd: "adb shell input keyevent 3", desc: "Simulate Home button." },
+          { cmd: "adb shell input keyevent 4", desc: "Simulate Back button." },
+          { cmd: "adb shell input keyevent 26", desc: "Toggle Power button (Turn device ON/OFF)." },
+          { cmd: "adb shell input keyevent 66", desc: "Simulate Enter key." },
+          { cmd: "adb shell input keyevent 67", desc: "Simulate Delete/Backspace key." },
+          { cmd: "adb shell monkey -p com.myAppPackage -v 10000 -s 100", desc: "Generate 10,000 random events on the device (Monkey testing)." },
+        ],
+      },
+      {
+        section: "Screen & UI",
+        items: [
+          { cmd: "adb shell screencap -p /sdcard/screenshot.png", desc: "Capture a screenshot." },
+          { cmd: "adb shell screenrecord /sdcard/demo.mp4", desc: "Record the device screen." },
+          { cmd: "adb shell wm size 2048x1536", desc: "Emulate device resolution/size." },
+          { cmd: "adb shell wm density 288", desc: "Emulate device screen density." },
+          { cmd: "adb shell wm size reset", desc: "Reset screen resolution to default." },
+        ],
+      },
+      {
+        section: "Debugging, Logs & System Info",
+        items: [
+          { cmd: "adb logcat", desc: "View device logs." },
+          { cmd: "adb logcat -c", desc: "Clear/flush the active device logcat buffer." },
+          { cmd: "adb logcat -d > log.txt", desc: "Save the logcat output to a file." },
+          { cmd: "adb bugreport > bugreport.zip", desc: "Dump whole device information (dumpstate, dumpsys, logcat)." },
+          { cmd: "adb shell getprop ro.build.version.release", desc: "Get device Android OS version." },
+          { cmd: "adb get-serialno", desc: "Get the serial number." },
+          { cmd: "adb shell dumpsys battery", desc: "Display device battery metrics." },
+          { cmd: "adb shell dumpsys battery set level <n>", desc: "Change the emulated battery level (0-100)." },
+        ],
+      },
+      {
+        section: "Backup & Restore",
+        items: [
+          { cmd: "adb backup -apk -all -f backup.ab", desc: "Backup settings and apps to a file." },
+          { cmd: "adb restore backup.ab", desc: "Restore a previous backup to your phone." },
+          { cmd: "adb sideload", desc: "Push and flash custom ROMs and zips from your computer." },
+        ],
+      },
+      {
+        section: "Shared Preferences",
+        items: [
+          { cmd: "adb shell 'am broadcast -a org.example.app.sp.PUT --es key key_name --es value \"hello world!\"'", desc: "Add a string value to default shared preferences." },
+          { cmd: "adb shell 'am broadcast -a org.example.app.sp.REMOVE --es key key_name'", desc: "Remove a value from default shared preferences." },
+          { cmd: "adb shell 'am broadcast -a org.example.app.sp.CLEAR --es key key_name'", desc: "Clear all default shared preferences." },
+        ],
+      },
+      {
+        section: "Advanced Batch Commands",
+        items: [
+          { cmd: "adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r app.apk", desc: "Install an app on ALL connected devices." },
+          { cmd: "adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall com.example.app", desc: "Uninstall an app from ALL connected devices." },
+          { cmd: "adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell getprop ro.build.version.release", desc: "Print Android version of ALL connected devices." },
         ],
       },
     ],
