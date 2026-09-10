@@ -3067,6 +3067,210 @@ export const toolsData = [
       },
     ],
   },
+  {
+    id: "fzf",
+    name: "Fuzzy Finder (fzf)",
+    category: "Utilities",
+    color: "#FF00FF",
+    accentClass: "fzf-accent",
+    github: "https://github.com/junegunn/fzf",
+    tagline: "A general-purpose command-line fuzzy finder.",
+    description: "fzf is an interactive Unix filter for command-line that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.",
+    install: {
+      windows: "winget install fzf",
+      mac: "brew install fzf",
+      linux: "sudo apt install fzf"
+    },
+    visualConcept: {
+      title: "How fzf works",
+      steps: [
+        { name: "Input Source", desc: "A command that generates a list (e.g. find, history)", status: "modified" },
+        { name: "fzf Filter", desc: "Interactive fuzzy search prompt in the terminal", status: "staged" },
+        { name: "Selection", desc: "User picks one or multiple items", status: "committed" },
+        { name: "Output Action", desc: "Selected item is passed to the next command", status: "remote" }
+      ]
+    },
+    interactiveBuilder: {
+      title: "fzf Command Builder",
+      description: "Build common fzf pipelines and commands.",
+      options: [
+        { id: "source", label: "Input Source", type: "select", defaultValue: "files", choices: [{ value: "files", label: "Files in directory" }, { value: "history", label: "Command History" }, { value: "git_log", label: "Git Commits" }] },
+        { id: "multi", label: "Allow Multiple Selection (-m)", type: "boolean", defaultValue: false }
+      ],
+      generator: (opts) => {
+        let cmd = "";
+        if (opts.source === "files") cmd = `find . -type f | fzf`;
+        else if (opts.source === "history") cmd = `history | fzf`;
+        else if (opts.source === "git_log") cmd = `git log --oneline | fzf`;
+        if (opts.multi) cmd += " -m";
+        return { command: cmd, explanation: [] };
+      },
+      simulatedOutput: (opts) => "Simulating fzf interactive prompt...\n> result"
+    },
+    cheatsheets: [
+      { section: "Basic Usage", items: [{ cmd: "find * -type f | fzf", desc: "Fuzzy find files" }, { cmd: "history | fzf", desc: "Fuzzy search command history" }] }
+    ]
+  },
+  {
+    id: "zoxide",
+    name: "Zoxide (Smart cd)",
+    category: "Utilities",
+    color: "#FF5F00",
+    accentClass: "zoxide-accent",
+    github: "https://github.com/ajeetdsouza/zoxide",
+    tagline: "A smarter cd command, inspired by z and autojump.",
+    description: "zoxide is a blazing fast alternative to cd that remembers which directories you use most frequently, so you can jump to them in just a few keystrokes.",
+    install: { windows: "winget install zoxide", mac: "brew install zoxide", linux: "curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash" },
+    visualConcept: { title: "Zoxide Workflow", steps: [{ name: "Learn", desc: "Zoxide records the directories you visit", status: "staged" }, { name: "Jump", desc: "Type 'z <hint>' to jump to the highest ranked match", status: "remote" }] },
+    interactiveBuilder: {
+      title: "Zoxide Builder",
+      description: "Generate zoxide navigation commands.",
+      options: [
+        { id: "query", label: "Directory hint", type: "text", defaultValue: "proj" },
+        { id: "interactive", label: "Interactive selection (-i)", type: "boolean", defaultValue: false }
+      ],
+      generator: (opts) => {
+        let cmd = `z ${opts.query}`;
+        if (opts.interactive) cmd += ` -i`;
+        return { command: cmd, explanation: [] };
+      },
+      simulatedOutput: () => "Navigating to /path/to/project"
+    },
+    cheatsheets: [{ section: "Usage", items: [{ cmd: "z foo", desc: "cd into highest ranked directory matching foo" }, { cmd: "z foo bar", desc: "cd into highest ranked directory matching foo and bar" }, { cmd: "zi foo", desc: "cd with interactive selection (using fzf)" }] }]
+  },
+  {
+    id: "ripgrep",
+    name: "Ripgrep (rg)",
+    category: "Utilities",
+    color: "#E2A900",
+    accentClass: "ripgrep-accent",
+    github: "https://github.com/BurntSushi/ripgrep",
+    tagline: "Recursively searches directories for a regex pattern.",
+    description: "ripgrep is a line-oriented search tool that recursively searches your current directory for a regex pattern while respecting your gitignore rules.",
+    install: { windows: "winget install BurntSushi.ripgrep.MSVC", mac: "brew install ripgrep", linux: "sudo apt-get install ripgrep" },
+    visualConcept: { title: "Ripgrep Search", steps: [{ name: "Regex", desc: "Define search pattern", status: "modified" }, { name: "Search", desc: "Fast parallel search through files", status: "staged" }] },
+    interactiveBuilder: {
+      title: "Ripgrep Builder",
+      description: "Build rg regex searches.",
+      options: [
+        { id: "pattern", label: "Search Pattern", type: "text", defaultValue: "TODO" },
+        { id: "ignoreCase", label: "Ignore Case (-i)", type: "boolean", defaultValue: true },
+        { id: "hidden", label: "Search Hidden Files (-. )", type: "boolean", defaultValue: false }
+      ],
+      generator: (opts) => {
+        let cmd = `rg`;
+        if (opts.ignoreCase) cmd += ` -i`;
+        if (opts.hidden) cmd += ` -.`;
+        cmd += ` "${opts.pattern}"`;
+        return { command: cmd, explanation: [] };
+      },
+      simulatedOutput: () => "src/main.js:15: // TODO: refactor this"
+    },
+    cheatsheets: [{ section: "Basic Usage", items: [{ cmd: "rg 'fast'", desc: "Search for 'fast' in current directory" }, { cmd: "rg -i 'fast'", desc: "Case-insensitive search" }, { cmd: "rg -t py 'import'", desc: "Search only Python files" }] }]
+  },
+  {
+    id: "eza",
+    name: "eza (Modern ls)",
+    category: "Utilities",
+    color: "#4A90E2",
+    accentClass: "eza-accent",
+    github: "https://github.com/eza-community/eza",
+    tagline: "A modern, maintained replacement for ls.",
+    description: "eza is a modern, maintained replacement for the venerable file-listing command-line program ls that ships with Unix and Linux operating systems, giving it more features and better defaults.",
+    install: { windows: "winget install eza", mac: "brew install eza", linux: "sudo apt install eza" },
+    visualConcept: { title: "eza Output", steps: [{ name: "Icons", desc: "File type icons", status: "staged" }, { name: "Git", desc: "Git integration and statuses", status: "remote" }] },
+    interactiveBuilder: {
+      title: "eza Builder",
+      description: "Configure eza directory listings.",
+      options: [
+        { id: "long", label: "Long view (-l)", type: "boolean", defaultValue: true },
+        { id: "icons", label: "Show Icons (--icons)", type: "boolean", defaultValue: true },
+        { id: "tree", label: "Tree view (-T)", type: "boolean", defaultValue: false }
+      ],
+      generator: (opts) => {
+        let cmd = `eza`;
+        if (opts.long) cmd += ` -l`;
+        if (opts.icons) cmd += ` --icons`;
+        if (opts.tree) cmd += ` -T`;
+        return { command: cmd, explanation: [] };
+      },
+      simulatedOutput: () => "Permissions  Size  Date    Name\n.rw-r--r--   1.0K  Jan 1   📄 index.js"
+    },
+    cheatsheets: [{ section: "Usage", items: [{ cmd: "eza -l", desc: "Long format" }, { cmd: "eza -la", desc: "Long format including hidden" }, { cmd: "eza --tree", desc: "View as a tree" }] }]
+  },
+  {
+    id: "bat",
+    name: "Bat (Modern cat)",
+    category: "Utilities",
+    color: "#F6C915",
+    accentClass: "bat-accent",
+    github: "https://github.com/sharkdp/bat",
+    tagline: "A cat(1) clone with syntax highlighting and Git integration.",
+    description: "bat supports syntax highlighting for a large number of programming and markup languages, as well as git integration to show modifications.",
+    install: { windows: "winget install sharkdp.bat", mac: "brew install bat", linux: "sudo apt install bat" },
+    visualConcept: { title: "Bat Features", steps: [{ name: "Syntax", desc: "Highlighting based on extension", status: "modified" }, { name: "Paging", desc: "Automatic paging for long files", status: "staged" }] },
+    interactiveBuilder: {
+      title: "Bat Builder",
+      description: "Read files with syntax highlighting.",
+      options: [
+        { id: "file", label: "File to read", type: "text", defaultValue: "README.md" },
+        { id: "numbers", label: "Hide line numbers (-n)", type: "boolean", defaultValue: false }
+      ],
+      generator: (opts) => {
+        let cmd = `bat`;
+        if (opts.numbers) cmd += ` -n`;
+        cmd += ` ${opts.file}`;
+        return { command: cmd, explanation: [] };
+      },
+      simulatedOutput: () => "   1   console.log('Hello world');"
+    },
+    cheatsheets: [{ section: "Basic Usage", items: [{ cmd: "bat file.txt", desc: "Display a file" }, { cmd: "bat -A file.txt", desc: "Show all non-printable characters" }] }]
+  },
+  {
+    id: "lazygit",
+    name: "Lazygit",
+    category: "VCS",
+    color: "#B22222",
+    accentClass: "lazygit-accent",
+    github: "https://github.com/jesseduffield/lazygit",
+    tagline: "A simple terminal UI for git commands.",
+    description: "Lazygit is a fast and easy-to-use terminal user interface for Git, designed to simplify workflows.",
+    install: { windows: "winget install lazygit", mac: "brew install lazygit", linux: "sudo add-apt-repository ppa:lazygit-team/release && sudo apt-get update && sudo apt-get install lazygit" },
+    visualConcept: { title: "Lazygit TUI", steps: [{ name: "Status", desc: "View files", status: "staged" }, { name: "Branch", desc: "Manage branches", status: "remote" }] },
+    interactiveBuilder: {
+      title: "Lazygit Launcher",
+      description: "Launch the Lazygit TUI.",
+      options: [],
+      generator: () => ({ command: "lazygit", explanation: [] }),
+      simulatedOutput: () => "Launching Lazygit TUI interface..."
+    },
+    cheatsheets: [{ section: "Keybindings", items: [{ cmd: "Space", desc: "Toggle staged/unstaged" }, { cmd: "c", desc: "Commit changes" }, { cmd: "P", desc: "Push to remote" }] }]
+  },
+  {
+    id: "starship",
+    name: "Starship",
+    category: "Utilities",
+    color: "#DD0B78",
+    accentClass: "starship-accent",
+    github: "https://github.com/starship/starship",
+    tagline: "The minimal, blazing-fast, and infinitely customizable prompt for any shell!",
+    description: "Starship is a cross-shell prompt that shows information you need while you're working, dynamically.",
+    install: { windows: "winget install starship", mac: "brew install starship", linux: "curl -sS https://starship.rs/install.sh | sh" },
+    visualConcept: { title: "Starship Prompt", steps: [{ name: "Context", desc: "Git branch, language version", status: "modified" }, { name: "Display", desc: "Render prompt cleanly", status: "staged" }] },
+    interactiveBuilder: {
+      title: "Starship Config",
+      description: "Edit starship.toml configuration.",
+      options: [
+        { id: "preset", label: "Setup preset", type: "select", defaultValue: "pure", choices: [{ value: "pure", label: "Pure Preset" }, { value: "nerd", label: "Nerd Font Preset" }] }
+      ],
+      generator: (opts) => {
+        return { command: `starship preset ${opts.preset} -o ~/.config/starship.toml`, explanation: [] };
+      },
+      simulatedOutput: () => "Configuration applied successfully."
+    },
+    cheatsheets: [{ section: "Setup", items: [{ cmd: "starship init bash", desc: "Initialize in bash" }, { cmd: "starship init zsh", desc: "Initialize in zsh" }] }]
+  }
+
 ];
 
 export const quizQuestions = [
