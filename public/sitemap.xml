@@ -84,6 +84,55 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Fuzzy Finder (fzf) -->
+  <url>
+    <loc>https://tools-cli.konshu.in/fzf</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Zoxide -->
+  <url>
+    <loc>https://tools-cli.konshu.in/zoxide</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Ripgrep -->
+  <url>
+    <loc>https://tools-cli.konshu.in/ripgrep</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- eza (Modern ls) -->
+  <url>
+    <loc>https://tools-cli.konshu.in/eza</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Bat (Modern cat) -->
+  <url>
+    <loc>https://tools-cli.konshu.in/bat</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Lazygit -->
+  <url>
+    <loc>https://tools-cli.konshu.in/lazygit</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Starship -->
+  <url>
+    <loc>https://tools-cli.konshu.in/starship</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
     <!-- About Section -->
   <url>
     <loc>https://tools-cli.konshu.in/about</loc>

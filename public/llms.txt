@@ -23,7 +23,14 @@ AI Agents can use these routes to understand the scope of supported modules:
 - `/gemini` - [Gemini CLI](https://tools-cli.konshu.in/gemini): API configs and parameters setup.
 - `/adb` - [ADB Tools](https://tools-cli.konshu.in/adb): Android debugging commands.
 - `/magick` - [ImageMagick](https://tools-cli.konshu.in/magick): Image manipulation scripts.
-- `/utils` - [CLI Utilities](https://tools-cli.konshu.in/utils): Stream processors (jq, ripgrep, tmux, docker).
+- `/fzf` - [Fuzzy Finder](https://tools-cli.konshu.in/fzf): Interactive shell searching pipelines.
+- `/zoxide` - [Zoxide](https://tools-cli.konshu.in/zoxide): Smart directory navigation.
+- `/ripgrep` - [Ripgrep](https://tools-cli.konshu.in/ripgrep): Blazing fast regex search.
+- `/eza` - [eza](https://tools-cli.konshu.in/eza): Modern colorful file listing.
+- `/bat` - [Bat](https://tools-cli.konshu.in/bat): Syntax-highlighted file viewing.
+- `/lazygit` - [Lazygit](https://tools-cli.konshu.in/lazygit): Visual TUI for Git workflows.
+- `/starship` - [Starship](https://tools-cli.konshu.in/starship): Cross-shell prompt configurations.
+- `/utils` - [CLI Utilities](https://tools-cli.konshu.in/utils): Stream processors (jq, tmux, docker).
 - `/quiz` - [Knowledge Quiz](https://tools-cli.konshu.in/quiz): Interactive terminal syntax test.
 
 ## Technology Stack & Architecture
