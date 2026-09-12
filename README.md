@@ -13,14 +13,13 @@ An interactive, high-fidelity developer dashboard designed to help master advanc
 
 The companion currently includes deep configurations, lifecycles, and interactive builders for:
 
-* **Version Control (Git)**: Branching, staging, stashing, and commit rollbacks.
-* **Local AI (Ollama)**: Local model pulls, metadata checks, and system prompt parameters.
-* **Media Rendering (FFmpeg)**: Video compression (CRF), audio extractions, and resolution crops.
-* **Web Scraping (yt-dlp)**: High-speed video, playlist, subtitles, and trimmed segment downloads.
-* **Virtual Environments (Python & Pip)**: Environment setups, requirement compiles, and package installs.
-* **Package Managers (Node & NPM)**: Dependency resolves, script runs, and `npx` setups.
-* **CLI Utilities (jq, ripgrep, curl, docker, tmux)**: Stream processing, HTTP testing, containerization, and terminal multiplexing.
-* **Server Deployments (Vercel CLI)**: Project links, preview & production deployments, secrets binding, and rollbacks.
+* **Version Control**: Git, GitHub CLI (gh), Lazygit.
+* **Local AI**: Ollama, Gemini CLI.
+* **Media Rendering**: FFmpeg, ImageMagick.
+* **Web Scraping**: yt-dlp.
+* **Virtual Environments & Packages**: Python & Pip, Node & NPM.
+* **Modern Shell Utilities**: fzf, zoxide, ripgrep, eza, bat, starship.
+* **Network & DevOps**: Nmap, Vercel CLI, ADB, docker, tmux.
 
 ---
 
@@ -63,7 +62,9 @@ src/
 │   ├── Quiz.css            # Quiz component styling
 │   └── icons.jsx           # SVG wrappers for non-standard symbols (e.g. GithubIcon)
 └── data/
-    └── toolsData.js        # The single-source-of-truth file containing all CLI parameters and choices
+    ├── tools/              # Individual modular JS files for each CLI tool (e.g. git.js, ollama.js)
+    ├── quizQuestions.js    # Trivia questions array
+    └── toolsData.js        # The aggregated entry point exporting the `toolsData` array
 ```
 
 ---
@@ -125,11 +126,10 @@ To deploy this project to the Vercel edge network:
 ## 🛠️ Adding a New CLI Engine
 
 To extend the companion dashboard with a new command engine:
-1. Open [toolsData.js](src/data/toolsData.js).
-2. Append a new tool object structure inside the `toolsData` array:
+1. Create a new file in `src/data/tools/` (e.g., `mycli.js`) and export your tool object:
    ```javascript
-   {
-     id: 'my-cli-tool',
+   export const mycli = {
+     id: 'my-cli',
      name: 'My CLI Tool',
      category: 'Utilities',
      color: '#accent-hex-color',
@@ -150,8 +150,9 @@ To extend the companion dashboard with a new command engine:
        simulatedOutput: (opts) => { ... }
      },
      cheatsheets: [ ... ]
-   }
+   };
    ```
+2. Open `src/data/toolsData.js`, import your new object, and append it to the `toolsData` array.
 3. Open [index.css](src/index.css) and append matching accent variables:
    ```css
    .my-cli-accent {
