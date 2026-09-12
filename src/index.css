@@ -120,6 +120,10 @@ body {
   --accent-color: var(--git-color);
   --accent-glow: rgba(240, 80, 50, 0.25);
 }
+.gh-accent {
+  --accent-color: #2ea043;
+  --accent-glow: rgba(46, 160, 67, 0.25);
+}
 .ollama-accent {
   --accent-color: var(--ollama-color);
   --accent-glow: rgba(168, 85, 247, 0.25);

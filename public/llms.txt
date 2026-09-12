@@ -14,6 +14,7 @@ AI Agents can use these routes to understand the scope of supported modules:
 - `/` - [Dashboard Home](https://tools-cli.konshu.in): Main grid, bookmarks, and copy histories.
 - `/about` - [About](https://tools-cli.konshu.in/about): Architecture and mission.
 - `/git` - [Git Builder](https://tools-cli.konshu.in/git): Staging, branching, and commit configurator.
+- `/gh` - [GitHub CLI](https://tools-cli.konshu.in/gh): Pull requests, issues, and repos.
 - `/ollama` - [Ollama AI](https://tools-cli.konshu.in/ollama): Local LLM downloads and prompt builder.
 - `/ffmpeg` - [FFmpeg Renderer](https://tools-cli.konshu.in/ffmpeg): A/V conversions and compression filters.
 - `/yt-dlp` - [yt-dlp](https://tools-cli.konshu.in/yt-dlp): Media extraction script builder.

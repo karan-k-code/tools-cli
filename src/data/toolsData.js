@@ -17,9 +17,11 @@ import { eza } from './tools/eza.js';
 import { bat } from './tools/bat.js';
 import { lazygit } from './tools/lazygit.js';
 import { starship } from './tools/starship.js';
+import { gh } from './tools/gh.js';
 
 export const toolsData = [
   git,
+  gh,
   ollama,
   ffmpeg,
   ytdlp,

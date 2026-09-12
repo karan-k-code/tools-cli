@@ -14,6 +14,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- GitHub CLI -->
+  <url>
+    <loc>https://tools-cli.konshu.in/gh</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <!-- Ollama Companion -->
   <url>
     <loc>https://tools-cli.konshu.in/ollama</loc>
