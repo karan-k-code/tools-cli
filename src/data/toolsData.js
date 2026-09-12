@@ -18,10 +18,12 @@ import { bat } from './tools/bat.js';
 import { lazygit } from './tools/lazygit.js';
 import { starship } from './tools/starship.js';
 import { gh } from './tools/gh.js';
+import { nmap } from './tools/nmap.js';
 
 export const toolsData = [
   git,
   gh,
+  nmap,
   ollama,
   ffmpeg,
   ytdlp,

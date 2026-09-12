@@ -124,6 +124,10 @@ body {
   --accent-color: #2ea043;
   --accent-glow: rgba(46, 160, 67, 0.25);
 }
+.nmap-accent {
+  --accent-color: #2a628f;
+  --accent-glow: rgba(42, 98, 143, 0.25);
+}
 .ollama-accent {
   --accent-color: var(--ollama-color);
   --accent-glow: rgba(168, 85, 247, 0.25);
