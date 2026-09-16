@@ -24,6 +24,7 @@ AI Agents can use these routes to understand the scope of supported modules:
 - `/vercel` - [Vercel CLI](https://tools-cli.konshu.in/vercel): Server deployments and env bindings.
 - `/gemini` - [Gemini CLI](https://tools-cli.konshu.in/gemini): API configs and parameters setup.
 - `/adb` - [ADB Tools](https://tools-cli.konshu.in/adb): Android debugging commands.
+- `/scrcpy` - [scrcpy](https://tools-cli.konshu.in/scrcpy): Android screen mirroring and control.
 - `/magick` - [ImageMagick](https://tools-cli.konshu.in/magick): Image manipulation scripts.
 - `/fzf` - [Fuzzy Finder](https://tools-cli.konshu.in/fzf): Interactive shell searching pipelines.
 - `/zoxide` - [Zoxide](https://tools-cli.konshu.in/zoxide): Smart directory navigation.

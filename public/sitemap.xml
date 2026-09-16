@@ -91,6 +91,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- scrcpy -->
+  <url>
+    <loc>https://tools-cli.konshu.in/scrcpy</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- ImageMagick -->
   <url>
     <loc>https://tools-cli.konshu.in/magick</loc>

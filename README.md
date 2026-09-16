@@ -19,7 +19,7 @@ The companion currently includes deep configurations, lifecycles, and interactiv
 * **Web Scraping**: yt-dlp.
 * **Virtual Environments & Packages**: Python & Pip, Node & NPM.
 * **Modern Shell Utilities**: fzf, zoxide, ripgrep, eza, bat, starship.
-* **Network & DevOps**: Nmap, Vercel CLI, ADB, docker, tmux.
+* **Network & DevOps**: Nmap, Vercel CLI, scrcpy, ADB, docker, tmux.
 
 ---
 

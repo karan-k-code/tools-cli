@@ -19,11 +19,13 @@ import { lazygit } from './tools/lazygit.js';
 import { starship } from './tools/starship.js';
 import { gh } from './tools/gh.js';
 import { nmap } from './tools/nmap.js';
+import { scrcpy } from './tools/scrcpy.js';
 
 export const toolsData = [
   git,
   gh,
   nmap,
+  scrcpy,
   ollama,
   ffmpeg,
   ytdlp,
