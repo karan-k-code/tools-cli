@@ -22,7 +22,7 @@ const IS_INDIA = (() => {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     return tz === "Asia/Calcutta" || tz === "Asia/Kolkata";
-  } catch (e) {
+  } catch {
     return false;
   }
 })();

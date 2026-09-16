@@ -22,3 +22,14 @@ The following modern CLI tools have been researched and are recommended to be ad
 ---
 
 *Note: Assigned to Project Manager / Frontend Developer for future implementation.*
+
+## 🔴 Critical Bugs
+- **Lint Errors (Unused Variables):**
+  - `src/components/Donate.jsx`: Line 25 - Unused variable `e` in `IS_INDIA` try-catch block.
+  - `src/data/tools/fzf.js`: Line 39 - Unused variable `opts` in `simulatedOutput`.
+
+## 🟡 UI/UX Issues
+- **Typo in App.jsx Route Handling:**
+  - `App.jsx` lines 37 and 42 contain a typo: `cleanPath === "donent"` should be corrected or removed.
+- **Unused Assets:**
+  - `src/assets/hero.png` exists but is not used (the app uses `hero.webp` from public).

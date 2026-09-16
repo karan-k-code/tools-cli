@@ -34,12 +34,12 @@ export default function App() {
   // Derived routing states from URL path (using cleanPath to support clean parsing)
   const cleanPath = location.pathname.replace(/^\//, "");
   const showQuiz = cleanPath === "quiz";
-  const showDonate = cleanPath === "donate" || cleanPath === "donent";
+  const showDonate = cleanPath === "donate";
   const showTerms = cleanPath === "terms";
   const showPrivacy = cleanPath === "privacy";
   const showDisclaimer = cleanPath === "disclaimer";
   const isAboutPage = cleanPath === "about";
-  const isDonatePage = cleanPath === "donate" || cleanPath === "donent";
+  const isDonatePage = cleanPath === "donate";
   const isFullPage = isAboutPage || isDonatePage;
 
   // Find active tool from route param
