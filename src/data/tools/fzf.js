@@ -36,7 +36,7 @@ export const fzf = {
         if (opts.multi) cmd += " -m";
         return { command: cmd, explanation: [] };
       },
-      simulatedOutput: (opts) => "Simulating fzf interactive prompt...\n> result"
+      simulatedOutput: () => "Simulating fzf interactive prompt...\n> result"
     },
     cheatsheets: [
       { section: "Basic Usage", items: [{ cmd: "find * -type f | fzf", desc: "Fuzzy find files" }, { cmd: "history | fzf", desc: "Fuzzy search command history" }] }
