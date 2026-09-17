@@ -117,7 +117,7 @@ export default function DashboardHome({
               {toolsData.reduce(
                 (acc, t) =>
                   acc +
-                  t.cheatsheets.reduce((cAcc, s) => cAcc + s.items.length, 0),
+                  (t.cheatsheets?.reduce((cAcc, s) => cAcc + (s.commands || s.items || []).length, 0) || 0),
                 0,
               )}
             </span>

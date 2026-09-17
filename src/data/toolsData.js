@@ -20,7 +20,7 @@ import { starship } from "./tools/starship.js";
 import { gh } from "./tools/gh.js";
 import { nmap } from "./tools/nmap.js";
 import { scrcpy } from "./tools/scrcpy.js";
-import { theHarvester } from "./tools/theHarvester.js";
+// import { theHarvester } from "./tools/theHarvester.js";
 
 export const toolsData = [
   git,
@@ -44,7 +44,7 @@ export const toolsData = [
   bat,
   lazygit,
   starship,
-  theHarvester,
+  // theHarvester,
 ];
 
 export const quizQuestions = [
