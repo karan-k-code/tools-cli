@@ -5,31 +5,27 @@
 The following modern CLI tools have been researched and are recommended to be added to `toolsData.js` with their own interactive builders and cheatsheets.
 
 - [x] **`fzf` (Fuzzy Finder)**
-  - *Use Case:* Interactive searching for files, history, and git branches.
 - [x] **`zoxide` (Smart `cd`)**
-  - *Use Case:* Fast directory navigation based on frequency.
 - [x] **`ripgrep` (`rg`)**
-  - *Use Case:* Blazing fast regex searching respecting `.gitignore`.
 - [x] **`eza` (Modern `ls`)**
-  - *Use Case:* Colored directory listings, icons, tree views, and Git integration.
 - [x] **`bat` (Modern `cat`)**
-  - *Use Case:* File reading with syntax highlighting and Git diffs.
 - [x] **`lazygit`**
-  - *Use Case:* TUI for complex Git workflows (staging, rebasing).
 - [x] **`Starship`**
-  - *Use Case:* Cross-shell prompt configuration builder (`starship.toml`).
 
 ---
 
 *Note: Assigned to Project Manager / Frontend Developer for future implementation.*
 
 ## 🔴 Critical Bugs
-- **Lint Errors (Unused Variables):**
-  - `src/components/Donate.jsx`: Line 25 - Unused variable `e` in `IS_INDIA` try-catch block.
-  - `src/data/tools/fzf.js`: Line 39 - Unused variable `opts` in `simulatedOutput`.
+- **theHarvester Crash - Generator Return Type:**
+  - `src/data/tools/theHarvester.js`: The `interactiveBuilder.generator` returns a string. It must return an object `{ command: cmd, explanation: [] }` to prevent `App.jsx` from crashing on `cmdExplanation.length`.
+- **theHarvester Crash - Cheatsheet Structure:**
+  - `src/data/tools/theHarvester.js`: The `cheatsheets` array uses `title` and `commands` keys instead of the expected `section` and `items` keys, which crashes `ToolDetail.jsx` during `sheet.items.map`.
 
 ## 🟡 UI/UX Issues
-- **Typo in App.jsx Route Handling:**
-  - `App.jsx` lines 37 and 42 contain a typo: `cleanPath === "donent"` should be corrected or removed.
-- **Unused Assets:**
-  - `src/assets/hero.png` exists but is not used (the app uses `hero.webp` from public).
+- **Missing Category in Sidebar:**
+  - `theHarvester.js` uses category `"Information Gathering"`, but `Sidebar.jsx` hardcodes category filters. Add `"Information Gathering"` to the categories array in `Sidebar.jsx`.
+- **Invalid Color format in theHarvester:**
+  - `theHarvester.js` defines `color: "--adb-color"`. This breaks the hex parsing (`parseInt`) in `DashboardHome.jsx`. It should be a valid hex code (e.g., `#3ddc84`).
+- **Wrong Favicon MIME type:**
+  - `index.html`: The favicon `<link>` has `href="k.logo.webp"` but incorrectly specifies `type="image/svg+xml"`. It should be `type="image/webp"`.
