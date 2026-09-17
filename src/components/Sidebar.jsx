@@ -89,7 +89,7 @@ export default function Sidebar({
           flexWrap: "wrap",
         }}
       >
-        {["All", "VCS", "AI", "Media", "Utilities"].map((cat) => (
+        {["All", "VCS", "AI", "Media", "Utilities", "Information Gathering"].map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
