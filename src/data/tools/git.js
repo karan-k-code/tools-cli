@@ -273,8 +273,9 @@ export const git = {
     },
     cheatsheets: [
       {
-        section: "Configuration",
-        items: [
+        title: "Configuration",
+      icon: "⚙️",
+        commands: [
           {
             cmd: 'git config --global user.name "Your Name"',
             desc: "Set global username for commits.",
@@ -286,8 +287,9 @@ export const git = {
         ],
       },
       {
-        section: "Inspection & Logs",
-        items: [
+        title: "Inspection & Logs",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "git status",
             desc: "List files modified, staged, or untracked in current tree.",
@@ -303,8 +305,9 @@ export const git = {
         ],
       },
       {
-        section: "Remote Collaboration",
-        items: [
+        title: "Remote Collaboration",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "git remote add origin <url>",
             desc: 'Map a remote repository URL to shortname "origin".',

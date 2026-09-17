@@ -370,10 +370,13 @@ export default function ToolDetail({
           </h3>
           <div className="cheatsheet-grid">
             {activeTool.cheatsheets.map((sheet) => (
-              <div key={sheet.section} className="cheatsheet-card">
-                <div className="cheatsheet-title">{sheet.section}</div>
+              <div key={sheet.title} className="cheatsheet-card">
+                <div className="cheatsheet-title">
+                  {sheet.icon && <span style={{ marginRight: "8px" }}>{sheet.icon}</span>}
+                  {sheet.title}
+                </div>
                 <div className="cheatsheet-list">
-                  {sheet.items.map((item) => (
+                  {(sheet.commands || sheet.items)?.map((item) => (
                     <div key={item.cmd} className="cheatsheet-item">
                       <div className="cheatsheet-cmd-row">
                         <span className="cheatsheet-cmd">$ {item.cmd}</span>

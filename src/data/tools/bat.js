@@ -24,5 +24,6 @@ export const bat = {
       },
       simulatedOutput: () => "   1   console.log('Hello world');"
     },
-    cheatsheets: [{ section: "Basic Usage", items: [{ cmd: "bat file.txt", desc: "Display a file" }, { cmd: "bat -A file.txt", desc: "Show all non-printable characters" }] }]
+    cheatsheets: [{ title: "Basic Usage",
+      icon: "⚙️", commands: [{ cmd: "bat file.txt", desc: "Display a file" }, { cmd: "bat -A file.txt", desc: "Show all non-printable characters" }] }]
   };

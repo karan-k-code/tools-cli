@@ -187,8 +187,9 @@ export const nodenpm = {
     },
     cheatsheets: [
       {
-        section: "Version Control & Clean",
-        items: [
+        title: "Version Control & Clean",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "npm install --production",
             desc: "Install production dependencies only (ignores devDependencies).",
@@ -204,8 +205,9 @@ export const nodenpm = {
         ],
       },
       {
-        section: "Global Packages",
-        items: [
+        title: "Global Packages",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "npm list -g --depth=0",
             desc: "List all globally installed npm modules.",

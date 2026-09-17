@@ -236,8 +236,9 @@ export const ffmpeg = {
     },
     cheatsheets: [
       {
-        section: "Video Filtering",
-        items: [
+        title: "Video Filtering",
+      icon: "⚙️",
+        commands: [
           {
             cmd: 'ffmpeg -i input.mp4 -vf "transpose=1" output.mp4',
             desc: "Rotate video 90 degrees clockwise.",
@@ -249,8 +250,9 @@ export const ffmpeg = {
         ],
       },
       {
-        section: "Merge & Concatenate",
-        items: [
+        title: "Merge & Concatenate",
+      icon: "⚙️",
+        commands: [
           {
             cmd: 'ffmpeg -i "concat:part1.mp3|part2.mp3" -acodec copy output.mp3',
             desc: "Merge two MP3 files together without re-encoding.",

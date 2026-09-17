@@ -216,8 +216,9 @@ export const utils = {
     },
     cheatsheets: [
       {
-        section: "Docker",
-        items: [
+        title: "Docker",
+      icon: "⚙️",
+        commands: [
           { cmd: "docker ps", desc: "List active container processes." },
           {
             cmd: "docker logs <container-id>",
@@ -230,8 +231,9 @@ export const utils = {
         ],
       },
       {
-        section: "Tmux",
-        items: [
+        title: "Tmux",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "tmux attach -t <session>",
             desc: "Connect to an active terminal multiplexer session.",

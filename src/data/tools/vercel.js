@@ -221,8 +221,9 @@ export const vercel = {
     },
     cheatsheets: [
       {
-        section: "Local Synced dev",
-        items: [
+        title: "Local Synced dev",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "vercel dev",
             desc: "Run Vercel replication dev server locally on port 3000, parsing serverless routing.",
@@ -234,8 +235,9 @@ export const vercel = {
         ],
       },
       {
-        section: "Inspections & Management",
-        items: [
+        title: "Inspections & Management",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "vercel list",
             desc: "List recent deployments of the linked project, along with status tags.",

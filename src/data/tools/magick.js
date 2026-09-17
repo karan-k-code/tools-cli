@@ -287,8 +287,9 @@ export const magick = {
     },
     cheatsheets: [
       {
-        section: "Basic Conversions",
-        items: [
+        title: "Basic Conversions",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "magick input.png -quality 85 output.jpg",
             desc: "Convert PNG to JPEG with specific compression quality.",
@@ -304,8 +305,9 @@ export const magick = {
         ],
       },
       {
-        section: "Advanced Operations",
-        items: [
+        title: "Advanced Operations",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "magick input.jpg -colorspace Gray output.jpg",
             desc: "Convert image to grayscale format.",

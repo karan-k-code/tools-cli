@@ -183,8 +183,9 @@ export const gemini = {
     },
     cheatsheets: [
       {
-        section: "Basic Queries",
-        items: [
+        title: "Basic Queries",
+      icon: "⚙️",
+        commands: [
           {
             cmd: 'gemini "write a python quicksort"',
             desc: "Quick prompt run and output response.",
@@ -196,8 +197,9 @@ export const gemini = {
         ],
       },
       {
-        section: "Model & Config",
-        items: [
+        title: "Model & Config",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "gemini --list-models",
             desc: "List all available Gemini models and metadata.",
@@ -206,8 +208,9 @@ export const gemini = {
         ],
       },
       {
-        section: "Multimodal Inputs",
-        items: [
+        title: "Multimodal Inputs",
+      icon: "⚙️",
+        commands: [
           {
             cmd: 'gemini --file logs.txt "find the error"',
             desc: "Attach a text file to your Gemini prompt.",

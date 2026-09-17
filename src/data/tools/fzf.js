@@ -39,6 +39,7 @@ export const fzf = {
       simulatedOutput: () => "Simulating fzf interactive prompt...\n> result"
     },
     cheatsheets: [
-      { section: "Basic Usage", items: [{ cmd: "find * -type f | fzf", desc: "Fuzzy find files" }, { cmd: "history | fzf", desc: "Fuzzy search command history" }] }
+      { title: "Basic Usage",
+      icon: "⚙️", commands: [{ cmd: "find * -type f | fzf", desc: "Fuzzy find files" }, { cmd: "history | fzf", desc: "Fuzzy search command history" }] }
     ]
   };

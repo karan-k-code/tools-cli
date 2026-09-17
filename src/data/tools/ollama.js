@@ -167,8 +167,9 @@ export const ollama = {
     },
     cheatsheets: [
       {
-        section: "Server & Control",
-        items: [
+        title: "Server & Control",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "ollama serve",
             desc: "Start the Ollama background server manually.",
@@ -180,8 +181,9 @@ export const ollama = {
         ],
       },
       {
-        section: "Model Customization",
-        items: [
+        title: "Model Customization",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "ollama create mymodel -f ./Modelfile",
             desc: "Build a custom model from a definition File.",

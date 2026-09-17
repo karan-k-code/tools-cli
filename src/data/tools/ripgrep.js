@@ -26,5 +26,6 @@ export const ripgrep = {
       },
       simulatedOutput: () => "src/main.js:15: // TODO: refactor this"
     },
-    cheatsheets: [{ section: "Basic Usage", items: [{ cmd: "rg 'fast'", desc: "Search for 'fast' in current directory" }, { cmd: "rg -i 'fast'", desc: "Case-insensitive search" }, { cmd: "rg -t py 'import'", desc: "Search only Python files" }] }]
+    cheatsheets: [{ title: "Basic Usage",
+      icon: "⚙️", commands: [{ cmd: "rg 'fast'", desc: "Search for 'fast' in current directory" }, { cmd: "rg -i 'fast'", desc: "Case-insensitive search" }, { cmd: "rg -t py 'import'", desc: "Search only Python files" }] }]
   };

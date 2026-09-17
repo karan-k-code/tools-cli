@@ -16,10 +16,29 @@ export const theHarvester = {
     linux: "sudo apt update && sudo apt install theharvester -y",
   },
   visualConcept: {
-    icon: "🔍",
-    gradient: "from-purple-500 to-violet-600",
-    pattern: "radar",
-    animation: "pulse-scan",
+    title: "infrometion gedering tools",
+    steps: [
+      {
+        name: "CLI Command",
+        desc: "Type command to load models locally.",
+        status: "modified",
+      },
+      {
+        name: "Ollama Server",
+        desc: "A background service running on port 11434 serving models.",
+        status: "staged",
+      },
+      {
+        name: "GGUF Models",
+        desc: "Quantized LLM files loaded in RAM/VRAM for prompt processing.",
+        status: "committed",
+      },
+      {
+        name: "Local Output",
+        desc: "Model response streamed back over local sockets. 100% private.",
+        status: "remote",
+      },
+    ],
   },
   interactiveBuilder: {
     title: "theHarvester Command Builder",

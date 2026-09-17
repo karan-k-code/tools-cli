@@ -88,24 +88,27 @@ Nmap done: 1 IP address (1 host up) scanned in 2.14 seconds`
   },
   cheatsheets: [
     {
-      section: "Basic Scanning",
-      items: [
+      title: "Basic Scanning",
+      icon: "⚙️",
+      commands: [
         { cmd: "nmap 192.168.1.1", desc: "Scan a single IP." },
         { cmd: "nmap example.com", desc: "Scan a hostname." },
         { cmd: "nmap 192.168.1.0/24", desc: "Scan an entire subnet." }
       ]
     },
     {
-      section: "Discovery & Ports",
-      items: [
+      title: "Discovery & Ports",
+      icon: "⚙️",
+      commands: [
         { cmd: "nmap -sn 192.168.1.0/24", desc: "Ping sweep a network to find live hosts without port scanning." },
         { cmd: "nmap -p 80,443 example.com", desc: "Scan only specific ports (HTTP and HTTPS)." },
         { cmd: "nmap -p- 127.0.0.1", desc: "Scan all 65535 ports on localhost." }
       ]
     },
     {
-      section: "Advanced Scanning",
-      items: [
+      title: "Advanced Scanning",
+      icon: "⚙️",
+      commands: [
         { cmd: "nmap -sV scanme.nmap.org", desc: "Detect versions of services running on open ports." },
         { cmd: "nmap -O 192.168.1.1", desc: "Attempt to identify the operating system of the target." },
         { cmd: "nmap -A example.com", desc: "Aggressive scan (Enables OS detection, version detection, script scanning, and traceroute)." }

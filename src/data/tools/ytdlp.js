@@ -242,8 +242,9 @@ export const ytdlp = {
     },
     cheatsheets: [
       {
-        section: "Performance Options",
-        items: [
+        title: "Performance Options",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "yt-dlp --limit-rate 50K <url>",
             desc: "Limit download bandwidth speed to 50KB/s.",
@@ -255,8 +256,9 @@ export const ytdlp = {
         ],
       },
       {
-        section: "Metadata & Subtitles",
-        items: [
+        title: "Metadata & Subtitles",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "yt-dlp --list-subs <url>",
             desc: "List all available subtitle languages for the video without downloading.",
@@ -276,8 +278,9 @@ export const ytdlp = {
         ],
       },
       {
-        section: "Authentication & Inputs",
-        items: [
+        title: "Authentication & Inputs",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "yt-dlp --cookies-from-browser chrome <url>",
             desc: "Extract cookie session keys from Chrome to bypass captchas, age-gates, or login prompts.",

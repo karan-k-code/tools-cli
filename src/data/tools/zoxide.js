@@ -23,5 +23,6 @@ export const zoxide = {
       },
       simulatedOutput: () => "Navigating to /path/to/project"
     },
-    cheatsheets: [{ section: "Usage", items: [{ cmd: "z foo", desc: "cd into highest ranked directory matching foo" }, { cmd: "z foo bar", desc: "cd into highest ranked directory matching foo and bar" }, { cmd: "zi foo", desc: "cd with interactive selection (using fzf)" }] }]
+    cheatsheets: [{ title: "Usage",
+      icon: "⚙️", commands: [{ cmd: "z foo", desc: "cd into highest ranked directory matching foo" }, { cmd: "z foo bar", desc: "cd into highest ranked directory matching foo and bar" }, { cmd: "zi foo", desc: "cd with interactive selection (using fzf)" }] }]
   };

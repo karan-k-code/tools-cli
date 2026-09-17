@@ -206,8 +206,9 @@ export const pythonpip = {
     },
     cheatsheets: [
       {
-        section: "Package Management",
-        items: [
+        title: "Package Management",
+      icon: "⚙️",
+        commands: [
           {
             cmd: "pip uninstall <package>",
             desc: "Remove a package from the environment.",
@@ -223,8 +224,9 @@ export const pythonpip = {
         ],
       },
       {
-        section: "Execution & Shell",
-        items: [
+        title: "Execution & Shell",
+      icon: "⚙️",
+        commands: [
           { cmd: "python script.py", desc: "Execute a python file." },
           {
             cmd: 'python -c "import os; print(os.getcwd())"',

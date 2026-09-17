@@ -359,8 +359,9 @@ export const adb = {
     },
     cheatsheets: [
       {
-        section: "Connection & Discovery",
-        items: [
+        title: "Connection & Discovery",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb kill-server", desc: "Kill the ADB server process." },
           { cmd: "adb start-server", desc: "Start the ADB server process." },
           { cmd: "adb devices", desc: "List attached devices." },
@@ -372,8 +373,9 @@ export const adb = {
         ],
       },
       {
-        section: "Device Rebooting",
-        items: [
+        title: "Device Rebooting",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb reboot", desc: "Reboot the device normally." },
           { cmd: "adb reboot recovery", desc: "Reboot device into recovery mode." },
           { cmd: "adb reboot-bootloader", desc: "Reboot device into bootloader/fastboot mode." },
@@ -381,8 +383,9 @@ export const adb = {
         ],
       },
       {
-        section: "App & Package Management",
-        items: [
+        title: "App & Package Management",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb install path/to/app.apk", desc: "Install an app." },
           { cmd: "adb install -r app.apk", desc: "Reinstall/upgrade an existing app, keeping its data." },
           { cmd: "adb uninstall com.myAppPackage", desc: "Uninstall an app." },
@@ -397,16 +400,18 @@ export const adb = {
         ],
       },
       {
-        section: "Permissions",
-        items: [
+        title: "Permissions",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb shell pm grant [packageName] [Permission]", desc: "Grant a permission to an app." },
           { cmd: "adb shell pm revoke [packageName] [Permission]", desc: "Revoke a permission from an app." },
           { cmd: "adb shell pm reset-permissions -p [packageName]", desc: "Reset permissions for a specific app." },
         ],
       },
       {
-        section: "File Management",
-        items: [
+        title: "File Management",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb push [source] [destination]", desc: "Copy files from your computer to your phone." },
           { cmd: "adb pull [device_location] [local_location]", desc: "Copy files from your phone to your computer." },
           { cmd: "adb shell ls -s", desc: "List directory contents with sizes." },
@@ -414,8 +419,9 @@ export const adb = {
         ],
       },
       {
-        section: "Activity Manager (Intents)",
-        items: [
+        title: "Activity Manager (Intents)",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb shell am start -a android.intent.action.VIEW", desc: "Start an activity with VIEW action." },
           { cmd: "adb shell am start -a android.intent.action.VIEW -d URL", desc: "Open a URL." },
           { cmd: "adb shell am broadcast -a 'my_action'", desc: "Send a broadcast intent." },
@@ -424,8 +430,9 @@ export const adb = {
         ],
       },
       {
-        section: "Input & Key Events",
-        items: [
+        title: "Input & Key Events",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb shell input text 'hello'", desc: "Print text into the focused input field." },
           { cmd: "adb shell input keyevent 3", desc: "Simulate Home button." },
           { cmd: "adb shell input keyevent 4", desc: "Simulate Back button." },
@@ -436,8 +443,9 @@ export const adb = {
         ],
       },
       {
-        section: "Screen & UI",
-        items: [
+        title: "Screen & UI",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb shell screencap -p /sdcard/screenshot.png", desc: "Capture a screenshot." },
           { cmd: "adb shell screenrecord /sdcard/demo.mp4", desc: "Record the device screen." },
           { cmd: "adb shell wm size 2048x1536", desc: "Emulate device resolution/size." },
@@ -446,8 +454,9 @@ export const adb = {
         ],
       },
       {
-        section: "Debugging, Logs & System Info",
-        items: [
+        title: "Debugging, Logs & System Info",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb logcat", desc: "View device logs." },
           { cmd: "adb logcat -c", desc: "Clear/flush the active device logcat buffer." },
           { cmd: "adb logcat -d > log.txt", desc: "Save the logcat output to a file." },
@@ -459,24 +468,27 @@ export const adb = {
         ],
       },
       {
-        section: "Backup & Restore",
-        items: [
+        title: "Backup & Restore",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb backup -apk -all -f backup.ab", desc: "Backup settings and apps to a file." },
           { cmd: "adb restore backup.ab", desc: "Restore a previous backup to your phone." },
           { cmd: "adb sideload", desc: "Push and flash custom ROMs and zips from your computer." },
         ],
       },
       {
-        section: "Shared Preferences",
-        items: [
+        title: "Shared Preferences",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb shell 'am broadcast -a org.example.app.sp.PUT --es key key_name --es value \"hello world!\"'", desc: "Add a string value to default shared preferences." },
           { cmd: "adb shell 'am broadcast -a org.example.app.sp.REMOVE --es key key_name'", desc: "Remove a value from default shared preferences." },
           { cmd: "adb shell 'am broadcast -a org.example.app.sp.CLEAR --es key key_name'", desc: "Clear all default shared preferences." },
         ],
       },
       {
-        section: "Advanced Batch Commands",
-        items: [
+        title: "Advanced Batch Commands",
+      icon: "⚙️",
+        commands: [
           { cmd: "adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r app.apk", desc: "Install an app on ALL connected devices." },
           { cmd: "adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall com.example.app", desc: "Uninstall an app from ALL connected devices." },
           { cmd: "adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell getprop ro.build.version.release", desc: "Print Android version of ALL connected devices." },
