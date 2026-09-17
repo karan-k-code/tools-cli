@@ -2,8 +2,8 @@ export const theHarvester = {
   id: "theharvester",
   name: "theHarvester",
   category: "Information Gathering",
-  color: "--adb-color",
-  accentClass: "adb-color",
+  color: "#a855f7",
+  accentClass: "ollama-accent",
   github: "https://github.com/laramies/theHarvester",
   tagline:
     "OSINT reconnaissance tool for emails, subdomains, hosts, and open ports.",
@@ -42,6 +42,8 @@ export const theHarvester = {
   },
   interactiveBuilder: {
     title: "theHarvester Command Builder",
+    description:
+      "Configure options to run theHarvester for OSINT reconnaissance.",
     options: [
       {
         id: "domain",
