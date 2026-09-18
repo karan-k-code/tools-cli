@@ -20,7 +20,14 @@ const LegalPopup = () => {
   };
 
   // If already agreed, or if currently reading the legal documents/about page, hide the popup overlay
-  const isLegalRoute = ["/terms", "/privacy", "/disclaimer", "/about"].includes(location.pathname);
+  const isLegalRoute = [
+    "/terms",
+    "/privacy",
+    "/disclaimer",
+    "/about",
+    "/donate",
+    "/",
+  ].includes(location.pathname);
 
   if (hasAgreed || isLegalRoute) return null;
 
@@ -33,8 +40,9 @@ const LegalPopup = () => {
         </div>
         <div className="legal-popup-content">
           <p>
-            Please take a moment to review our legal policies before using this website. 
-            By continuing to use this interactive CLI companion, you acknowledge that you have read and agreed to the following:
+            Please take a moment to review our legal policies before using this
+            website. By continuing to use this interactive CLI companion, you
+            acknowledge that you have read and agreed to the following:
           </p>
           <ul className="legal-links-list">
             <li>
@@ -50,14 +58,15 @@ const LegalPopup = () => {
           <div className="legal-warning">
             <AlertTriangle size={16} />
             <span>
-              This platform provides general-purpose commands for educational and utility purposes. Always ensure you have authorization before running network commands.
+              This platform provides general-purpose commands for educational
+              and utility purposes. Always ensure you have authorization before
+              running network commands.
             </span>
           </div>
         </div>
         <div className="legal-popup-footer">
           <button className="legal-agree-btn" onClick={handleAgree}>
-            <Check size={18} />
-            I Agree & Continue
+            <Check size={18} />I Agree & Continue
           </button>
         </div>
       </div>
