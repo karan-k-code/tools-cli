@@ -19,8 +19,8 @@ const LegalPopup = () => {
     setHasAgreed(true);
   };
 
-  // If already agreed, or if currently reading the legal documents, hide the popup overlay
-  const isLegalRoute = ["/terms", "/privacy", "/disclaimer"].includes(location.pathname);
+  // If already agreed, or if currently reading the legal documents/about page, hide the popup overlay
+  const isLegalRoute = ["/terms", "/privacy", "/disclaimer", "/about"].includes(location.pathname);
 
   if (hasAgreed || isLegalRoute) return null;
 
