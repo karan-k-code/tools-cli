@@ -52,7 +52,7 @@ export const gh = {
   cheatsheets: [
     {
       title: "Authentication",
-      icon: "⚙️",
+      icon: "🔐",
       commands: [
         { cmd: "gh auth login", desc: "Authenticate with your GitHub account." },
         { cmd: "gh auth status", desc: "Check your authentication status." }
@@ -60,7 +60,7 @@ export const gh = {
     },
     {
       title: "Pull Requests",
-      icon: "⚙️",
+      icon: "🔀",
       commands: [
         { cmd: "gh pr list", desc: "List open pull requests in the current repository." },
         { cmd: "gh pr checkout <number>", desc: "Check out a pull request locally by its number." },
@@ -71,7 +71,7 @@ export const gh = {
     },
     {
       title: "Issues",
-      icon: "⚙️",
+      icon: "🐞",
       commands: [
         { cmd: "gh issue list", desc: "List open issues." },
         { cmd: "gh issue create", desc: "Create a new issue interactively." },
@@ -80,7 +80,7 @@ export const gh = {
     },
     {
       title: "Repositories",
-      icon: "⚙️",
+      icon: "📦",
       commands: [
         { cmd: "gh repo clone <owner>/<repo>", desc: "Clone a repository locally." },
         { cmd: "gh repo create <name>", desc: "Create a new repository." },

@@ -82,7 +82,7 @@ INFO: Audio stream started`
   cheatsheets: [
     {
       title: "Connection",
-      icon: "⚙️",
+      icon: "📲",
       commands: [
         { cmd: "scrcpy", desc: "Start mirroring the single connected device." },
         { cmd: "scrcpy -s <serial>", desc: "Connect to a specific device by its ADB serial." },
@@ -91,7 +91,7 @@ INFO: Audio stream started`
     },
     {
       title: "Performance & Quality",
-      icon: "⚙️",
+      icon: "⚡",
       commands: [
         { cmd: "scrcpy -m 1024 -b 2M", desc: "Limit resolution to 1024 and bitrate to 2 Mbps (good for slow Wi-Fi)." },
         { cmd: "scrcpy --max-fps 30", desc: "Limit framerate to 30 FPS." },
@@ -100,7 +100,7 @@ INFO: Audio stream started`
     },
     {
       title: "Recording & Interaction",
-      icon: "⚙️",
+      icon: "🎥",
       commands: [
         { cmd: "scrcpy -r capture.mp4", desc: "Record the screen while mirroring." },
         { cmd: "scrcpy --no-display -r capture.mp4", desc: "Record the screen without showing the mirror window." },

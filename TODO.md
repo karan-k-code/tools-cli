@@ -16,16 +16,18 @@ The following modern CLI tools have been researched and are recommended to be ad
 
 *Note: Assigned to Project Manager / Frontend Developer for future implementation.*
 
-## 🔴 Critical Bugs
+## ✅ Resolved
 - **theHarvester Crash - Generator Return Type:**
-  - `src/data/tools/theHarvester.js`: The `interactiveBuilder.generator` returns a string. It must return an object `{ command: cmd, explanation: [] }` to prevent `App.jsx` from crashing on `cmdExplanation.length`.
-- **theHarvester Crash - Cheatsheet Structure:**
-  - `src/data/tools/theHarvester.js`: The `cheatsheets` array uses `title` and `commands` keys instead of the expected `section` and `items` keys, which crashes `ToolDetail.jsx` during `sheet.items.map`.
+  - Fixed in `src/data/tools/theHarvester.js`. The `interactiveBuilder.generator` now returns `{ command: cmd, explanation: [] }` like all other tools, so `App.jsx` / `ToolDetail.jsx` no longer crash on `cmdExplanation.length`.
+- **theHarvester Builder Schema:**
+  - Fixed select options to use `choices` (component reads `opt.choices.map`) instead of `options`, switched `default` → `defaultValue` (used by `App.jsx`), and changed the `limit` field from unsupported `type: "number"` to `text` so it renders. Also replaced the copy-pasted Ollama `visualConcept` with a theHarvester workflow.
+- **Cheatsheet Structure:**
+  - Already compatible. `ToolDetail.jsx` / `DashboardHome.jsx` read `(sheet.commands || sheet.items)` and `sheet.title`, which theHarvester's `title`/`icon`/`commands` structure satisfies.
+- **Missing Category in Sidebar:**
+  - Already present. `Sidebar.jsx` includes `"Information Gathering"` in its category filters.
+- **Invalid Color format in theHarvester:**
+  - Already valid hex (`#a855f7`), no longer breaks `parseInt` in `DashboardHome.jsx`.
 
 ## 🟡 UI/UX Issues
-- **Missing Category in Sidebar:**
-  - `theHarvester.js` uses category `"Information Gathering"`, but `Sidebar.jsx` hardcodes category filters. Add `"Information Gathering"` to the categories array in `Sidebar.jsx`.
-- **Invalid Color format in theHarvester:**
-  - `theHarvester.js` defines `color: "--adb-color"`. This breaks the hex parsing (`parseInt`) in `DashboardHome.jsx`. It should be a valid hex code (e.g., `#3ddc84`).
 - **Wrong Favicon MIME type:**
   - `index.html`: The favicon `<link>` has `href="k.logo.webp"` but incorrectly specifies `type="image/svg+xml"`. It should be `type="image/webp"`.

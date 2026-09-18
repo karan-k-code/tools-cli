@@ -288,7 +288,7 @@ export const magick = {
     cheatsheets: [
       {
         title: "Basic Conversions",
-      icon: "⚙️",
+      icon: "🎨",
         commands: [
           {
             cmd: "magick input.png -quality 85 output.jpg",
@@ -306,7 +306,7 @@ export const magick = {
       },
       {
         title: "Advanced Operations",
-      icon: "⚙️",
+      icon: "✨",
         commands: [
           {
             cmd: "magick input.jpg -colorspace Gray output.jpg",

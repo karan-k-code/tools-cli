@@ -222,7 +222,7 @@ export const vercel = {
     cheatsheets: [
       {
         title: "Local Synced dev",
-      icon: "⚙️",
+      icon: "💻",
         commands: [
           {
             cmd: "vercel dev",
@@ -236,7 +236,7 @@ export const vercel = {
       },
       {
         title: "Inspections & Management",
-      icon: "⚙️",
+      icon: "📊",
         commands: [
           {
             cmd: "vercel list",

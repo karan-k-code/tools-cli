@@ -184,7 +184,7 @@ export const gemini = {
     cheatsheets: [
       {
         title: "Basic Queries",
-      icon: "⚙️",
+      icon: "💬",
         commands: [
           {
             cmd: 'gemini "write a python quicksort"',
@@ -198,7 +198,7 @@ export const gemini = {
       },
       {
         title: "Model & Config",
-      icon: "⚙️",
+      icon: "🧠",
         commands: [
           {
             cmd: "gemini --list-models",
@@ -209,7 +209,7 @@ export const gemini = {
       },
       {
         title: "Multimodal Inputs",
-      icon: "⚙️",
+      icon: "🖼️",
         commands: [
           {
             cmd: 'gemini --file logs.txt "find the error"',

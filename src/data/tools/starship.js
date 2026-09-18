@@ -21,5 +21,5 @@ export const starship = {
       simulatedOutput: () => "Configuration applied successfully."
     },
     cheatsheets: [{ title: "Setup",
-      icon: "⚙️", commands: [{ cmd: "starship init bash", desc: "Initialize in bash" }, { cmd: "starship init zsh", desc: "Initialize in zsh" }] }]
+      icon: "🚀", commands: [{ cmd: "starship init bash", desc: "Initialize in bash" }, { cmd: "starship init zsh", desc: "Initialize in zsh" }] }]
   };

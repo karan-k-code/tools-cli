@@ -439,6 +439,7 @@
   padding: 1.25rem;
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-fast);
+  height: fit-content;
 }
 
 .cheatsheet-card:hover {

@@ -188,7 +188,7 @@ export const nodenpm = {
     cheatsheets: [
       {
         title: "Version Control & Clean",
-      icon: "⚙️",
+      icon: "🧹",
         commands: [
           {
             cmd: "npm install --production",
@@ -206,7 +206,7 @@ export const nodenpm = {
       },
       {
         title: "Global Packages",
-      icon: "⚙️",
+      icon: "📦",
         commands: [
           {
             cmd: "npm list -g --depth=0",

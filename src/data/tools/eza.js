@@ -27,5 +27,5 @@ export const eza = {
       simulatedOutput: () => "Permissions  Size  Date    Name\n.rw-r--r--   1.0K  Jan 1   📄 index.js"
     },
     cheatsheets: [{ title: "Usage",
-      icon: "⚙️", commands: [{ cmd: "eza -l", desc: "Long format" }, { cmd: "eza -la", desc: "Long format including hidden" }, { cmd: "eza --tree", desc: "View as a tree" }] }]
+      icon: "📁", commands: [{ cmd: "eza -l", desc: "Long format" }, { cmd: "eza -la", desc: "Long format including hidden" }, { cmd: "eza --tree", desc: "View as a tree" }] }]
   };

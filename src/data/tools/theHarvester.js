@@ -16,26 +16,26 @@ export const theHarvester = {
     linux: "sudo apt update && sudo apt install theharvester -y",
   },
   visualConcept: {
-    title: "infrometion gedering tools",
+    title: "Information Gathering Workflow",
     steps: [
       {
-        name: "CLI Command",
-        desc: "Type command to load models locally.",
-        status: "modified",
-      },
-      {
-        name: "Ollama Server",
-        desc: "A background service running on port 11434 serving models.",
+        name: "Target Domain",
+        desc: "Supply the target domain to begin OSINT discovery.",
         status: "staged",
       },
       {
-        name: "GGUF Models",
-        desc: "Quantized LLM files loaded in RAM/VRAM for prompt processing.",
+        name: "Source Queries",
+        desc: "Query 50+ sources like search engines and certificate logs.",
+        status: "modified",
+      },
+      {
+        name: "Data Collection",
+        desc: "Collect emails, subdomains, hosts, ports, and banners.",
         status: "committed",
       },
       {
-        name: "Local Output",
-        desc: "Model response streamed back over local sockets. 100% private.",
+        name: "Report Output",
+        desc: "Save structured results to JSON, JSONL, or XML files.",
         status: "remote",
       },
     ],
@@ -49,6 +49,7 @@ export const theHarvester = {
         id: "domain",
         label: "Target Domain",
         type: "text",
+        defaultValue: "",
         placeholder: "example.com",
         required: true,
         help: "The domain you want to gather information about",
@@ -57,7 +58,8 @@ export const theHarvester = {
         id: "source",
         label: "Data Source",
         type: "select",
-        options: [
+        defaultValue: "all",
+        choices: [
           { value: "all", label: "All Sources (Recommended)" },
           { value: "duckduckgo", label: "DuckDuckGo" },
           { value: "bing", label: "Bing" },
@@ -70,15 +72,14 @@ export const theHarvester = {
           { value: "hunter", label: "Hunter.io (API Key Required)" },
           { value: "github-code", label: "GitHub Code (API Key Required)" },
         ],
-        default: "all",
         help: "Choose which source(s) to query for information",
       },
       {
         id: "limit",
         label: "Result Limit",
-        type: "number",
+        type: "text",
+        defaultValue: "500",
         placeholder: "500",
-        default: 500,
         min: 1,
         max: 5000,
         help: "Maximum results per source (default: 500)",
@@ -87,6 +88,7 @@ export const theHarvester = {
         id: "output",
         label: "Output File",
         type: "text",
+        defaultValue: "",
         placeholder: "report",
         help: "Base filename for saving results (creates .jsonl, .json, .xml)",
       },
@@ -94,35 +96,52 @@ export const theHarvester = {
         id: "outputFormat",
         label: "Output Format",
         type: "select",
-        options: [
+        defaultValue: "jsonl",
+        choices: [
           { value: "jsonl", label: "JSONL (Best for automation)" },
           { value: "json", label: "JSON" },
           { value: "xml", label: "XML" },
         ],
-        default: "jsonl",
         help: "Format for the saved output file",
       },
     ],
     generator: (opts) => {
       let cmd = "theHarvester";
+      const explanation = [];
 
       if (opts.domain) {
         cmd += ` -d ${opts.domain}`;
+        explanation.push({
+          part: `-d ${opts.domain}`,
+          desc: "Target domain to gather OSINT information about.",
+        });
       }
 
       if (opts.source) {
         cmd += ` -b ${opts.source}`;
+        explanation.push({
+          part: `-b ${opts.source}`,
+          desc: `Data source(s) to query: ${opts.source}.`,
+        });
       }
 
       if (opts.limit) {
         cmd += ` -l ${opts.limit}`;
+        explanation.push({
+          part: `-l ${opts.limit}`,
+          desc: `Maximum results to fetch per source (default: 500).`,
+        });
       }
 
       if (opts.output) {
         cmd += ` -f ${opts.output}`;
+        explanation.push({
+          part: `-f ${opts.output}`,
+          desc: `Base filename for saving results (creates ${opts.output}.json, ${opts.output}.jsonl, ${opts.output}.xml).`,
+        });
       }
 
-      return cmd;
+      return { command: cmd, explanation };
     },
     simulatedOutput: (opts) => {
       const domain = opts.domain || "example.com";

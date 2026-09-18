@@ -274,7 +274,7 @@ export const git = {
     cheatsheets: [
       {
         title: "Configuration",
-      icon: "⚙️",
+      icon: "🛠️",
         commands: [
           {
             cmd: 'git config --global user.name "Your Name"',
@@ -288,7 +288,7 @@ export const git = {
       },
       {
         title: "Inspection & Logs",
-      icon: "⚙️",
+      icon: "📜",
         commands: [
           {
             cmd: "git status",
@@ -306,7 +306,7 @@ export const git = {
       },
       {
         title: "Remote Collaboration",
-      icon: "⚙️",
+      icon: "🔄",
         commands: [
           {
             cmd: "git remote add origin <url>",

@@ -168,7 +168,7 @@ export const ollama = {
     cheatsheets: [
       {
         title: "Server & Control",
-      icon: "⚙️",
+      icon: "🖥️",
         commands: [
           {
             cmd: "ollama serve",
@@ -182,7 +182,7 @@ export const ollama = {
       },
       {
         title: "Model Customization",
-      icon: "⚙️",
+      icon: "🛠️",
         commands: [
           {
             cmd: "ollama create mymodel -f ./Modelfile",

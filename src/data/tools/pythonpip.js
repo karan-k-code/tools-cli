@@ -207,7 +207,7 @@ export const pythonpip = {
     cheatsheets: [
       {
         title: "Package Management",
-      icon: "⚙️",
+      icon: "📦",
         commands: [
           {
             cmd: "pip uninstall <package>",
@@ -225,7 +225,7 @@ export const pythonpip = {
       },
       {
         title: "Execution & Shell",
-      icon: "⚙️",
+      icon: "🐍",
         commands: [
           { cmd: "python script.py", desc: "Execute a python file." },
           {

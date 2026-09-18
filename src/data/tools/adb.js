@@ -360,7 +360,7 @@ export const adb = {
     cheatsheets: [
       {
         title: "Connection & Discovery",
-      icon: "⚙️",
+      icon: "🔌",
         commands: [
           { cmd: "adb kill-server", desc: "Kill the ADB server process." },
           { cmd: "adb start-server", desc: "Start the ADB server process." },
@@ -374,7 +374,7 @@ export const adb = {
       },
       {
         title: "Device Rebooting",
-      icon: "⚙️",
+      icon: "🔄",
         commands: [
           { cmd: "adb reboot", desc: "Reboot the device normally." },
           { cmd: "adb reboot recovery", desc: "Reboot device into recovery mode." },
@@ -384,7 +384,7 @@ export const adb = {
       },
       {
         title: "App & Package Management",
-      icon: "⚙️",
+      icon: "📦",
         commands: [
           { cmd: "adb install path/to/app.apk", desc: "Install an app." },
           { cmd: "adb install -r app.apk", desc: "Reinstall/upgrade an existing app, keeping its data." },
@@ -401,7 +401,7 @@ export const adb = {
       },
       {
         title: "Permissions",
-      icon: "⚙️",
+      icon: "🔐",
         commands: [
           { cmd: "adb shell pm grant [packageName] [Permission]", desc: "Grant a permission to an app." },
           { cmd: "adb shell pm revoke [packageName] [Permission]", desc: "Revoke a permission from an app." },
@@ -410,7 +410,7 @@ export const adb = {
       },
       {
         title: "File Management",
-      icon: "⚙️",
+      icon: "📁",
         commands: [
           { cmd: "adb push [source] [destination]", desc: "Copy files from your computer to your phone." },
           { cmd: "adb pull [device_location] [local_location]", desc: "Copy files from your phone to your computer." },
@@ -420,7 +420,7 @@ export const adb = {
       },
       {
         title: "Activity Manager (Intents)",
-      icon: "⚙️",
+      icon: "📢",
         commands: [
           { cmd: "adb shell am start -a android.intent.action.VIEW", desc: "Start an activity with VIEW action." },
           { cmd: "adb shell am start -a android.intent.action.VIEW -d URL", desc: "Open a URL." },
@@ -431,7 +431,7 @@ export const adb = {
       },
       {
         title: "Input & Key Events",
-      icon: "⚙️",
+      icon: "⌨️",
         commands: [
           { cmd: "adb shell input text 'hello'", desc: "Print text into the focused input field." },
           { cmd: "adb shell input keyevent 3", desc: "Simulate Home button." },
@@ -444,7 +444,7 @@ export const adb = {
       },
       {
         title: "Screen & UI",
-      icon: "⚙️",
+      icon: "📸",
         commands: [
           { cmd: "adb shell screencap -p /sdcard/screenshot.png", desc: "Capture a screenshot." },
           { cmd: "adb shell screenrecord /sdcard/demo.mp4", desc: "Record the device screen." },
@@ -455,7 +455,7 @@ export const adb = {
       },
       {
         title: "Debugging, Logs & System Info",
-      icon: "⚙️",
+      icon: "🐛",
         commands: [
           { cmd: "adb logcat", desc: "View device logs." },
           { cmd: "adb logcat -c", desc: "Clear/flush the active device logcat buffer." },
@@ -469,7 +469,7 @@ export const adb = {
       },
       {
         title: "Backup & Restore",
-      icon: "⚙️",
+      icon: "💾",
         commands: [
           { cmd: "adb backup -apk -all -f backup.ab", desc: "Backup settings and apps to a file." },
           { cmd: "adb restore backup.ab", desc: "Restore a previous backup to your phone." },
@@ -478,7 +478,7 @@ export const adb = {
       },
       {
         title: "Shared Preferences",
-      icon: "⚙️",
+      icon: "🗃️",
         commands: [
           { cmd: "adb shell 'am broadcast -a org.example.app.sp.PUT --es key key_name --es value \"hello world!\"'", desc: "Add a string value to default shared preferences." },
           { cmd: "adb shell 'am broadcast -a org.example.app.sp.REMOVE --es key key_name'", desc: "Remove a value from default shared preferences." },
@@ -487,7 +487,7 @@ export const adb = {
       },
       {
         title: "Advanced Batch Commands",
-      icon: "⚙️",
+      icon: "⚡",
         commands: [
           { cmd: "adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r app.apk", desc: "Install an app on ALL connected devices." },
           { cmd: "adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall com.example.app", desc: "Uninstall an app from ALL connected devices." },

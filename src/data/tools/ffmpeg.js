@@ -237,7 +237,7 @@ export const ffmpeg = {
     cheatsheets: [
       {
         title: "Video Filtering",
-      icon: "⚙️",
+      icon: "🎛️",
         commands: [
           {
             cmd: 'ffmpeg -i input.mp4 -vf "transpose=1" output.mp4',
@@ -251,7 +251,7 @@ export const ffmpeg = {
       },
       {
         title: "Merge & Concatenate",
-      icon: "⚙️",
+      icon: "🔗",
         commands: [
           {
             cmd: 'ffmpeg -i "concat:part1.mp3|part2.mp3" -acodec copy output.mp3',

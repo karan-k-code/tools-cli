@@ -17,5 +17,5 @@ export const lazygit = {
       simulatedOutput: () => "Launching Lazygit TUI interface..."
     },
     cheatsheets: [{ title: "Keybindings",
-      icon: "⚙️", commands: [{ cmd: "Space", desc: "Toggle staged/unstaged" }, { cmd: "c", desc: "Commit changes" }, { cmd: "P", desc: "Push to remote" }] }]
+      icon: "⌨️", commands: [{ cmd: "Space", desc: "Toggle staged/unstaged" }, { cmd: "c", desc: "Commit changes" }, { cmd: "P", desc: "Push to remote" }] }]
   };

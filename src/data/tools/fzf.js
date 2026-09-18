@@ -40,6 +40,6 @@ export const fzf = {
     },
     cheatsheets: [
       { title: "Basic Usage",
-      icon: "⚙️", commands: [{ cmd: "find * -type f | fzf", desc: "Fuzzy find files" }, { cmd: "history | fzf", desc: "Fuzzy search command history" }] }
+      icon: "🔍", commands: [{ cmd: "find * -type f | fzf", desc: "Fuzzy find files" }, { cmd: "history | fzf", desc: "Fuzzy search command history" }] }
     ]
   };

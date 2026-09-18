@@ -243,7 +243,7 @@ export const ytdlp = {
     cheatsheets: [
       {
         title: "Performance Options",
-      icon: "⚙️",
+      icon: "⚡",
         commands: [
           {
             cmd: "yt-dlp --limit-rate 50K <url>",
@@ -257,7 +257,7 @@ export const ytdlp = {
       },
       {
         title: "Metadata & Subtitles",
-      icon: "⚙️",
+      icon: "🏷️",
         commands: [
           {
             cmd: "yt-dlp --list-subs <url>",
@@ -279,7 +279,7 @@ export const ytdlp = {
       },
       {
         title: "Authentication & Inputs",
-      icon: "⚙️",
+      icon: "🔑",
         commands: [
           {
             cmd: "yt-dlp --cookies-from-browser chrome <url>",

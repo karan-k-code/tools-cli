@@ -217,7 +217,7 @@ export const utils = {
     cheatsheets: [
       {
         title: "Docker",
-      icon: "⚙️",
+      icon: "🐳",
         commands: [
           { cmd: "docker ps", desc: "List active container processes." },
           {
@@ -232,7 +232,7 @@ export const utils = {
       },
       {
         title: "Tmux",
-      icon: "⚙️",
+      icon: "🖥️",
         commands: [
           {
             cmd: "tmux attach -t <session>",
