@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AlertTriangle, Check, ShieldAlert } from "lucide-react";
 import "./css/LegalPopup.css";
 
 const LegalPopup = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
+  const [hasAgreed, setHasAgreed] = useState(false);
 
   useEffect(() => {
-    const hasAgreed = localStorage.getItem("toolscli_legal_agreed");
-    if (!hasAgreed) {
-      setIsVisible(true);
+    const agreed = localStorage.getItem("toolscli_legal_agreed");
+    if (agreed === "true") {
+      setHasAgreed(true);
     }
   }, []);
 
   const handleAgree = () => {
     localStorage.setItem("toolscli_legal_agreed", "true");
-    setIsVisible(false);
+    setHasAgreed(true);
   };
 
-  if (!isVisible) return null;
+  // If already agreed, or if currently reading the legal documents, hide the popup overlay
+  const isLegalRoute = ["/terms", "/privacy", "/disclaimer"].includes(location.pathname);
+
+  if (hasAgreed || isLegalRoute) return null;
 
   return (
     <div className="legal-popup-overlay">
@@ -34,19 +38,13 @@ const LegalPopup = () => {
           </p>
           <ul className="legal-links-list">
             <li>
-              <Link to="/terms" onClick={() => setIsVisible(false)}>
-                Terms & Conditions
-              </Link>
+              <Link to="/terms">Terms & Conditions</Link>
             </li>
             <li>
-              <Link to="/privacy" onClick={() => setIsVisible(false)}>
-                Privacy Policy
-              </Link>
+              <Link to="/privacy">Privacy Policy</Link>
             </li>
             <li>
-              <Link to="/disclaimer" onClick={() => setIsVisible(false)}>
-                Disclaimer
-              </Link>
+              <Link to="/disclaimer">Disclaimer</Link>
             </li>
           </ul>
           <div className="legal-warning">
