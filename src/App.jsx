@@ -18,6 +18,7 @@ import Terms from "./components/Terms";
 import Privacy from "./components/Privacy";
 import Disclaimer from "./components/Disclaimer";
 import Footer from "./components/Footer";
+import LegalPopup from "./components/LegalPopup";
 import About from "./components/About";
 
 // main content components
@@ -378,6 +379,8 @@ export default function App() {
         {/* Footer */}
         <Footer />
       </div>
+
+      <LegalPopup />
 
       {/* Toast Notification Container */}
       <div className="toast-container">
