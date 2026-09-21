@@ -427,9 +427,8 @@
 }
 
 .cheatsheet-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
+  columns: 320px;
+  column-gap: 1.5rem;
 }
 
 .cheatsheet-card {
@@ -440,6 +439,11 @@
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-fast);
   height: fit-content;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  width: 100%;
 }
 
 .cheatsheet-card:hover {
