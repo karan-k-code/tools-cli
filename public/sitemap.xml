@@ -3,14 +3,14 @@
   <!-- Main Home Dashboard -->
   <url>
     <loc>https://tools-cli.konshu.in/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <!-- Git Builder -->
   <url>
     <loc>https://tools-cli.konshu.in/git</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
