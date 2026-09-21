@@ -274,7 +274,7 @@ export const git = {
     cheatsheets: [
       {
         title: "Configuration",
-      icon: "🛠️",
+        icon: "⚙️",
         commands: [
           {
             cmd: 'git config --global user.name "Your Name"',
@@ -288,7 +288,7 @@ export const git = {
       },
       {
         title: "Inspection & Logs",
-      icon: "📜",
+        icon: "🔍",
         commands: [
           {
             cmd: "git status",
@@ -305,8 +305,34 @@ export const git = {
         ],
       },
       {
+        title: "Advanced Operations (Missing Commands)",
+        icon: "🔥",
+        commands: [
+          {
+            cmd: "git commit --amend -m 'new msg'",
+            desc: "Modify the most recent commit (change message or add staged files).",
+          },
+          {
+            cmd: "git rebase main",
+            desc: "Reapply local branch commits on top of another branch (e.g., main).",
+          },
+          {
+            cmd: "git cherry-pick <commit-hash>",
+            desc: "Apply the changes from a specific existing commit to your current branch.",
+          },
+          {
+            cmd: "git stash pop",
+            desc: "Restore the most recently stashed files and remove them from the stash list.",
+          },
+          {
+            cmd: "git restore <file>",
+            desc: "Discard uncommitted changes in a specific file in your working directory.",
+          }
+        ],
+      },
+      {
         title: "Remote Collaboration",
-      icon: "🔄",
+        icon: "☁️",
         commands: [
           {
             cmd: "git remote add origin <url>",
